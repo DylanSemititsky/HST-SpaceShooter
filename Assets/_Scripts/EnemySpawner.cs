@@ -1,7 +1,4 @@
-﻿//ALLOWS ENEMY SPAWNS IN HORIZONTAL/VERTICAL FORMATIONS AND GROUPS.
-//CAN SET SPAWN TIME FOR WAVES AND NUMBER OF WAVES.
-
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
 [System.Serializable]
