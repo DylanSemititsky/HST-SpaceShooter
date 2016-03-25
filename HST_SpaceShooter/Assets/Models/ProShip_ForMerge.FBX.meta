@@ -1,0 +1,131 @@
+fileFormatVersion: 2
+guid: da67c3a5b4f023140a349a9902c98bed
+timeCreated: 1456414504
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: PS_AS_Lg_flame01
+    100004: PS_CentralThruster
+    100006: PS_MainShip
+    100008: PS_Omni002
+    100010: PS_Sm_Flame01
+    100012: PS_Sm_Flame02
+    100014: PS_Sm_Flame03
+    100016: PS_Sm_Flame04
+    100018: PS_Sm_Thruster01
+    100020: PS_Sm_Thruster02
+    100022: PS_Sm_Thruster03
+    100024: PS_Sm_Thruster04
+    400000: //RootNode
+    400002: PS_AS_Lg_flame01
+    400004: PS_CentralThruster
+    400006: PS_MainShip
+    400008: PS_Omni002
+    400010: PS_Sm_Flame01
+    400012: PS_Sm_Flame02
+    400014: PS_Sm_Flame03
+    400016: PS_Sm_Flame04
+    400018: PS_Sm_Thruster01
+    400020: PS_Sm_Thruster02
+    400022: PS_Sm_Thruster03
+    400024: PS_Sm_Thruster04
+    2300000: PS_AS_Lg_flame01
+    2300002: PS_CentralThruster
+    2300004: PS_MainShip
+    2300006: PS_Sm_Flame01
+    2300008: PS_Sm_Flame02
+    2300010: PS_Sm_Flame03
+    2300012: PS_Sm_Flame04
+    2300014: PS_Sm_Thruster01
+    2300016: PS_Sm_Thruster02
+    2300018: PS_Sm_Thruster03
+    2300020: PS_Sm_Thruster04
+    3300000: PS_AS_Lg_flame01
+    3300002: PS_CentralThruster
+    3300004: PS_MainShip
+    3300006: PS_Sm_Flame01
+    3300008: PS_Sm_Flame02
+    3300010: PS_Sm_Flame03
+    3300012: PS_Sm_Flame04
+    3300014: PS_Sm_Thruster01
+    3300016: PS_Sm_Thruster02
+    3300018: PS_Sm_Thruster03
+    3300020: PS_Sm_Thruster04
+    4300000: PS_MainShip
+    4300002: PS_CentralThruster
+    4300004: PS_Sm_Thruster01
+    4300006: PS_Sm_Thruster02
+    4300008: PS_Sm_Thruster03
+    4300010: PS_Sm_Thruster04
+    4300012: PS_AS_Lg_flame01
+    4300014: PS_Sm_Flame01
+    4300016: PS_Sm_Flame02
+    4300018: PS_Sm_Flame03
+    4300020: PS_Sm_Flame04
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
