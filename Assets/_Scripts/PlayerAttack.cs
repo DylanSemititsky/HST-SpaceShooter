@@ -124,11 +124,11 @@ public class PlayerAttack : MonoBehaviour {
 		}
 
 		//SPECIAL ATTACK. Fire on "space bar" press
-		if (Input.GetKeyDown(KeyCode.Space))
+		/*if (Input.GetKeyDown(KeyCode.Space))
 		{
             Instantiate(specialAttack, primaryAttack.primaryShotSpawn.position, primaryAttack.primaryShotSpawn.rotation);
             audioSource.Play();
-		}
+		}*/
 	}
 
 		void OnTriggerEnter(Collider other)

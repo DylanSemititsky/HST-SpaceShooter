@@ -8,7 +8,7 @@ public class DestroyByHealth : MonoBehaviour
 {
 	public GameObject explosion;
 	public GameObject explosionAsteroids;
-	public GameObject cupcake;
+	public GameObject droppedItem;
 	public float health = 50;
 
 	
@@ -35,7 +35,7 @@ public class DestroyByHealth : MonoBehaviour
 		if (health <= 0){
 			if (tag == "Enemy"){
 				Instantiate(explosion, transform.position, transform.rotation);
-				Instantiate (cupcake, transform.position, transform.rotation);
+				Instantiate (droppedItem, transform.position, transform.rotation);
 			}
 			if (tag == "Asteroid") {
 				Instantiate(explosion, transform.position, transform.rotation);
