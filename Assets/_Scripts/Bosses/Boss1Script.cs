@@ -30,6 +30,7 @@ public class Boss1Script : MonoBehaviour {
 	public bool bossHeadActive;
 	bool rightArmExists = true;
 	bool leftArmExists = true;
+
 	float counter;
 	//main boss health
 	public int bossHealth = 300;
