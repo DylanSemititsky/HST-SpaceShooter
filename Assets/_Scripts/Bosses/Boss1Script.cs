@@ -143,18 +143,20 @@ public class Boss1Script : MonoBehaviour {
 			Destroy(gameObject);
 		}
 		if (leftArmHealth <= 0) {
-			Destroy (GameObject.Find ("leftarm"));
+			Destroy (GameObject.Find ("leftArm"));
+			Destroy (GameObject.Find ("leftHand"));
 			leftArmExists = false;
 			Transform leftHand = GameObject.Find ("leftHand").transform; //get position of arm and explode there
-			Transform leftArm = GameObject.Find ("leftarm").transform;
+			Transform leftArm = GameObject.Find ("leftArm").transform;
 			Instantiate(explosion, leftHand.position,  Quaternion.identity);
 			Instantiate(explosion, leftArm.position, Quaternion.identity);
 		}
 		if (rightArmHealth <= 0) {
 			rightArmExists = false;
-			Destroy (GameObject.Find ("rightarm"));
+			Destroy (GameObject.Find ("rightArm"));
+			Destroy (GameObject.Find ("rightHand"));
 			Transform rightHand = GameObject.Find ("rightHand").transform; //get position of arm and explode there
-			Transform rightArm = GameObject.Find ("rightarm").transform;
+			Transform rightArm = GameObject.Find ("rightArm").transform;
 			Instantiate(explosion, rightHand.position, Quaternion.identity);
 			Instantiate(explosion, rightArm.position, Quaternion.identity);
 		}
