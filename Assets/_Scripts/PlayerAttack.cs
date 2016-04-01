@@ -26,10 +26,11 @@ public class PlayerAttack : MonoBehaviour {
 	private float primaryAttackNextFire;
 	private float multiAttackNextFire;
 
-	private AudioSource audioSource;
+	//private AudioSource audioSource;
+	public AudioSource[] audioClips = null;
 
 	void Start() {
-		audioSource = GetComponent<AudioSource>();
+		//audioSource = GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
@@ -42,7 +43,8 @@ public class PlayerAttack : MonoBehaviour {
 			{
 				primaryAttackNextFire = Time.time + fireRate;
 				Instantiate(primaryAttack.primaryAttackLv1, primaryAttack.primaryShotSpawn.position, primaryAttack.primaryShotSpawn.rotation);
-            	audioSource.Play();
+            	//audioSource.Play();
+            	audioClips[0].Play();
 			}
 		}
 		if (primaryAttack.setPrimaryAttackLevel == 2)	//Level 2
@@ -51,7 +53,8 @@ public class PlayerAttack : MonoBehaviour {
 			{
 				primaryAttackNextFire = Time.time + fireRate;
 				Instantiate(primaryAttack.primaryAttackLv2, primaryAttack.primaryShotSpawn.position, primaryAttack.primaryShotSpawn.rotation);
-            	audioSource.Play();
+            	//audioSource.Play();
+				audioClips[0].Play();
 			}
 		}
 		if (primaryAttack.setPrimaryAttackLevel == 3)	//Level 3
@@ -60,7 +63,8 @@ public class PlayerAttack : MonoBehaviour {
 			{
             	primaryAttackNextFire = Time.time + fireRate;
 				Instantiate(primaryAttack.primaryAttackLv3, primaryAttack.primaryShotSpawn.position, primaryAttack.primaryShotSpawn.rotation);
-            	audioSource.Play();
+            	//audioSource.Play();
+				audioClips[0].Play();
 			}
 		}
 		if (primaryAttack.setPrimaryAttackLevel == 4) 	//Level 4
@@ -69,9 +73,11 @@ public class PlayerAttack : MonoBehaviour {
 			{
             	primaryAttackNextFire = Time.time + fireRate;
 				Instantiate(primaryAttack.primaryAttackLv4, primaryAttack.primaryShotSpawn.position, primaryAttack.primaryShotSpawn.rotation);
-            	audioSource.Play();
+            	//audioSource.Play();
+				audioClips[0].Play();
 			}
 		}
+
 
 		//MULTI SHOT. Auto-fired. Level based on setPrimaryAttackLevel in Inspector.
 		if (multiAttack.setMultiAttackLevel == 1)	//Level 1
@@ -136,7 +142,11 @@ public class PlayerAttack : MonoBehaviour {
 		if (other.tag == "Powerup")
 		{
 			fireRate = fireRate * 0.9f;
+			if(fireRate <= 0.075f){
+				fireRate = 0.075f;
+			}
 			Destroy(other.gameObject);
+			audioClips[1].Play();
 		}
 	}
 }
