@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 
-public class Start_Game : MonoBehaviour 
+public class StartGame : MonoBehaviour 
 {
 	private AudioSource audioSource;
 	public GameObject explosion;
@@ -19,7 +19,7 @@ public class Start_Game : MonoBehaviour
 		Renderer rend = GetComponent<Renderer> ();
 		float fadeTime = GameObject.Find ("Fade").GetComponent<Fading>().BeginFade(1);
 
-		for(int i = 1; i <= 10; i++){
+		for(int i = 1; i <= 8; i++){
 			rend.material.SetColor ("_TintColor", Color.green);
 			yield return new WaitForSeconds (0.1f);
 			rend.material.SetColor ("_TintColor", Color.red);
