@@ -4,9 +4,6 @@ using UnityEngine.UI;
 
 public class TitleFade : MonoBehaviour {
 
-	public GameObject titleUI;
-
-
 IEnumerator Start(){
 
 		CanvasGroup canvasGroup = GetComponent<CanvasGroup>();
