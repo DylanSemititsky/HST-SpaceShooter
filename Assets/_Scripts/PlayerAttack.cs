@@ -36,6 +36,26 @@ public class PlayerAttack : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+		//Temporary quick hotkeys
+		if (Input.GetKeyDown("]") && primaryAttack.setPrimaryAttackLevel < 4){	//+1 Primary Attack Level
+			primaryAttack.setPrimaryAttackLevel++;
+		}
+		if (Input.GetKeyDown("[") && primaryAttack.setPrimaryAttackLevel > 0){	//-1 Primary Attack Level
+			primaryAttack.setPrimaryAttackLevel--;
+		}
+		if (Input.GetKeyDown("'") && multiAttack.setMultiAttackLevel < 3){	//+1 Multi Attack Level
+			multiAttack.setMultiAttackLevel++;
+		}
+		if (Input.GetKeyDown(";") && multiAttack.setMultiAttackLevel > 0){	//-1 Multi Attack Level
+			multiAttack.setMultiAttackLevel--;
+		}
+		if (Input.GetKeyDown(".") && fireRate > .075){	//+10% Fire Rate
+			fireRate = fireRate * 0.9f;
+		}
+		if (Input.GetKeyDown(",") && fireRate < 0.5f){ 	//Reset Fire Rate to 0.5/second
+			fireRate = 0.5f;
+		}
+
 		//BASIC ATTACK. Auto-fired. Level based on setPrimaryAttackLevel in Inspector.
 		if (primaryAttack.setPrimaryAttackLevel == 1)	//Level 1
 		{
