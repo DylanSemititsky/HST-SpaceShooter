@@ -6,7 +6,7 @@ public class Boss1Script3 : MonoBehaviour {
 	Boss1Script boss1Script;
 
 	void Start () {
-		boss1Script = GameObject.Find ("Boss1").GetComponent<Boss1Script> ();
+		boss1Script = GameObject.Find ("Boss1(Clone)").GetComponent<Boss1Script> ();
 	}
 	
 
