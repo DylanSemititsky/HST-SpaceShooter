@@ -17,7 +17,6 @@ public class StartGame : MonoBehaviour
 		Instantiate(explosion, transform.position, transform.rotation);
 
 		Renderer rend = GetComponent<Renderer> ();
-		float fadeTime = GameObject.Find ("Fade").GetComponent<Fading>().BeginFade(1);
 
 		for(int i = 1; i <= 8; i++){
 			rend.material.SetColor ("_TintColor", Color.green);
