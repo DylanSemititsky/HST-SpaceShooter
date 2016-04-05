@@ -8,9 +8,17 @@ public class DestroyByHealth : MonoBehaviour
 {
 	public GameObject explosion;
 	public GameObject explosionAsteroids;
-	public GameObject droppedItem;
+	public GameObject powerupCurrency;
+	public GameObject powerupHeal;
+	public GameObject powerupFireRate;
+
 	public float health = 50;
 
+	private float randomNumber;
+
+	void Start(){
+		randomNumber = Random.Range (1, 100);
+	}
 	
 	void OnTriggerEnter(Collider other){
 		if (other.tag == "Boundary") {
@@ -35,11 +43,23 @@ public class DestroyByHealth : MonoBehaviour
 		if (health <= 0){
 			if (tag == "Enemy"){
 				Instantiate(explosion, transform.position, transform.rotation);
-				Instantiate (droppedItem, transform.position, transform.rotation);
+
+				if (randomNumber > 90) {
+					Instantiate (powerupHeal, transform.position, transform.rotation);
+				}
+				if (randomNumber >= 85 && randomNumber <= 90) {
+					Instantiate (powerupFireRate, transform.position, transform.rotation);
+				}
+				if (randomNumber < 85) {
+					Instantiate (powerupCurrency, transform.position, transform.rotation);
+				}
 			}
 			if (tag == "Asteroid") {
-				Instantiate(explosion, transform.position, transform.rotation);
 				Instantiate (explosionAsteroids, transform.position, transform.rotation);
+
+				if (randomNumber > 90) {
+					Instantiate (powerupHeal, transform.position, transform.rotation);
+				}
 			}
 			Destroy(gameObject);
 		}

@@ -13,7 +13,6 @@ public class SceneFadeIn : MonoBehaviour {
 
 	IEnumerator FadeFromBlack()
 	{
-		Debug.Log ("Coroutine Started");
 		CanvasGroup canvasGroup = GetComponent<CanvasGroup>();
 		while (canvasGroup.alpha > 0) {
 			canvasGroup.alpha -= Time.deltaTime / 2;

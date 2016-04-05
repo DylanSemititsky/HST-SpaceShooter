@@ -14,7 +14,6 @@ public class SceneFade : MonoBehaviour {
 
 	void Update(){
 		if (fadeActivate == true) {
-			Debug.Log ("fadeActive is True!");
 			StartCoroutine (FadeInCo());
 		}
 	}
@@ -30,19 +29,4 @@ public class SceneFade : MonoBehaviour {
 
      	yield return null;
  	}
-
-	IEnumerator FadeOut()
- 	{
-     	CanvasGroup canvasGroup = GetComponent<CanvasGroup>();
-     	while (canvasGroup.alpha > 0) {
-     		canvasGroup.alpha -= Time.deltaTime / 2;
-     		yield return null;
-     	}
-
-     	yield return null;
- 	}
-
-	/*public void FadeIn(){
-		StartCoroutine (FadeInCo);
-	}*/
 }
