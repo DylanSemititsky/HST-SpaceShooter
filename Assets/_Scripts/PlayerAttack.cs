@@ -168,5 +168,14 @@ public class PlayerAttack : MonoBehaviour {
 			Destroy(other.gameObject);
 			audioClips[1].Play();
 		}
+		if (other.tag == "Watermelon")
+		{
+			multiAttack.setMultiAttackLevel += 1;
+			if(multiAttack.setMultiAttackLevel >= 3){
+				multiAttack.setMultiAttackLevel = 3;
+			}
+			Destroy(other.gameObject);
+			audioClips[1].Play();
+		}
 	}
 }
