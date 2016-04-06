@@ -18,7 +18,7 @@ public class SceneFadeIn : MonoBehaviour {
 			canvasGroup.alpha -= Time.deltaTime / 3;
 			yield return null;
 		}
-
+			
 		yield return null;
 	}
 }

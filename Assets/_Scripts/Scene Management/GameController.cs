@@ -71,6 +71,7 @@ public class GameController : MonoBehaviour
 		yield return new WaitForSeconds (2);
 		FadeActivate ();
 		yield return new WaitForSeconds (3);
+		Debug.Log ("About to load scene");
 		SceneManager.LoadScene ("Main Menu");
 	}
 
@@ -79,6 +80,7 @@ public class GameController : MonoBehaviour
 	}
 
 	public void FadeActivate(){
+		Debug.Log ("FadeActivate");
 		sceneFade = fadeToBlack.GetComponent<SceneFade> ();
 		sceneFade.fadeActivate = true;
 	}
