@@ -7,8 +7,11 @@ using UnityEngine.UI;
 
 public class DestroyByHealth : MonoBehaviour 
 {
+	//Set explosion for this object
 	public GameObject explosion;
 	public GameObject explosionAsteroids;
+
+	//PowerUp Objects and Drop Chance Ranges
 	public float currencyDropChanceRange1;
 	public float currencyDropChanceRange2;
 	public GameObject powerupCurrency;
@@ -19,16 +22,22 @@ public class DestroyByHealth : MonoBehaviour
 	public float FireRateDropChanceRange2;
 	public GameObject powerupFireRate;
 
+	//Random number to determine dropped item
+	private float randomNumber;
+
+	//Gives Score value to GameController
 	public GameController gameController;
 	public int scoreValue;
 
+	//Set Health of enemy/object
 	public float health = 50;
 
+	//Color of damage flash when hit
 	public float flashSpeed = 5f;
 	public Color flashColor = new Color (1f, 0f, 0f, 0.1f);
 	bool damaged;
 
-	private float randomNumber;
+
 
 	void Start(){
 		randomNumber = Random.Range (1, 100);
@@ -51,14 +60,14 @@ public class DestroyByHealth : MonoBehaviour
 			if (tag == "Enemy"){
 				Instantiate(explosion, transform.position, transform.rotation);
 
-				if (randomNumber > FireRateDropChanceRange1 && randomNumber <= FireRateDropChanceRange2) {
-					Instantiate (powerupHeal, transform.position, transform.rotation);
+				if (randomNumber > HealDropChanceRange1 && randomNumber <= HealDropChanceRange2) {
+					Instantiate (powerupHeal, transform.position, powerupHeal.transform.rotation);
 				}
-				if (randomNumber >= HealDropChanceRange1 && randomNumber <=HealDropChanceRange2) {
-					Instantiate (powerupFireRate, transform.position, transform.rotation);
+				if (randomNumber >= FireRateDropChanceRange1 && randomNumber <=FireRateDropChanceRange2) {
+					Instantiate (powerupFireRate, transform.position, powerupFireRate.transform.rotation);
 				}
 				if (randomNumber >= currencyDropChanceRange1 && randomNumber < currencyDropChanceRange2) {	//DISABLED FOR DEMO
-					Instantiate (powerupCurrency, transform.position, transform.rotation);
+					Instantiate (powerupCurrency, transform.position, powerupCurrency.transform.rotation);
 				}
 			}
 			if (tag == "Asteroid") {
