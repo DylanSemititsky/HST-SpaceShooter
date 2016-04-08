@@ -29,8 +29,18 @@ public class PlayerAttack : MonoBehaviour {
 	//private AudioSource audioSource;
 	public AudioSource[] audioClips = null;
 
+	GameState gameState;
+
 	void Start() {
-		//audioSource = GetComponent<AudioSource>();
+		GameObject gameStateObject = GameObject.Find ("GameState");	
+			if (gameStateObject != null) {
+				gameState = gameStateObject.GetComponent<GameState> ();
+		}
+
+			//gameState.getPrimaryAttackLevel(primaryAttack.setPrimaryAttackLevel);
+			//gameState.getMultiAttackLevel(multiAttack.setMultiAttackLevel);
+			//gameState.getFireRate(fireRate);
+		
 	}
 	
 	// Update is called once per frame

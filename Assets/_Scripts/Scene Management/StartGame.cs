@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class StartGame : MonoBehaviour 
 {
 	SceneFade sceneFade;
+
+	public bool start = false;
 	public GameObject fadeToBlack;
 
 	private AudioSource audioSource;
@@ -30,7 +32,8 @@ public class StartGame : MonoBehaviour
 			rend.material.SetColor ("_TintColor", Color.red);
 			yield return new WaitForSeconds (0.1f);
 		}
-		SceneManager.LoadScene ("Asteroid");
+		start = true;
+		//SceneManager.LoadScene ("Asteroid");
 	}
 
 	public void FadeActivate(){

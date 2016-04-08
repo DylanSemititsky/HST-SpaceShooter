@@ -10,10 +10,9 @@ public class GameController : MonoBehaviour
 	public GUIText scoreText;
 	public GUIText restartText;
 	public GUIText gameOverText;
-	public GUIText levelCompleteText;
-	public GUIText thankYouForPlaying;
+	//public GUIText levelCompleteText;
 
-	private bool levelComplete;
+	//private bool levelComplete;
 	private bool gameOver;
 	private bool restart;
 	private int score;
@@ -23,8 +22,7 @@ public class GameController : MonoBehaviour
 		restart = false;
 		restartText.text = "";
 		gameOverText.text = "";
-		levelCompleteText.text = "";
-		thankYouForPlaying.text = "";
+		//levelCompleteText.text = "";
 		score = 0;
 		UpdateScore ();
 	}
@@ -36,9 +34,9 @@ public class GameController : MonoBehaviour
 			}
 		}
 
-		if (levelComplete) {
+		/*if (levelComplete) {
 			LevelComplete ();
-		}
+		}*/
 	}
 
 	void Restart (){
@@ -66,8 +64,7 @@ public class GameController : MonoBehaviour
 	}
 
 	private IEnumerator CoLevelComplete(){
-		levelCompleteText.text = "Level Complete!";
-		thankYouForPlaying.text = "Thank You for Playing!";
+		//levelCompleteText.text = "Level Complete!";
 		yield return new WaitForSeconds (2);
 		FadeActivate ();
 		yield return new WaitForSeconds (3);

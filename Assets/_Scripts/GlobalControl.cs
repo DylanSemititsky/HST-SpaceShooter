@@ -3,14 +3,12 @@ using System.Collections;
 
 public class GlobalControl : MonoBehaviour {
 
-public static GlobalControl Instance;
+	public static GlobalControl instance;
 
 	public float maxHealth;
 	public float health;
 	public float maxShield;
 	public float shield;
-
-	public Renderer rend;
 
 	public float fireRate;
 	public float setPrimaryAttackLevel;
@@ -20,11 +18,11 @@ public static GlobalControl Instance;
 	public float cupcakes;
 
 	void Awake(){
-		if (Instance == null){
+		if (instance == null){
 			DontDestroyOnLoad(gameObject);
-			Instance = this;
+			instance = this;
 		}
-		else if (Instance != this){
+		else if (instance != this){
 			Destroy(gameObject);
 		}
 	}
