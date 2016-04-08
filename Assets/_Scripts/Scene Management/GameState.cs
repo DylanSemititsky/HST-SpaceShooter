@@ -1,4 +1,9 @@
-﻿using UnityEngine;
+﻿// ---------------------------------------------------------------------------------------------------
+// Holds all player variables in a GameState Instance object.
+// Sets starting variables and stores saved variables just before any scene is loaded
+// ---------------------------------------------------------------------------------------------------
+
+using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
 

@@ -1,4 +1,8 @@
-﻿using UnityEngine;
+﻿// ---------------------------------------------------------------------------------------------------
+//
+// ---------------------------------------------------------------------------------------------------
+
+using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
 
@@ -17,6 +21,10 @@ public class GameController : MonoBehaviour
 	private bool restart;
 	private int score;
 
+
+	// ---------------------------------------------------------------------------------------------------
+	// START
+	// ---------------------------------------------------------------------------------------------------
 	void Start (){
 		gameOver = false;
 		restart = false;
@@ -27,6 +35,9 @@ public class GameController : MonoBehaviour
 		UpdateScore ();
 	}
 
+	// ---------------------------------------------------------------------------------------------------
+	// UPDATE
+	// ---------------------------------------------------------------------------------------------------
 	void Update (){
 		if (restart){
 			if (Input.GetKeyDown(KeyCode.R)){
@@ -39,6 +50,9 @@ public class GameController : MonoBehaviour
 		}*/
 	}
 
+	// ---------------------------------------------------------------------------------------------------
+	// Restart text "if" gameOver condition
+	// ---------------------------------------------------------------------------------------------------
 	void Restart (){
 		
 		if (gameOver){
@@ -48,6 +62,15 @@ public class GameController : MonoBehaviour
 
 	}
 
+	public void GameOver (){
+		gameOverText.text = "GAME OVER";
+		gameOver = true;
+		Restart ();
+	}
+
+	// ---------------------------------------------------------------------------------------------------
+	// Add score whenever an enemy with a newScoreValue is killed, then Update Score
+	// ---------------------------------------------------------------------------------------------------
 	public void AddScore (int newScoreValue){
 		score += newScoreValue;
 		UpdateScore ();
@@ -57,12 +80,10 @@ public class GameController : MonoBehaviour
 		scoreText.text = "Score: " + score;
 	}
 
-	public void GameOver (){
-		gameOverText.text = "GAME OVER";
-		gameOver = true;
-		Restart ();
-	}
 
+	// ---------------------------------------------------------------------------------------------------
+	// When LevelComplete is called, begin FadeActivate and return to Main Menu
+	// ---------------------------------------------------------------------------------------------------
 	private IEnumerator CoLevelComplete(){
 		//levelCompleteText.text = "Level Complete!";
 		yield return new WaitForSeconds (2);

@@ -1,4 +1,8 @@
-﻿using UnityEngine;
+﻿// ---------------------------------------------------------------------------------------------------
+// Code for the Start button in Main Menu scene. 
+// ---------------------------------------------------------------------------------------------------
+
+using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -13,11 +17,17 @@ public class StartGameObject : MonoBehaviour
 	private AudioSource audioSource;
 	public GameObject explosion;
 
+	// ---------------------------------------------------------------------------------------------------
+	// START
+	// ---------------------------------------------------------------------------------------------------
 	void Start() {
 		audioSource = GetComponent<AudioSource>();
 
 	}
 
+	// ---------------------------------------------------------------------------------------------------
+	// Play audio, trigger explosion, begin FadeToBlack, flash Start button Red and Green, make start = true for GameStart script
+	// ---------------------------------------------------------------------------------------------------
 	IEnumerator OnTriggerEnter(Collider other){
 		audioSource.Play();
 		Instantiate(explosion, transform.position, transform.rotation);

@@ -1,4 +1,11 @@
-﻿using UnityEngine;
+﻿// ---------------------------------------------------------------------------------------------------
+// PLAYER ATTACK CONTROLLER
+// Controls player: Attack levels and Fire Rate
+// Controls attack sound effects
+// Collects variables from GameState manager everytime a scene is loaded 
+// ---------------------------------------------------------------------------------------------------
+
+using UnityEngine;
 using System.Collections;
 
 [System.Serializable]
@@ -31,6 +38,10 @@ public class PlayerAttack : MonoBehaviour {
 
 	GameState gameState;
 
+
+	// ---------------------------------------------------------------------------------------------------
+	// START
+	// ---------------------------------------------------------------------------------------------------
 	void Start() {
 
 		//Find GameState Object to access it's script
@@ -45,8 +56,10 @@ public class PlayerAttack : MonoBehaviour {
 		fireRate = gameState.getFireRate();
 		
 	}
-	
-	// Update is called once per frame
+
+	// ---------------------------------------------------------------------------------------------------
+	// UPDATE
+	// ---------------------------------------------------------------------------------------------------
 	void Update () {
 
 		//Temporary quick hotkeys to test upgrades
@@ -69,7 +82,9 @@ public class PlayerAttack : MonoBehaviour {
 			fireRate = 0.5f;
 		}
 
+		// ---------------------------------------------------------------------------------------------------
 		//BASIC ATTACK. Auto-fired. Level based on setPrimaryAttackLevel in Inspector.
+		// ---------------------------------------------------------------------------------------------------
 		if (primaryAttack.setPrimaryAttackLevel == 1)	//Level 1
 		{
 			if (Time.time > primaryAttackNextFire) 
@@ -111,8 +126,9 @@ public class PlayerAttack : MonoBehaviour {
 			}
 		}
 
-
+		// ---------------------------------------------------------------------------------------------------
 		//MULTI SHOT. Auto-fired. Level based on setPrimaryAttackLevel in Inspector.
+		// ---------------------------------------------------------------------------------------------------
 		if (multiAttack.setMultiAttackLevel == 1)	//Level 1
 		{
 			if (Time.time > multiAttackNextFire) 
@@ -162,7 +178,9 @@ public class PlayerAttack : MonoBehaviour {
 			}
 		}
 
+		// ---------------------------------------------------------------------------------------------------
 		//SPECIAL ATTACK. Fire on "space bar" press
+		// ---------------------------------------------------------------------------------------------------
 		/*if (Input.GetKeyDown(KeyCode.Space))
 		{
             Instantiate(specialAttack, primaryAttack.primaryShotSpawn.position, primaryAttack.primaryShotSpawn.rotation);
@@ -170,6 +188,9 @@ public class PlayerAttack : MonoBehaviour {
 		}*/
 	}
 
+	// ---------------------------------------------------------------------------------------------------
+	// PowerUp pick up for Fire Rate increase
+	// ---------------------------------------------------------------------------------------------------
 		void OnTriggerEnter(Collider other)
 	{
 		if (other.tag == "Powerup")
@@ -193,6 +214,9 @@ public class PlayerAttack : MonoBehaviour {
 	}
 
 
+	// ---------------------------------------------------------------------------------------------------
+	// Return values for storing in GameState Manager
+	// ---------------------------------------------------------------------------------------------------
 	public int getPrimaryAttack(){
 		return primaryAttack.setPrimaryAttackLevel;
 	}
