@@ -4,7 +4,7 @@ using System.Collections;
 [System.Serializable]
 public class PrimaryAttack 	//Collapsible menu to access Primary Attack settings.
 {
-	public float setPrimaryAttackLevel; //Set Primary Attack level.
+	public int setPrimaryAttackLevel; //Set Primary Attack level.
 	public GameObject primaryAttackLv1, primaryAttackLv2, primaryAttackLv3, primaryAttackLv4; //Place Art for each level here (in Inspector).
 	public Transform primaryShotSpawn; //Where Primary Attacks will spawn.
 }
@@ -12,7 +12,7 @@ public class PrimaryAttack 	//Collapsible menu to access Primary Attack settings
 [System.Serializable]
 public class MultiAttack  	//Collapsible menu to access Multi Attack settings.
 {
-	public float setMultiAttackLevel; //Set Multi Attack level.
+	public int setMultiAttackLevel; //Set Multi Attack level.
 	public GameObject multiAttackLv1, multiAttackLv2, multiAttackLv2R, multiAttackLv2L, multiAttackLv3, multiAttackLv3R, multiAttackLv3L; //Place Art for each level here (in Inspector).
 	public Transform multiShotSpawnLv1R, multiShotSpawnLv1L, multiShotSpawnLv2R,  multiShotSpawnLv2L;
 }
@@ -32,21 +32,24 @@ public class PlayerAttack : MonoBehaviour {
 	GameState gameState;
 
 	void Start() {
+
+		//Find GameState Object to access it's script
 		GameObject gameStateObject = GameObject.Find ("GameState");	
-			if (gameStateObject != null) {
-				gameState = gameStateObject.GetComponent<GameState> ();
+		if (gameStateObject != null) {
+			gameState = gameStateObject.GetComponent<GameState> ();
 		}
 
-			//gameState.getPrimaryAttackLevel(primaryAttack.setPrimaryAttackLevel);
-			//gameState.getMultiAttackLevel(multiAttack.setMultiAttackLevel);
-			//gameState.getFireRate(fireRate);
+		//Set Upgrade values for new scene load (from GameState manager)
+		primaryAttack.setPrimaryAttackLevel = gameState.getPrimaryAttackLevel();
+		multiAttack.setMultiAttackLevel = gameState.getMultiAttackLevel();
+		fireRate = gameState.getFireRate();
 		
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
-		//Temporary quick hotkeys
+		//Temporary quick hotkeys to test upgrades
 		if (Input.GetKeyDown("]") && primaryAttack.setPrimaryAttackLevel < 4){	//+1 Primary Attack Level
 			primaryAttack.setPrimaryAttackLevel++;
 		}
@@ -187,5 +190,18 @@ public class PlayerAttack : MonoBehaviour {
 			Destroy(other.gameObject);
 			audioClips[1].Play();
 		}
+	}
+
+
+	public int getPrimaryAttack(){
+		return primaryAttack.setPrimaryAttackLevel;
+	}
+
+	public int getMultiAttack(){
+		return multiAttack.setMultiAttackLevel;
+	}
+
+	public float getFireRate(){
+		return fireRate;
 	}
 }

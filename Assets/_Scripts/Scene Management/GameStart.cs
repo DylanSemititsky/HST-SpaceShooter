@@ -3,12 +3,12 @@ using System.Collections;
  
 public class GameStart : MonoBehaviour
 {
- 		StartGame startGame;
+ 		StartGameObject startGame;
 
 		void Start(){
 			GameObject startObject = GameObject.Find ("Start");	
 			if (startObject != null) {
-				startGame = startObject.GetComponent<StartGame> ();
+				startGame = startObject.GetComponent<StartGameObject> ();
 			}
 		}
 

@@ -7,14 +7,17 @@ public class GameState : MonoBehaviour {
         // Declare properties
         private static GameState instance;
         private string activeLevel;                     		// Active level
-        private int maxHealth;                                  // Max HP
-        private int health;                                     // Current HP
-		private int maxShield;                                  // Max shield
-        private int shield;                                     // Current Shield
+        private int maxHealth = 100;                                  // Max HP
+        private int health = 100;                                     // Current HP
+		private float maxShield;                                  // Max shield
+        private float shield;                                     // Current Shield
         private int setPrimaryAttackLevel;                      // Primary Attack Level
         private int setMultiAttackLevel;                        // Multi Attack level
         private float fireRate;                                 // Fire Rate
         private int currency;                                   // Currency
+
+		PlayerController playerController;
+        PlayerAttack playerAttack;
        
        
        
@@ -24,13 +27,13 @@ public class GameState : MonoBehaviour {
         // Creates an instance of gamestate as a gameobject if an instance does not exist
         // ---------------------------------------------------------------------------------------------------
         public static GameState Instance{
-                get{
-                        if(instance == null){
-                                instance = new GameObject("gamestate").AddComponent<GameState> ();
-                        }
- 
-                        return instance;
+            get{
+                if(instance == null){
+                    instance = new GameObject("GameState").AddComponent<GameState> ();
                 }
+
+                return instance;
+            }
         }      
        
         // Sets the instance to null when the application quits
@@ -101,7 +104,7 @@ public class GameState : MonoBehaviour {
         // ---------------------------------------------------------------------------------------------------
         // Returns the characters shield
         // ---------------------------------------------------------------------------------------------------
-        public int getShield(){
+        public float getShield(){
                 return shield;
         }
 
@@ -140,4 +143,37 @@ public class GameState : MonoBehaviour {
         public int getCurrency(){
                 return currency;
         }
+
+
+		// ---------------------------------------------------------------------------------------------------
+        //Collect values before scene change (Must be called during(before) scene change)
+		// ---------------------------------------------------------------------------------------------------
+
+        public void StoreVariables(){
+        	
+	        GameObject playerObject = GameObject.Find ("Player");	
+			if (playerObject != null) {
+				playerController = playerObject.GetComponent<PlayerController> ();
+				playerAttack = playerObject.GetComponent<PlayerAttack>();
+			}
+
+			maxHealth = playerController.getMaxHealth();
+			maxShield = playerController.getMaxShield();
+			setPrimaryAttackLevel = playerAttack.primaryAttack.setPrimaryAttackLevel;
+			setMultiAttackLevel = playerAttack.multiAttack.setMultiAttackLevel;
+			fireRate = playerAttack.fireRate;
+		}
+
+
+		//Load Scene by Hotkeys
+		void Update(){
+			if(Input.GetKey("l")){
+				StoreVariables();
+				SceneManager.LoadScene("RedPlanet");
+			}
+			if(Input.GetKey("k")){
+				StoreVariables();
+				SceneManager.LoadScene("GreenPlanet");
+			}
+		}
 }

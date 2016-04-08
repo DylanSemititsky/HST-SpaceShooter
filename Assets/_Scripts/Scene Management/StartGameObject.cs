@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class StartGame : MonoBehaviour 
+public class StartGameObject : MonoBehaviour 
 {
 	SceneFade sceneFade;
 
