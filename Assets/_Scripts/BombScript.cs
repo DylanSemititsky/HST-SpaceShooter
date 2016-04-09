@@ -12,9 +12,6 @@ public class BombScript : MonoBehaviour {
 
 	private Rigidbody rb;
 	public float speed;
-	bool nextRoutine1 = false;
-	bool nextRoutine2 = false;
-	bool nextRoutine3 = false;
 
 	void Start () {
 

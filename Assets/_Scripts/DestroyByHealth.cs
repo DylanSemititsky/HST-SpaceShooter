@@ -12,15 +12,16 @@ public class DestroyByHealth : MonoBehaviour
 	public GameObject explosionAsteroids;
 
 	//PowerUp Objects and Drop Chance Ranges
-	public float currencyDropChanceRange1;
-	public float currencyDropChanceRange2;
-	public GameObject powerupCurrency;
-	public float HealDropChanceRange1;
-	public float HealDropChanceRange2;
-	public GameObject powerupHeal;
-	public float FireRateDropChanceRange1;
-	public float FireRateDropChanceRange2;
-	public GameObject powerupFireRate;
+	public GameObject item1;
+	public float item1DropMin;
+	public float item1DropMax;
+	public GameObject item2;
+	public float item2DropMin;
+	public float item2DropMax;
+	public GameObject item3;
+	public float item3DropMin;
+	public float item3DropMax;
+
 
 	//Random number to determine dropped item
 	private float randomNumber;
@@ -60,14 +61,14 @@ public class DestroyByHealth : MonoBehaviour
 			if (tag == "Enemy"){
 				Instantiate(explosion, transform.position, transform.rotation);
 
-				if (randomNumber >= HealDropChanceRange1 && randomNumber <= HealDropChanceRange2) {
-					Instantiate (powerupHeal, transform.position, powerupHeal.transform.rotation);
+				if (randomNumber >= item1DropMin && randomNumber <= item1DropMax) {
+					Instantiate (item1, transform.position, item1.transform.rotation);
 				}
-				if (randomNumber >= FireRateDropChanceRange1 && randomNumber <=FireRateDropChanceRange2) {
-					Instantiate (powerupFireRate, transform.position, powerupFireRate.transform.rotation);
+				if (randomNumber >= item2DropMin && randomNumber <=item2DropMax) {
+					Instantiate (item2, transform.position, item2.transform.rotation);
 				}
-				if (randomNumber >= currencyDropChanceRange1 && randomNumber <= currencyDropChanceRange2) {	//DISABLED FOR DEMO
-					Instantiate (powerupCurrency, transform.position, powerupCurrency.transform.rotation);
+				if (randomNumber >= item3DropMin && randomNumber <= item3DropMax) {	//DISABLED FOR DEMO
+					Instantiate (item3, transform.position, item3.transform.rotation);
 				}
 			}
 			if (tag == "Asteroid") {
