@@ -41,7 +41,6 @@ public class BombScript : MonoBehaviour {
 	public void OnTriggerEnter(Collider other){
 		
 		if(other.tag == "Enemy"){
-			Debug.Log("Collider with Enemy Occured");
 			Instantiate(explosion, transform.position, transform.rotation);
 
 			Detonation();
@@ -50,20 +49,17 @@ public class BombScript : MonoBehaviour {
 
 
 	public void Detonation(){
-			Debug.Log("Detonation Coroutine Started");
-			Instantiate(explosion, transform.position, transform.rotation);
-			Destroy(gameObject);
+		Instantiate(explosion, transform.position, transform.rotation);
+		Destroy(gameObject);
 
-			StartCoroutine(ExplosionDamage1());
+		ExplosionDamage1();
 
 		Destroy(gameObject);
 	}
 
 
 
-IEnumerator ExplosionDamage1(){
-	
-		Debug.Log("ExplosionDamage1 Started");
+	void ExplosionDamage1(){
 		Vector3 explosionPos = transform.position;
 		Collider[] colliders = Physics.OverlapSphere (explosionPos, 8);
 
@@ -71,13 +67,9 @@ IEnumerator ExplosionDamage1(){
 			GameObject hitObject = hit.gameObject;
 			DestroyByHealth enemy = hitObject.GetComponent<DestroyByHealth>();
 
-			Debug.Log("Before Null");
-
 			if(enemy != null){
 				enemy.AddDamage(damage1);
-				Debug.Log("Damage 1 applied");
 			}
 		}
-		yield return new WaitForSeconds(0.3f);
 	} 
 }

@@ -25,7 +25,7 @@ public class ExplosionScript : MonoBehaviour {
 		if(Time.time > nextDetonate){
 			 
 			nextDetonate = Time.time + detonateTime;
-			Detonation();
+			ExplosionDamage1();
 		}
 
 		timer += Time.deltaTime;
@@ -36,15 +36,7 @@ public class ExplosionScript : MonoBehaviour {
 	}
 
 
-	public void Detonation(){
-
-			StartCoroutine(ExplosionDamage1());
-	}
-
-
-
-IEnumerator ExplosionDamage1(){
-		Debug.Log("ExplosionDamage1 Started");
+	void ExplosionDamage1(){
 		Vector3 explosionPos = transform.position;
 		Collider[] colliders = Physics.OverlapSphere (explosionPos, 8);
 
@@ -52,13 +44,9 @@ IEnumerator ExplosionDamage1(){
 			GameObject hitObject = hit.gameObject;
 			DestroyByHealth enemy = hitObject.GetComponent<DestroyByHealth>();
 
-			Debug.Log("Before Null");
-
 			if(enemy != null){
 				enemy.AddDamage(damage1);
-				Debug.Log("Damage 1 applied");
 			}
 		}
-		yield return new WaitForSeconds(0.3f);
 	} 
 }
