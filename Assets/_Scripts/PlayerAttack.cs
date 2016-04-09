@@ -27,11 +27,18 @@ public class MultiAttack  	//Collapsible menu to access Multi Attack settings.
 }
 
 [System.Serializable]
-public class BurstAttack  	//Collapsible menu to access Multi Attack settings.
+public class BurstAttack  	//Collapsible menu to access Burst Attack settings.
 {
 	public int setBurstAttackLevel; //Set Multi Attack level.
 	public GameObject burstAttackLv1, burstAttackLv2; //Place Art for each level here (in Inspector).
 	public Transform burstShotSpawnR, burstShotSpawnL;
+}
+
+[System.Serializable]
+public class BombAttack  	//Collapsible menu to access Bomb Attack settings.
+{
+	public GameObject bomb; //Place Art for each level here (in Inspector).
+	public Transform shotSpawn;
 }
 
 public class PlayerAttack : MonoBehaviour {
@@ -39,6 +46,7 @@ public class PlayerAttack : MonoBehaviour {
 	public PrimaryAttack primaryAttack;
 	public MultiAttack multiAttack;
 	public BurstAttack burstAttack;
+	public BombAttack bombAttack;
 	public GameObject specialAttack;
 	public float fireRate;
 	public float burstFireRate;
@@ -90,7 +98,7 @@ public class PlayerAttack : MonoBehaviour {
 
 		BurstAttack();
 
-		SpecialAttack();
+		BombAttack();
 
 		UpgradeKeys();
 	}
@@ -300,14 +308,13 @@ public class PlayerAttack : MonoBehaviour {
 	}
 
 	// ---------------------------------------------------------------------------------------------------
-	//SPECIAL ATTACK. Fire on "space bar" press
+	//BOMB ATTACK. Fire on RMB press
 	// ---------------------------------------------------------------------------------------------------
-	void SpecialAttack(){
-		/*if (Input.GetKeyDown(KeyCode.Space))
-		{
-            Instantiate(specialAttack, primaryAttack.primaryShotSpawn.position, primaryAttack.primaryShotSpawn.rotation);
-            audioSource.Play();
-		}*/
+	void BombAttack(){
+		if (Input.GetMouseButtonDown (1)) {
+			Instantiate(bombAttack.bomb, bombAttack.shotSpawn.position, bombAttack.shotSpawn.rotation);
+			//audioClips[2].Play();
+			}
 	}
 
 	// ---------------------------------------------------------------------------------------------------

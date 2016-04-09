@@ -43,7 +43,7 @@ public class DestroyByHealth : MonoBehaviour
 		randomNumber = Random.Range (1, 100);
 
 		GameObject gameControllerObject = GameObject.Find ("GameController");
-		Debug.Log("GameController Found");
+		//Debug.Log("GameController Found");
 		if (gameControllerObject != null) {
 			gameController = gameControllerObject.GetComponent<GameController> ();
 		}
@@ -77,6 +77,12 @@ public class DestroyByHealth : MonoBehaviour
 			gameController.AddScore (scoreValue);
 			Destroy(gameObject);
 		}
+	}
+
+	public void AddDamage (float newDamageNumber){
+		health -= newDamageNumber;
+		damaged = true;
+		return;
 	}
 
 
