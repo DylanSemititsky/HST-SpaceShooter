@@ -19,7 +19,8 @@ public class GameState : MonoBehaviour {
         private int setPrimaryAttackLevel;                      // Primary Attack Level
         private int setMultiAttackLevel;                        // Multi Attack level
         private float fireRate;                                 // Fire Rate
-        private int currency;                                   // Currency
+        private int currency;
+		private int bombsAvailable = 0;                                   // Currency
 
 		PlayerController playerController;
         PlayerAttack playerAttack;

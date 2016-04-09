@@ -4,7 +4,7 @@ using System.Collections;
 public class ExplosionScript : MonoBehaviour {
 
 	private float nextDetonate;
-	private float detonateTime = 1;
+	private float detonateTime = 0.5f;
 	public float damage1 = 50;
 	public float damage2 = 25;
 	float timer = 0.0f;

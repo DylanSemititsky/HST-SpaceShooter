@@ -59,6 +59,7 @@ public class PlayerAttack : MonoBehaviour {
 	public float burstRechargeDelay;
 	private float nextBurstRecharge;
 	private float burstFillAmount;
+	public int bombsAvailable;
 	public Image burstBar;
 	private bool mouseDown;
 
@@ -311,9 +312,10 @@ public class PlayerAttack : MonoBehaviour {
 	//BOMB ATTACK. Fire on RMB press
 	// ---------------------------------------------------------------------------------------------------
 	void BombAttack(){
-		if (Input.GetMouseButtonDown (1)) {
+		if (Input.GetMouseButtonDown (1) && bombsAvailable >= 1) {
 			Instantiate(bombAttack.bomb, bombAttack.shotSpawn.position, bombAttack.shotSpawn.rotation);
 			//audioClips[2].Play();
+			bombsAvailable -= 1;
 			}
 	}
 
