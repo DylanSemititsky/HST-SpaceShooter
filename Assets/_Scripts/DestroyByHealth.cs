@@ -60,13 +60,13 @@ public class DestroyByHealth : MonoBehaviour
 			if (tag == "Enemy"){
 				Instantiate(explosion, transform.position, transform.rotation);
 
-				if (randomNumber > HealDropChanceRange1 && randomNumber <= HealDropChanceRange2) {
+				if (randomNumber >= HealDropChanceRange1 && randomNumber <= HealDropChanceRange2) {
 					Instantiate (powerupHeal, transform.position, powerupHeal.transform.rotation);
 				}
 				if (randomNumber >= FireRateDropChanceRange1 && randomNumber <=FireRateDropChanceRange2) {
 					Instantiate (powerupFireRate, transform.position, powerupFireRate.transform.rotation);
 				}
-				if (randomNumber >= currencyDropChanceRange1 && randomNumber < currencyDropChanceRange2) {	//DISABLED FOR DEMO
+				if (randomNumber >= currencyDropChanceRange1 && randomNumber <= currencyDropChanceRange2) {	//DISABLED FOR DEMO
 					Instantiate (powerupCurrency, transform.position, powerupCurrency.transform.rotation);
 				}
 			}

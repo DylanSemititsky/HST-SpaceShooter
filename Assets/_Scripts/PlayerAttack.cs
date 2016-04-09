@@ -11,33 +11,29 @@ using System.Collections;
 
 
 [System.Serializable]
-public class PrimaryAttack 	//Collapsible menu to access Primary Attack settings.
-{
+public class PrimaryAttack{ 	//Collapsible menu to access Primary Attack settings.
 	public int setPrimaryAttackLevel; //Set Primary Attack level.
 	public GameObject primaryAttackLv1, primaryAttackLv2, primaryAttackLv3, primaryAttackLv4; //Place Art for each level here (in Inspector).
 	public Transform primaryShotSpawn; //Where Primary Attacks will spawn.
 }
 
 [System.Serializable]
-public class MultiAttack  	//Collapsible menu to access Multi Attack settings.
-{
+public class MultiAttack{  	//Collapsible menu to access Multi Attack settings.
 	public int setMultiAttackLevel; //Set Multi Attack level.
 	public GameObject multiAttackLv1, multiAttackLv2, multiAttackLv2R, multiAttackLv2L, multiAttackLv3, multiAttackLv3R, multiAttackLv3L; //Place Art for each level here (in Inspector).
 	public Transform multiShotSpawnLv1R, multiShotSpawnLv1L, multiShotSpawnLv2R,  multiShotSpawnLv2L;
 }
 
 [System.Serializable]
-public class BurstAttack  	//Collapsible menu to access Burst Attack settings.
-{
+public class BurstAttack{  			//Collapsible menu to access Burst Attack settings.
 	public int setBurstAttackLevel; //Set Multi Attack level.
 	public GameObject burstAttackLv1, burstAttackLv2; //Place Art for each level here (in Inspector).
 	public Transform burstShotSpawnR, burstShotSpawnL;
 }
 
 [System.Serializable]
-public class BombAttack  	//Collapsible menu to access Bomb Attack settings.
-{
-	public GameObject bomb; //Place Art for each level here (in Inspector).
+public class BombAttack{  		//Collapsible menu to access Bomb Attack settings.
+	public GameObject bomb; 	//Place Art here
 	public Transform shotSpawn;
 }
 
@@ -105,12 +101,10 @@ public class PlayerAttack : MonoBehaviour {
 	}
 
 	// ---------------------------------------------------------------------------------------------------
-	// PowerUp pick up for Fire Rate increase
+	// PowerUp Control
 	// ---------------------------------------------------------------------------------------------------
-		void OnTriggerEnter(Collider other)
-	{
-		if (other.tag == "Powerup")
-		{
+		void OnTriggerEnter(Collider other){
+		if (other.tag == "powerUp_fireRate"){
 			fireRate = fireRate * 0.9f;
 			if(fireRate <= 0.075f){
 				fireRate = 0.075f;
@@ -118,12 +112,17 @@ public class PlayerAttack : MonoBehaviour {
 			Destroy(other.gameObject);
 			audioClips[1].Play();
 		}
-		if (other.tag == "Watermelon")
-		{
+		if (other.tag == "powerUp_watermelon"){
 			multiAttack.setMultiAttackLevel += 1;
 			if(multiAttack.setMultiAttackLevel >= 3){
 				multiAttack.setMultiAttackLevel = 3;
 			}
+			Destroy(other.gameObject);
+			audioClips[1].Play();
+		}
+		if (other.tag == "powerUp_bomb"){
+			bombsAvailable += 1;
+
 			Destroy(other.gameObject);
 			audioClips[1].Play();
 		}
@@ -139,40 +138,32 @@ public class PlayerAttack : MonoBehaviour {
 	// ---------------------------------------------------------------------------------------------------
 	void PrimaryAttack(){
 
-		if (primaryAttack.setPrimaryAttackLevel == 1)	//Level 1
-		{
-			if (Time.time > primaryAttackNextFire) 
-			{
+		if (primaryAttack.setPrimaryAttackLevel == 1){	//Level 1
+			if (Time.time > primaryAttackNextFire) {
 				primaryAttackNextFire = Time.time + fireRate;
 				Instantiate(primaryAttack.primaryAttackLv1, primaryAttack.primaryShotSpawn.position, primaryAttack.primaryShotSpawn.rotation);
             	//audioSource.Play();
 				audioClips[0].Play();
 			}
 		}
-		if (primaryAttack.setPrimaryAttackLevel == 2)	//Level 2
-		{
-			if (Time.time > primaryAttackNextFire) 
-			{
+		if (primaryAttack.setPrimaryAttackLevel == 2){	//Level 2
+			if (Time.time > primaryAttackNextFire) {
 				primaryAttackNextFire = Time.time + fireRate;
 				Instantiate(primaryAttack.primaryAttackLv2, primaryAttack.primaryShotSpawn.position, primaryAttack.primaryShotSpawn.rotation);
             	//audioSource.Play();
 				audioClips[0].Play();
 			}
 		}
-		if (primaryAttack.setPrimaryAttackLevel == 3)	//Level 3
-		{
-			if (Time.time > primaryAttackNextFire) 
-			{
+		if (primaryAttack.setPrimaryAttackLevel == 3){	//Level 3
+			if (Time.time > primaryAttackNextFire) {
             	primaryAttackNextFire = Time.time + fireRate;
 				Instantiate(primaryAttack.primaryAttackLv3, primaryAttack.primaryShotSpawn.position, primaryAttack.primaryShotSpawn.rotation);
             	//audioSource.Play();
 				audioClips[0].Play();
 			}
 		}
-		if (primaryAttack.setPrimaryAttackLevel == 4) 	//Level 4
-		{
-			if (Time.time > primaryAttackNextFire) 
-			{
+		if (primaryAttack.setPrimaryAttackLevel == 4){ 	//Level 4
+			if (Time.time > primaryAttackNextFire) {
             	primaryAttackNextFire = Time.time + fireRate;
 				Instantiate(primaryAttack.primaryAttackLv4, primaryAttack.primaryShotSpawn.position, primaryAttack.primaryShotSpawn.rotation);
             	//audioSource.Play();
@@ -185,10 +176,8 @@ public class PlayerAttack : MonoBehaviour {
 	//MULTI SHOT. Auto-fired. Level based on setPrimaryAttackLevel.
 	// ---------------------------------------------------------------------------------------------------
 	void MultiAttack(){
-		if (multiAttack.setMultiAttackLevel == 1)	//Level 1
-		{
-			if (Time.time > multiAttackNextFire) 
-			{
+		if (multiAttack.setMultiAttackLevel == 1){	//Level 1
+			if (Time.time > multiAttackNextFire) {
             	multiAttackNextFire = Time.time + fireRate * 2;
 				Instantiate(multiAttack.multiAttackLv1, multiAttack.multiShotSpawnLv1L.position, multiAttack.multiShotSpawnLv1L.rotation);
 	            //audioSource.Play();
@@ -197,10 +186,8 @@ public class PlayerAttack : MonoBehaviour {
 	            //audioSource.Play();
 			}
 		}
-		if (multiAttack.setMultiAttackLevel == 2)	//Level 2
-		{
-			if (Time.time > multiAttackNextFire) 
-			{
+		if (multiAttack.setMultiAttackLevel == 2){	//Level 2
+			if (Time.time > multiAttackNextFire) {
 				multiAttackNextFire = Time.time + fireRate * 2;
 				Instantiate(multiAttack.multiAttackLv2, multiAttack.multiShotSpawnLv1L.position, multiAttack.multiShotSpawnLv1L.rotation);
 	            //audioSource.Play();
@@ -215,10 +202,8 @@ public class PlayerAttack : MonoBehaviour {
 	            //audioSource.Play();
 			}
 		}
-		if (multiAttack.setMultiAttackLevel == 3)	//Level 3
-		{
-			if (Time.time > multiAttackNextFire) 
-			{
+		if (multiAttack.setMultiAttackLevel == 3){	//Level 3
+			if (Time.time > multiAttackNextFire) {
 				multiAttackNextFire = Time.time + fireRate * 2;
 				Instantiate(multiAttack.multiAttackLv3, multiAttack.multiShotSpawnLv1L.position, multiAttack.multiShotSpawnLv1L.rotation);
 	            //audioSource.Play();
@@ -359,5 +344,9 @@ public class PlayerAttack : MonoBehaviour {
 
 	public float getFireRate(){
 		return fireRate;
+	}
+
+	public float getBombsAvailable(){
+		return bombsAvailable;
 	}
 }
