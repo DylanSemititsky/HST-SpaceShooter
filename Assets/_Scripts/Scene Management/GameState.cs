@@ -12,8 +12,8 @@ public class GameState : MonoBehaviour {
         // Declare properties
         private static GameState instance;
         private string activeLevel;                     		// Active level
-        private int maxHealth = 100;                                  // Max HP
-        private int health = 100;                                     // Current HP
+        private float maxHealth = 100;                                  // Max HP
+        private float health = 100;                                     // Current HP
 		private float maxShield;                                  // Max shield
         private float shield;                                     // Current Shield
         private int setPrimaryAttackLevel;                      // Primary Attack Level
@@ -45,9 +45,7 @@ public class GameState : MonoBehaviour {
         public void OnApplicationQuit(){
                 instance = null;
         }
-        // ---------------------------------------------------------------------------------------------------
-       
-       
+		
         // ---------------------------------------------------------------------------------------------------
         // startState()
         // ---------------------------------------------------------------------------------------------------
@@ -55,18 +53,18 @@ public class GameState : MonoBehaviour {
         // ---------------------------------------------------------------------------------------------------
         public void startState(){
                 print ("Creating a new game state");
-               
+                
                 // Set default properties:
                 activeLevel = "Level 1";
                 maxHealth = 100;
-                health = maxHealth;
+                health = 100;
                 maxShield = 20;
-                shield = maxShield;
+                shield = 20;
                 setPrimaryAttackLevel = 1;
                 setMultiAttackLevel = 0;
                 fireRate = 0.5f;
                 currency = 0;
-                               
+                              
                 // Load level 1
                 SceneManager.LoadScene ("GreenPlanet");
         }
@@ -100,7 +98,7 @@ public class GameState : MonoBehaviour {
         // ---------------------------------------------------------------------------------------------------
         // Returns the characters health
         // ---------------------------------------------------------------------------------------------------
-        public int getHealth(){
+        public float getHealth(){
                 return health;
         }
        

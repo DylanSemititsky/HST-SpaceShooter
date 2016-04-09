@@ -92,7 +92,7 @@ public class PlayerAttack : MonoBehaviour {
 				primaryAttackNextFire = Time.time + fireRate;
 				Instantiate(primaryAttack.primaryAttackLv1, primaryAttack.primaryShotSpawn.position, primaryAttack.primaryShotSpawn.rotation);
             	//audioSource.Play();
-            	audioClips[0].Play();
+				audioClips[0].Play();
 			}
 		}
 		if (primaryAttack.setPrimaryAttackLevel == 2)	//Level 2
