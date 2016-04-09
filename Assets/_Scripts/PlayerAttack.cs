@@ -6,7 +6,9 @@
 // ---------------------------------------------------------------------------------------------------
 
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
+
 
 [System.Serializable]
 public class PrimaryAttack 	//Collapsible menu to access Primary Attack settings.
@@ -24,14 +26,34 @@ public class MultiAttack  	//Collapsible menu to access Multi Attack settings.
 	public Transform multiShotSpawnLv1R, multiShotSpawnLv1L, multiShotSpawnLv2R,  multiShotSpawnLv2L;
 }
 
+[System.Serializable]
+public class BurstAttack  	//Collapsible menu to access Multi Attack settings.
+{
+	public int setBurstAttackLevel; //Set Multi Attack level.
+	public GameObject burstAttackLv1, burstAttackLv2; //Place Art for each level here (in Inspector).
+	public Transform burstShotSpawnR, burstShotSpawnL;
+}
+
 public class PlayerAttack : MonoBehaviour {
 
 	public PrimaryAttack primaryAttack;
 	public MultiAttack multiAttack;
+	public BurstAttack burstAttack;
 	public GameObject specialAttack;
 	public float fireRate;
+	public float burstFireRate;
 	private float primaryAttackNextFire;
 	private float multiAttackNextFire;
+	private float burstAttackNextFire;
+
+	public float maxBurst;
+	public float burst;
+	public float burstRechargeDelay;
+	private float nextBurstRecharge;
+	private float burstFillAmount;
+	public Image burstBar;
+	private bool mouseDown;
+
 
 	//private AudioSource audioSource;
 	public AudioSource[] audioClips = null;
@@ -175,6 +197,47 @@ public class PlayerAttack : MonoBehaviour {
 				multiAttackNextFire = Time.time + fireRate * 2;
 				Instantiate(multiAttack.multiAttackLv3L, multiAttack.multiShotSpawnLv2L.position, multiAttack.multiShotSpawnLv1R.rotation);
 	            //audioSource.Play();
+			}
+		}
+
+		// ---------------------------------------------------------------------------------------------------
+		//BURST ATTACK. Fire on LMB press
+		// ---------------------------------------------------------------------------------------------------
+		if (burstAttack.setBurstAttackLevel == 1) {	//Level 1
+			if (Input.GetMouseButton (0) && burst > 0) {
+				mouseDown = true;
+				if (Time.time > burstAttackNextFire) {
+					burstAttackNextFire = Time.time + burstFireRate * 2;
+					Instantiate (burstAttack.burstAttackLv1, burstAttack.burstShotSpawnL.position, burstAttack.burstShotSpawnL.rotation);
+					//audioSource.Play();
+
+					burstAttackNextFire = Time.time + burstFireRate * 2;
+					Instantiate (burstAttack.burstAttackLv1, burstAttack.burstShotSpawnR.position, burstAttack.burstShotSpawnR.rotation);
+					//audioSource.Play();
+
+					if (burst >= maxBurst){
+					burst = maxBurst;
+					}
+
+					burst -= Time.deltaTime * 40;
+				}
+
+			} else mouseDown = false;
+		}
+		if (burst >= maxBurst){
+			burst = maxBurst;
+		}
+
+		burstFillAmount = (burst / maxBurst);
+		if (burstFillAmount != burstBar.fillAmount) {
+			burstBar.fillAmount = burstFillAmount;
+		}
+
+
+		if (mouseDown == false){
+			if (Time.time > nextBurstRecharge){
+				nextBurstRecharge = Time.time + burstRechargeDelay;
+				burst += 0.1f;
 			}
 		}
 
