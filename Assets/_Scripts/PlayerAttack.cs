@@ -84,29 +84,52 @@ public class PlayerAttack : MonoBehaviour {
 	// ---------------------------------------------------------------------------------------------------
 	void Update () {
 
-		//Temporary quick hotkeys to test upgrades
-		if (Input.GetKeyDown("]") && primaryAttack.setPrimaryAttackLevel < 4){	//+1 Primary Attack Level
-			primaryAttack.setPrimaryAttackLevel++;
-		}
-		if (Input.GetKeyDown("[") && primaryAttack.setPrimaryAttackLevel > 0){	//-1 Primary Attack Level
-			primaryAttack.setPrimaryAttackLevel--;
-		}
-		if (Input.GetKeyDown("'") && multiAttack.setMultiAttackLevel < 3){	//+1 Multi Attack Level
-			multiAttack.setMultiAttackLevel++;
-		}
-		if (Input.GetKeyDown(";") && multiAttack.setMultiAttackLevel > 0){	//-1 Multi Attack Level
-			multiAttack.setMultiAttackLevel--;
-		}
-		if (Input.GetKeyDown(".") && fireRate > .075){	//+10% Fire Rate
-			fireRate = fireRate * 0.9f;
-		}
-		if (Input.GetKeyDown(",") && fireRate < 0.5f){ 	//Reset Fire Rate to 0.5/second
-			fireRate = 0.5f;
-		}
+		PrimaryAttack();
 
-		// ---------------------------------------------------------------------------------------------------
-		//BASIC ATTACK. Auto-fired. Level based on setPrimaryAttackLevel in Inspector.
-		// ---------------------------------------------------------------------------------------------------
+		MultiAttack();
+
+		BurstAttack();
+
+		SpecialAttack();
+
+		UpgradeKeys();
+	}
+
+	// ---------------------------------------------------------------------------------------------------
+	// PowerUp pick up for Fire Rate increase
+	// ---------------------------------------------------------------------------------------------------
+		void OnTriggerEnter(Collider other)
+	{
+		if (other.tag == "Powerup")
+		{
+			fireRate = fireRate * 0.9f;
+			if(fireRate <= 0.075f){
+				fireRate = 0.075f;
+			}
+			Destroy(other.gameObject);
+			audioClips[1].Play();
+		}
+		if (other.tag == "Watermelon")
+		{
+			multiAttack.setMultiAttackLevel += 1;
+			if(multiAttack.setMultiAttackLevel >= 3){
+				multiAttack.setMultiAttackLevel = 3;
+			}
+			Destroy(other.gameObject);
+			audioClips[1].Play();
+		}
+	}
+
+
+	// ---------------------------------------------------------------------------------------------------
+	// ATTACK FUNCTIONS
+	// ---------------------------------------------------------------------------------------------------
+	// ---------------------------------------------------------------------------------------------------
+	// ---------------------------------------------------------------------------------------------------
+	//PRIMARY ATTACK. Auto-fired. Level based on setPrimaryAttackLevel.
+	// ---------------------------------------------------------------------------------------------------
+	void PrimaryAttack(){
+
 		if (primaryAttack.setPrimaryAttackLevel == 1)	//Level 1
 		{
 			if (Time.time > primaryAttackNextFire) 
@@ -147,10 +170,12 @@ public class PlayerAttack : MonoBehaviour {
 				audioClips[0].Play();
 			}
 		}
+	}
 
-		// ---------------------------------------------------------------------------------------------------
-		//MULTI SHOT. Auto-fired. Level based on setPrimaryAttackLevel in Inspector.
-		// ---------------------------------------------------------------------------------------------------
+	// ---------------------------------------------------------------------------------------------------
+	//MULTI SHOT. Auto-fired. Level based on setPrimaryAttackLevel.
+	// ---------------------------------------------------------------------------------------------------
+	void MultiAttack(){
 		if (multiAttack.setMultiAttackLevel == 1)	//Level 1
 		{
 			if (Time.time > multiAttackNextFire) 
@@ -199,13 +224,19 @@ public class PlayerAttack : MonoBehaviour {
 	            //audioSource.Play();
 			}
 		}
+	}
 
-		// ---------------------------------------------------------------------------------------------------
-		//BURST ATTACK. Fire on LMB press
-		// ---------------------------------------------------------------------------------------------------
-		if (burstAttack.setBurstAttackLevel == 1) {	//Level 1
+	// ---------------------------------------------------------------------------------------------------
+	//BURST ATTACK. Fire on LMB press
+	// ---------------------------------------------------------------------------------------------------
+
+	void BurstAttack(){
+
+		//Level 1
+		if (burstAttack.setBurstAttackLevel == 1){
 			if (Input.GetMouseButton (0) && burst > 0) {
 				mouseDown = true;
+
 				if (Time.time > burstAttackNextFire) {
 					burstAttackNextFire = Time.time + burstFireRate * 2;
 					Instantiate (burstAttack.burstAttackLv1, burstAttack.burstShotSpawnL.position, burstAttack.burstShotSpawnL.rotation);
@@ -214,36 +245,64 @@ public class PlayerAttack : MonoBehaviour {
 					burstAttackNextFire = Time.time + burstFireRate * 2;
 					Instantiate (burstAttack.burstAttackLv1, burstAttack.burstShotSpawnR.position, burstAttack.burstShotSpawnR.rotation);
 					//audioSource.Play();
-
-					if (burst >= maxBurst){
-					burst = maxBurst;
-					}
-
-					burst -= Time.deltaTime * 40;
 				}
+				//While mouse is pressed down, decrease burst meter at this rate
+				burst -= Time.deltaTime * 20;
+			}
+		//Set mouseDown to false to allow recharge (below)
+		} else mouseDown = false;
 
-			} else mouseDown = false;
-		}
+		//Level 2
+		if (burstAttack.setBurstAttackLevel == 2){
+			maxBurst = 40;
+
+			if (Input.GetMouseButton (0) && burst > 0) {
+				mouseDown = true;
+
+				if (Time.time > burstAttackNextFire) {
+					burstAttackNextFire = Time.time + burstFireRate * 2;
+					Instantiate (burstAttack.burstAttackLv2, burstAttack.burstShotSpawnL.position, burstAttack.burstShotSpawnL.rotation);
+					//audioSource.Play();
+
+					burstAttackNextFire = Time.time + burstFireRate * 2;
+					Instantiate (burstAttack.burstAttackLv2, burstAttack.burstShotSpawnR.position, burstAttack.burstShotSpawnR.rotation);
+					//audioSource.Play();
+				}
+				//While mouse is pressed down, decrease burst meter at this rate
+				burst -= Time.deltaTime * 20;
+			}
+		//Set mouseDown to false to allow recharge (below)
+		}else mouseDown = false;
+
+		//Burst to stop recharging at maxBurst
 		if (burst >= maxBurst){
 			burst = maxBurst;
 		}
 
+		//Show burst meter fill amount
 		burstFillAmount = (burst / maxBurst);
 		if (burstFillAmount != burstBar.fillAmount) {
 			burstBar.fillAmount = burstFillAmount;
 		}
 
-
+		//Allow burst meter to recharge when mouse isn't pressed down
 		if (mouseDown == false){
 			if (Time.time > nextBurstRecharge){
 				nextBurstRecharge = Time.time + burstRechargeDelay;
-				burst += 0.1f;
+				if (burstAttack.setBurstAttackLevel == 1){
+					burst += 0.1f;
+				}
+				if (burstAttack.setBurstAttackLevel == 2){
+					burst += 0.2f;
+				}
 			}
 		}
+	}
 
-		// ---------------------------------------------------------------------------------------------------
-		//SPECIAL ATTACK. Fire on "space bar" press
-		// ---------------------------------------------------------------------------------------------------
+	// ---------------------------------------------------------------------------------------------------
+	//SPECIAL ATTACK. Fire on "space bar" press
+	// ---------------------------------------------------------------------------------------------------
+	void SpecialAttack(){
 		/*if (Input.GetKeyDown(KeyCode.Space))
 		{
             Instantiate(specialAttack, primaryAttack.primaryShotSpawn.position, primaryAttack.primaryShotSpawn.rotation);
@@ -252,27 +311,28 @@ public class PlayerAttack : MonoBehaviour {
 	}
 
 	// ---------------------------------------------------------------------------------------------------
-	// PowerUp pick up for Fire Rate increase
+	// Hotkeys to upgrade weapons during game (for testing purposes)
 	// ---------------------------------------------------------------------------------------------------
-		void OnTriggerEnter(Collider other)
-	{
-		if (other.tag == "Powerup")
-		{
-			fireRate = fireRate * 0.9f;
-			if(fireRate <= 0.075f){
-				fireRate = 0.075f;
-			}
-			Destroy(other.gameObject);
-			audioClips[1].Play();
+	void UpgradeKeys(){
+
+		//Temporary quick hotkeys to test upgrades
+		if (Input.GetKeyDown("]") && primaryAttack.setPrimaryAttackLevel < 4){	//+1 Primary Attack Level
+			primaryAttack.setPrimaryAttackLevel++;
 		}
-		if (other.tag == "Watermelon")
-		{
-			multiAttack.setMultiAttackLevel += 1;
-			if(multiAttack.setMultiAttackLevel >= 3){
-				multiAttack.setMultiAttackLevel = 3;
-			}
-			Destroy(other.gameObject);
-			audioClips[1].Play();
+		if (Input.GetKeyDown("[") && primaryAttack.setPrimaryAttackLevel > 0){	//-1 Primary Attack Level
+			primaryAttack.setPrimaryAttackLevel--;
+		}
+		if (Input.GetKeyDown("'") && multiAttack.setMultiAttackLevel < 3){	//+1 Multi Attack Level
+			multiAttack.setMultiAttackLevel++;
+		}
+		if (Input.GetKeyDown(";") && multiAttack.setMultiAttackLevel > 0){	//-1 Multi Attack Level
+			multiAttack.setMultiAttackLevel--;
+		}
+		if (Input.GetKeyDown(".") && fireRate > .075){	//+10% Fire Rate
+			fireRate = fireRate * 0.9f;
+		}
+		if (Input.GetKeyDown(",") && fireRate < 0.5f){ 	//Reset Fire Rate to 0.5/second
+			fireRate = 0.5f;
 		}
 	}
 
