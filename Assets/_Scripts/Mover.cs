@@ -31,5 +31,9 @@ public class Mover : MonoBehaviour {
 		if (direction == 3){
 			rb.velocity = new Vector3(0.0f, 0.0f, 1.0f) * speed;
 		}
+
+		if (direction == 4){
+			rb.velocity = new Vector3(0.0f, 0.0f, -1.0f) * speed;
+		}
 	}
 }

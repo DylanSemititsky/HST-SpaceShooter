@@ -23,7 +23,7 @@ public class SceneFade : MonoBehaviour {
  	{
      	CanvasGroup canvasGroup = GetComponent<CanvasGroup>();
      	while (canvasGroup.alpha < 1) {
-     		canvasGroup.alpha += Time.deltaTime / 100;
+     		canvasGroup.alpha += Time.deltaTime / 50;
      		yield return null;
      	}
 
