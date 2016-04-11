@@ -45,9 +45,10 @@ public class GameController : MonoBehaviour
 			}
 		}
 
-		/*if (levelComplete) {
-			LevelComplete ();
-		}*/
+		if (Input.GetKeyDown(KeyCode.U)){
+			SceneManager.LoadScene("UpgradeShop");
+		}
+	
 	}
 
 	// ---------------------------------------------------------------------------------------------------
@@ -90,7 +91,7 @@ public class GameController : MonoBehaviour
 		FadeActivate ();
 		yield return new WaitForSeconds (3);
 		Debug.Log ("About to load scene");
-		SceneManager.LoadScene ("Main Menu");
+		SceneManager.LoadScene ("UpgradeShop");
 	}
 
 	public void LevelComplete(){

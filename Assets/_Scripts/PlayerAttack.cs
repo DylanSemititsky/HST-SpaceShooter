@@ -54,7 +54,7 @@ public class PlayerAttack : MonoBehaviour {
 	public int bombsAvailable;
 	public Image burstBar;
 	private bool mouseDown;
-	private bool disableLasers;
+	public bool disableLasers, disableBurst;
 	private int primaryTemp;
 	private int multiTemp;
 	public GameObject laserSound;
@@ -87,6 +87,7 @@ public class PlayerAttack : MonoBehaviour {
 		primaryTemp = primaryAttack.setPrimaryAttackLevel;
 		multiTemp = multiAttack.setMultiAttackLevel;
 		bursting = false;
+		disableBurst = false;
 
 	
 	}
@@ -243,7 +244,7 @@ public class PlayerAttack : MonoBehaviour {
 
 
 		//Level 1
-		if (burstAttack.setBurstAttackLevel == 1) {
+		if (burstAttack.setBurstAttackLevel == 1 && disableBurst == false) {
 			
 			if (Input.GetMouseButton (0) && burst > 0) {
 
