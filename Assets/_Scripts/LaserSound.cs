@@ -3,9 +3,10 @@ using System.Collections;
 
 public class LaserSound : MonoBehaviour {
 
-	public AudioClip spaceGun;
+	public AudioSource laserSound;
+
 	// Use this for initialization
 	void Start () {
-		AudioSource.PlayClipAtPoint(spaceGun, new Vector3(0, 30, 5), 1f);
+		laserSound.Play ();
 	}
 }
