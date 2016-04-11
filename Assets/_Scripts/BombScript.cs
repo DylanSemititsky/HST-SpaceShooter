@@ -7,8 +7,7 @@ public class BombScript : MonoBehaviour {
 	private float detonateTime = 2;
 	public GameObject explosion;
 
-	public float damage1 = 200;
-	public float damage2 = 25;
+	public float damage = 30;
 
 	private Rigidbody rb;
 	public float speed;
@@ -65,7 +64,7 @@ public class BombScript : MonoBehaviour {
 			DestroyByHealth enemy = hitObject.GetComponent<DestroyByHealth>();
 
 			if(enemy != null){
-				enemy.AddDamage(damage1);
+				enemy.AddDamage(damage);
 			}
 		}
 	} 

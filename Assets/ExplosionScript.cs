@@ -5,8 +5,7 @@ public class ExplosionScript : MonoBehaviour {
 
 	private float nextDetonate;
 	private float detonateTime = 0.5f;
-	public float damage1 = 50;
-	public float damage2 = 25;
+	public float damage = 10;
 	float timer = 0.0f;
 	float trigger = 3.0f;
 
@@ -45,7 +44,7 @@ public class ExplosionScript : MonoBehaviour {
 			DestroyByHealth enemy = hitObject.GetComponent<DestroyByHealth>();
 
 			if(enemy != null){
-				enemy.AddDamage(damage1);
+				enemy.AddDamage(damage);
 			}
 		}
 	} 

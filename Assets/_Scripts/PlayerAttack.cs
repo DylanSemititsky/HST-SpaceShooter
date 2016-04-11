@@ -33,7 +33,8 @@ public class BurstAttack{  			//Collapsible menu to access Burst Attack settings
 
 [System.Serializable]
 public class BombAttack{  		//Collapsible menu to access Bomb Attack settings.
-	public GameObject bomb; 	//Place Art here
+	public int setBombLevel;
+	public GameObject bombPurple, bombRed, bombOrange, bombYellow; 	//Place Art here
 	public Transform shotSpawn;
 }
 
@@ -43,27 +44,21 @@ public class PlayerAttack : MonoBehaviour {
 	public MultiAttack multiAttack;
 	public BurstAttack burstAttack;
 	public BombAttack bombAttack;
-	public GameObject specialAttack;
-	public float fireRate;
-	public float burstFireRate;
-	private float primaryAttackNextFire;
-	private float multiAttackNextFire;
-	private float burstAttackNextFire;
+	public float fireRate, burstFireRate;
+	private float primaryAttackNextFire, multiAttackNextFire, burstAttackNextFire;
 	public int burstAttackDamage;
 
-	public float maxBurst;
-	public float burst;
-	public float burstRechargeDelay;
-	private float nextBurstRecharge;
-	private float burstFillAmount;
+	public float maxBurst, burst;
+	private float nextBurstRecharge, burstFillAmount, burstRechargeDelay;
 	private bool bursting;
 	public int bombsAvailable;
 	public Image burstBar;
-	public bool mouseDown;
-	public bool disableLasers;
+	private bool mouseDown;
+	private bool disableLasers;
 	private int primaryTemp;
 	private int multiTemp;
 	public GameObject laserSound;
+	public GameObject burstSound;
 
 
 	//private AudioSource audioSource;
@@ -88,7 +83,7 @@ public class PlayerAttack : MonoBehaviour {
 		multiAttack.setMultiAttackLevel = gameState.getMultiAttackLevel();
 		fireRate = gameState.getFireRate();*/
 
-		//Store laser attack upgrade levels for temporary disabling/enabling
+		//Store laser attack upgrade levels for temporary disabling/enabling during burst
 		primaryTemp = primaryAttack.setPrimaryAttackLevel;
 		multiTemp = multiAttack.setMultiAttackLevel;
 		bursting = false;
@@ -263,24 +258,31 @@ public class PlayerAttack : MonoBehaviour {
 					burstAttackNextFire = Time.time + burstFireRate * 2;
 					if (burstAttackDamage == 1) {
 						Instantiate (burstAttack.burstAttackLv1, burstAttack.burstShotSpawn.position, burstAttack.burstShotSpawn.rotation);
+						Instantiate(burstSound, transform.position, transform.rotation);
 					}
 					if (burstAttackDamage == 2) {
 						Instantiate (burstAttack.burstAttackLv1, burstAttack.burstShotSpawn.position, burstAttack.burstShotSpawn.rotation);
+						Instantiate(burstSound, transform.position, transform.rotation);
 					}
 					if (burstAttackDamage == 3) {
 						Instantiate (burstAttack.burstAttackLv2, burstAttack.burstShotSpawn.position, burstAttack.burstShotSpawn.rotation);
+						Instantiate(burstSound, transform.position, transform.rotation);
 					}
 					if (burstAttackDamage == 4) {
 						Instantiate (burstAttack.burstAttackLv2, burstAttack.burstShotSpawn.position, burstAttack.burstShotSpawn.rotation);
+						Instantiate(burstSound, transform.position, transform.rotation);
 					}
 					if (burstAttackDamage == 5) {
 						Instantiate (burstAttack.burstAttackLv3, burstAttack.burstShotSpawn.position, burstAttack.burstShotSpawn.rotation);
+						Instantiate(burstSound, transform.position, transform.rotation);
 					}
 					if (burstAttackDamage == 6) {
 						Instantiate (burstAttack.burstAttackLv3, burstAttack.burstShotSpawn.position, burstAttack.burstShotSpawn.rotation);
+						Instantiate(burstSound, transform.position, transform.rotation);
 					}
 					if (burstAttackDamage == 7) {
 						Instantiate (burstAttack.burstAttackLv4, burstAttack.burstShotSpawn.position, burstAttack.burstShotSpawn.rotation);
+						Instantiate(burstSound, transform.position, transform.rotation);
 					}
 				}
 				burst -= Time.deltaTime * 20;
@@ -349,10 +351,27 @@ public class PlayerAttack : MonoBehaviour {
 	// ---------------------------------------------------------------------------------------------------
 	void BombAttack(){
 		if (Input.GetMouseButtonDown (1) && bombsAvailable >= 1) {
-			Instantiate(bombAttack.bomb, bombAttack.shotSpawn.position, bombAttack.shotSpawn.rotation);
+			if(bombAttack.setBombLevel == 1){
+			Instantiate(bombAttack.bombYellow, bombAttack.shotSpawn.position, bombAttack.shotSpawn.rotation);
 			//audioClips[2].Play();
 			bombsAvailable -= 1;
 			}
+			if(bombAttack.setBombLevel == 2){
+			Instantiate(bombAttack.bombOrange, bombAttack.shotSpawn.position, bombAttack.shotSpawn.rotation);
+			//audioClips[2].Play();
+			bombsAvailable -= 1;
+			}
+			if(bombAttack.setBombLevel == 3){
+			Instantiate(bombAttack.bombRed, bombAttack.shotSpawn.position, bombAttack.shotSpawn.rotation);
+			//audioClips[2].Play();
+			bombsAvailable -= 1;
+			}
+			if(bombAttack.setBombLevel == 4){
+			Instantiate(bombAttack.bombPurple, bombAttack.shotSpawn.position, bombAttack.shotSpawn.rotation);
+			//audioClips[2].Play();
+			bombsAvailable -= 1;
+			}
+		}
 	}
 
 	// ---------------------------------------------------------------------------------------------------
