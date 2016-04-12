@@ -12,13 +12,12 @@ public class GameState : MonoBehaviour {
         // Declare properties
         private static GameState instance;
         private string activeLevel;                     		// Active level
-        private float maxHealth = 100;                                  // Max HP
-        private float health = 100;                                     // Current HP
-		private float maxShield;                                  // Max shield
-        private float shield;                                     // Current Shield
-        private int setPrimaryAttackLevel;                      // Primary Attack Level
-        private int setMultiAttackLevel;                        // Multi Attack level
-        private float fireRate;                                 // Fire Rate
+        private int setMaxHealth = 1;                             // Max HP
+		private int setMaxShield = 1;                                  // Max shield
+        private int setPrimaryAttackLevel = 1;                      // Primary Attack Level
+        private int setMultiAttackLevel = 0;                        // Multi Attack level
+		private int setFusionAttackLevel = 0;
+		private float fireRate = 0.5f;                                 // Fire Rate
         private int currency;
 		private int bombsAvailable = 5;                                   // Currency
 
@@ -57,17 +56,16 @@ public class GameState : MonoBehaviour {
                 
                 // Set default properties:
                 activeLevel = "Level 1";
-                maxHealth = 100;
-                health = 100;
-                maxShield = 20;
-                shield = 20;
+                setMaxHealth = 1;
+                setMaxShield = 1;
                 setPrimaryAttackLevel = 1;
                 setMultiAttackLevel = 0;
+				setFusionAttackLevel = 0;
                 fireRate = 0.5f;
                 currency = 0;
                               
                 // Load level 1
-                SceneManager.LoadScene ("GreenPlanet");
+                SceneManager.LoadScene ("UpgradeShop");
         }
        
        
@@ -99,8 +97,8 @@ public class GameState : MonoBehaviour {
         // ---------------------------------------------------------------------------------------------------
         // Returns the characters health
         // ---------------------------------------------------------------------------------------------------
-        public float getHealth(){
-                return health;
+        public int getHealth(){
+                return setMaxHealth;
         }
        
         // ---------------------------------------------------------------------------------------------------
@@ -108,8 +106,8 @@ public class GameState : MonoBehaviour {
         // ---------------------------------------------------------------------------------------------------
         // Returns the characters shield
         // ---------------------------------------------------------------------------------------------------
-        public float getShield(){
-                return shield;
+        public int getShield(){
+                return setMaxShield;
         }
 
 		// ---------------------------------------------------------------------------------------------------
@@ -129,6 +127,16 @@ public class GameState : MonoBehaviour {
         public int getMultiAttackLevel(){
                 return setMultiAttackLevel;
         }
+
+		// ---------------------------------------------------------------------------------------------------
+		// getFusionAttackLevel()
+		// ---------------------------------------------------------------------------------------------------
+		// Returns the characters FusionAttackLevel
+		// ---------------------------------------------------------------------------------------------------
+		public int getFusionAttackLevel(){
+			return setFusionAttackLevel;
+		}
+
 
 		// ---------------------------------------------------------------------------------------------------
         // getFireRate()
@@ -161,8 +169,8 @@ public class GameState : MonoBehaviour {
 				playerAttack = playerObject.GetComponent<PlayerAttack>();
 			}
 
-			maxHealth = playerController.getMaxHealth();
-			maxShield = playerController.getMaxShield();
+			setMaxHealth = playerController.getHealth();
+			setMaxShield = playerController.getShield();
 			setPrimaryAttackLevel = playerAttack.primaryAttack.setPrimaryAttackLevel;
 			setMultiAttackLevel = playerAttack.multiAttack.setMultiAttackLevel;
 			fireRate = playerAttack.fireRate;

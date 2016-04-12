@@ -8,6 +8,8 @@ public class OnToTheNext : MonoBehaviour
 
 	PlayerController playerController;
 	PlayerAttack playerAttack;
+	GameState gameState;
+
 	private float playerSpeedTemp;
 
 	// Use this for initialization
@@ -21,6 +23,11 @@ public class OnToTheNext : MonoBehaviour
 			playerAttack = playerObject.GetComponent<PlayerAttack> ();
 		}
 
+		GameObject gameStateObject = GameObject.Find ("GameState");
+		if (gameStateObject != null) {
+			gameState = gameStateObject.GetComponent<GameState>();
+		}
+
 		playerSpeedTemp = playerController.speed;
 		playerController.speed = 0;
 
@@ -28,8 +35,7 @@ public class OnToTheNext : MonoBehaviour
 
 	public void LoadNext (){
 		playerController.speed = playerSpeedTemp;
+		gameState.StoreVariables ();
 		SceneManager.LoadScene (addScene);
 	}
-	 
-
 }

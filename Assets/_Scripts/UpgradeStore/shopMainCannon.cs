@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class shopMainCannon : MonoBehaviour {
+public class ShopMainCannon : MonoBehaviour {
 
 	PlayerAttack playerAttack;
 	private int playerMainCannonTemp;
@@ -20,14 +20,13 @@ public class shopMainCannon : MonoBehaviour {
 	}	
 	// Update is called once per frame
 	void Update () {
-		Debug.Log ("primary attack = " + playerAttack.primaryAttack.setPrimaryAttackLevel);
 	}
 
 	public void ShowPrimaryAttack(){
 		playerMultiCannonTemp = playerAttack.multiAttack.setMultiAttackLevel;
 		playerAttack.multiAttack.setMultiAttackLevel = 0;
 		playerAttack.primaryAttack.setPrimaryAttackLevel += 1;
-		playerAttack.disableBurst = true;
+		playerAttack.disableFusion = true;
 	}
 
 	public void EnableUpgrade(){
@@ -38,6 +37,6 @@ public class shopMainCannon : MonoBehaviour {
 	public void Revert(){
 		playerAttack.primaryAttack.setPrimaryAttackLevel = playerMainCannonTemp;
 		playerAttack.multiAttack.setMultiAttackLevel = playerMultiCannonTemp;
-		playerAttack.disableBurst = false;
+		playerAttack.disableFusion = false;
 	}
 }

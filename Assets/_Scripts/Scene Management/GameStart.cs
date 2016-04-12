@@ -26,14 +26,12 @@ public class GameStart : MonoBehaviour
 	// triggers the startState() in the GameState script
 	// ---------------------------------------------------------------------------------------------------
     void OnGUI (){
-    	if (startGame.start == true){
-        	Debug.Log("Start = true");	
+    	if (startGame.start == true){	
         	beginGame();
         }
     }
    
     private void beginGame(){
-        print("Starting game");
            
         DontDestroyOnLoad(GameState.Instance);
         GameState.Instance.startState();       
