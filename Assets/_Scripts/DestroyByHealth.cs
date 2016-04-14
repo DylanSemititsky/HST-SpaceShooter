@@ -21,6 +21,9 @@ public class DestroyByHealth : MonoBehaviour
 	public GameObject item3;
 	public float item3DropMin;
 	public float item3DropMax;
+	//CameraShakeVariables
+	//public float amplitude = 0.1f;
+	//public float duration = 0.5f;
 
 
 	//Random number to determine dropped item
@@ -77,6 +80,7 @@ public class DestroyByHealth : MonoBehaviour
 
 			gameController.AddScore (scoreValue);
 			Destroy(gameObject);
+
 		}
 	}
 
