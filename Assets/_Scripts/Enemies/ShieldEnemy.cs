@@ -3,6 +3,17 @@ using System.Collections;
 
 public class ShieldEnemy : MonoBehaviour {
 
+
+	//DEFAULT MOVEMENT VARIABLES
+	public float horizontalSpeed; //bosses horizontal speed
+	public float verticalSpeed; // bosses vertical speed
+	public float vAplitude; // the max vertical range the boss will travel
+	public float hAplitude; // the max width range the boss with travel
+	Vector3 tempPosition ;
+	Vector3 originPos;
+	bool enteredPlaySpace;
+
+
 	public float speed;
 	public float rotateSpeed;
 	public GameObject homingLaser;
@@ -17,9 +28,24 @@ public class ShieldEnemy : MonoBehaviour {
 
 	void Start () {
 		rotateBone = gameObject.transform.GetChild (0).gameObject; //grab shield bone
+
+
+
 	}
 	
 	void Update () {
+
+
+		if (!movement) {
+
+			if (verticalSpeed < 1f) {
+				verticalSpeed += Time.deltaTime * 0.2f;
+			}
+			tempPosition.x = Mathf.Sin (Time.realtimeSinceStartup * horizontalSpeed) * hAplitude;
+			tempPosition.z = Mathf.Sin (Time.realtimeSinceStartup* verticalSpeed) * vAplitude;
+			tempPosition.z += originPos.z;
+			transform.position = tempPosition;
+		}
 
 		CheckHomingLaser ();//check to see if homing laser is shot so it can be re shot again
 		AttackSequence();
@@ -27,12 +53,15 @@ public class ShieldEnemy : MonoBehaviour {
 		if (movement) {//movement is true until z is less than 6.
 			transform.Translate (Vector3.back * speed * Time.deltaTime);
 		}
-		if(transform.position.z <= 8.5f) // stop position once enemy is half way into plane
+		if(transform.position.z <= 8.5f && movement == true) // stop position once enemy is half way into plane
 		{
-			movement = false;
+			tempPosition = transform.position;
+			originPos = transform.position;
 
-			// rotates shield around enemy
-			rotateBone.transform.Rotate (Vector3.up * rotateSpeed * Time.deltaTime);
+			movement = false;
+		}
+		if (!movement) {
+			RotateShield ();
 		}
 	}
 	IEnumerator ShootHomingLaser(float laserRate){ //create homing laser
@@ -59,6 +88,11 @@ public class ShieldEnemy : MonoBehaviour {
 			counter = 0;
 			hasFired = false;
 		}
+	}
+	void RotateShield(){
+		// rotates shield around enemy
+		rotateBone.transform.Rotate (Vector3.up * rotateSpeed * Time.deltaTime);
+
 	}
 
 }
