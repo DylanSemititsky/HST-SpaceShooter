@@ -51,7 +51,7 @@ public class PlayerAttack : MonoBehaviour {
 	public MultiAttack multiAttack;
 	public FusionAttack fusionAttack;
 	public BombAttack bombAttack;
-	public float fireRate, fusionFireRate = 0.05f;
+	public float fireRate, fusionFireRate;
 	private float primaryAttackNextFire, multiAttackNextFire, fusionAttackNextFire;
 
 	private float nextBombRecharge, bombFillAmount, bombRechargeDelay = 0.1f;
@@ -95,8 +95,6 @@ public class PlayerAttack : MonoBehaviour {
 		multiTemp = multiAttack.setMultiAttackLevel;
 		fusioning = false;
 		disableFusion = false;
-
-	
 	}
 
 	// ---------------------------------------------------------------------------------------------------
@@ -120,9 +118,9 @@ public class PlayerAttack : MonoBehaviour {
 	// ---------------------------------------------------------------------------------------------------
 		void OnTriggerEnter(Collider other){
 		if (other.tag == "powerUp_fireRate"){
-			fireRate = fireRate * 0.9f;
-			if(fireRate <= 0.075f){
-				fireRate = 0.075f;
+			fireRate = fireRate -= 0.04f;
+			if(fireRate <= 0.1f){
+				fireRate = 0.1f;
 			}
 			Destroy(other.gameObject);
 			//audioClips[1].Play();
@@ -248,6 +246,11 @@ public class PlayerAttack : MonoBehaviour {
 		//Determine Fusion attack level
 		fusionAttack.fusionAttackDamage = primaryAttack.setPrimaryAttackLevel + multiAttack.setMultiAttackLevel;
 
+		fusionFireRate = fireRate * 0.2f;
+		if(fusionFireRate <= 0.05f){
+			fusionFireRate = 0.05f;
+		}
+
 
 		//Level 1
 		if (fusionAttack.setFusionAttackLevel == 1 && disableFusion == false) {
@@ -268,33 +271,37 @@ public class PlayerAttack : MonoBehaviour {
 						Instantiate(fusionSound, transform.position, transform.rotation);
 						fusionAttack.fusion -= 5;
 					}
-					if (fusionAttack.fusionAttackDamage == 2) {
+					else if (fusionAttack.fusionAttackDamage == 2) {
 						Instantiate (fusionAttack.fusionAttackLv1, fusionAttack.fusionShotSpawn.position, fusionAttack.fusionShotSpawn.rotation);
 						Instantiate(fusionSound, transform.position, transform.rotation);
 						fusionAttack.fusion -= 5;
 					}
-					if (fusionAttack.fusionAttackDamage == 3) {
+					else if (fusionAttack.fusionAttackDamage == 3) {
 						Instantiate (fusionAttack.fusionAttackLv2, fusionAttack.fusionShotSpawn.position, fusionAttack.fusionShotSpawn.rotation);
 						Instantiate(fusionSound, transform.position, transform.rotation);
+						fusionAttack.fusion -= 5;
 					}
-					if (fusionAttack.fusionAttackDamage == 4) {
+					else if (fusionAttack.fusionAttackDamage == 4) {
 						Instantiate (fusionAttack.fusionAttackLv2, fusionAttack.fusionShotSpawn.position, fusionAttack.fusionShotSpawn.rotation);
 						Instantiate(fusionSound, transform.position, transform.rotation);
+						fusionAttack.fusion -= 5;
 					}
-					if (fusionAttack.fusionAttackDamage == 5) {
+					else if (fusionAttack.fusionAttackDamage == 5) {
 						Instantiate (fusionAttack.fusionAttackLv3, fusionAttack.fusionShotSpawn.position, fusionAttack.fusionShotSpawn.rotation);
 						Instantiate(fusionSound, transform.position, transform.rotation);
+						fusionAttack.fusion -= 5;
 					}
-					if (fusionAttack.fusionAttackDamage == 6) {
+					else if (fusionAttack.fusionAttackDamage == 6) {
 						Instantiate (fusionAttack.fusionAttackLv3, fusionAttack.fusionShotSpawn.position, fusionAttack.fusionShotSpawn.rotation);
 						Instantiate(fusionSound, transform.position, transform.rotation);
+						fusionAttack.fusion -= 5;
 					}
-					if (fusionAttack.fusionAttackDamage == 7) {
+					else if (fusionAttack.fusionAttackDamage == 7) {
 						Instantiate (fusionAttack.fusionAttackLv4, fusionAttack.fusionShotSpawn.position, fusionAttack.fusionShotSpawn.rotation);
 						Instantiate(fusionSound, transform.position, transform.rotation);
+						fusionAttack.fusion -= 5;
 					}
 				}
-				//fusionAttack.fusion -= Time.deltaTime * 20;
 
 				 
 			} else {
@@ -307,7 +314,7 @@ public class PlayerAttack : MonoBehaviour {
 		}
 
 		//Level 2
-		if (fusionAttack.setFusionAttackLevel == 2 && disableFusion == false) {
+		else if (fusionAttack.setFusionAttackLevel == 2 && disableFusion == false) {
 
 			if (Input.GetMouseButton (0) && fusionAttack.fusion > 0) {
 
@@ -326,34 +333,39 @@ public class PlayerAttack : MonoBehaviour {
 
 						Instantiate (fusionAttack.fusionAttackLv1, fusionAttack.fusionShotSpawnR.position, fusionAttack.fusionShotSpawn.rotation);
 						Instantiate(fusionSound, transform.position, transform.rotation);
+						fusionAttack.fusion -= 5;
 					}
-					if (fusionAttack.fusionAttackDamage == 2) {
+					else if (fusionAttack.fusionAttackDamage == 2) {
 						Instantiate (fusionAttack.fusionAttackLv1, fusionAttack.fusionShotSpawnL.position, fusionAttack.fusionShotSpawn.rotation);
 						Instantiate(fusionSound, transform.position, transform.rotation);
 
 						Instantiate (fusionAttack.fusionAttackLv1, fusionAttack.fusionShotSpawnR.position, fusionAttack.fusionShotSpawn.rotation);
 						Instantiate(fusionSound, transform.position, transform.rotation);
+						fusionAttack.fusion -= 5;
 					}
-					if (fusionAttack.fusionAttackDamage == 3) {
+					else if (fusionAttack.fusionAttackDamage == 3) {
 						Instantiate (fusionAttack.fusionAttackLv2, fusionAttack.fusionShotSpawnL.position, fusionAttack.fusionShotSpawn.rotation);
 						Instantiate(fusionSound, transform.position, transform.rotation);
 
 						Instantiate (fusionAttack.fusionAttackLv2, fusionAttack.fusionShotSpawnR.position, fusionAttack.fusionShotSpawn.rotation);
 						Instantiate(fusionSound, transform.position, transform.rotation);
+						fusionAttack.fusion -= 5;
 					}
-					if (fusionAttack.fusionAttackDamage == 4) {
+					else if (fusionAttack.fusionAttackDamage == 4) {
 						Instantiate (fusionAttack.fusionAttackLv2, fusionAttack.fusionShotSpawnL.position, fusionAttack.fusionShotSpawn.rotation);
 						Instantiate(fusionSound, transform.position, transform.rotation);
 
 						Instantiate (fusionAttack.fusionAttackLv2, fusionAttack.fusionShotSpawnR.position, fusionAttack.fusionShotSpawn.rotation);
 						Instantiate(fusionSound, transform.position, transform.rotation);
+						fusionAttack.fusion -= 5;
 					}
-					if (fusionAttack.fusionAttackDamage == 5) {
+					else if (fusionAttack.fusionAttackDamage == 5) {
 						Instantiate (fusionAttack.fusionAttackLv3, fusionAttack.fusionShotSpawnL.position, fusionAttack.fusionShotSpawn.rotation);
 						Instantiate(fusionSound, transform.position, transform.rotation);
 
 						Instantiate (fusionAttack.fusionAttackLv3, fusionAttack.fusionShotSpawnR.position, fusionAttack.fusionShotSpawn.rotation);
 						Instantiate(fusionSound, transform.position, transform.rotation);
+						fusionAttack.fusion -= 5;
 					}
 					if (fusionAttack.fusionAttackDamage == 6) {
 						Instantiate (fusionAttack.fusionAttackLv3, fusionAttack.fusionShotSpawnL.position, fusionAttack.fusionShotSpawn.rotation);
@@ -361,13 +373,15 @@ public class PlayerAttack : MonoBehaviour {
 
 						Instantiate (fusionAttack.fusionAttackLv3, fusionAttack.fusionShotSpawnR.position, fusionAttack.fusionShotSpawn.rotation);
 						Instantiate(fusionSound, transform.position, transform.rotation);
+						fusionAttack.fusion -= 5;
 					}
-					if (fusionAttack.fusionAttackDamage == 7) {
+					else if (fusionAttack.fusionAttackDamage == 7) {
 						Instantiate (fusionAttack.fusionAttackLv4, fusionAttack.fusionShotSpawnL.position, fusionAttack.fusionShotSpawn.rotation);
 						Instantiate(fusionSound, transform.position, transform.rotation);
 
 						Instantiate (fusionAttack.fusionAttackLv4, fusionAttack.fusionShotSpawnR.position, fusionAttack.fusionShotSpawn.rotation);
 						Instantiate(fusionSound, transform.position, transform.rotation);
+						fusionAttack.fusion -= 5;
 					}
 				}
 				//fusionAttack.fusion -= Time.deltaTime * 20;
@@ -407,14 +421,6 @@ public class PlayerAttack : MonoBehaviour {
 			}
 		}
 	}
-
-
-
-
-
-
-
-
 
 
 
@@ -477,8 +483,11 @@ public class PlayerAttack : MonoBehaviour {
 		if (Input.GetKeyDown(";") && multiAttack.setMultiAttackLevel > 0){	//-1 Multi Attack Level
 			multiAttack.setMultiAttackLevel--;
 		}
-		if (Input.GetKeyDown(".") && fireRate > .075){	//+10% Fire Rate
-			fireRate = fireRate * 0.9f;
+		if (Input.GetKeyDown(".") && fireRate > .1){	//+10% Fire Rate
+			fireRate = fireRate -= 0.04f;
+			if(fireRate <= 0.1f){
+				fireRate = 0.1f;
+			}
 		}
 		if (Input.GetKeyDown(",") && fireRate < 0.5f){ 	//Reset Fire Rate to 0.5/second
 			fireRate = 0.5f;
