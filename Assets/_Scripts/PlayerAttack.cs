@@ -29,6 +29,9 @@ public class FusionAttack{  			//Collapsible menu to access Fusion Attack settin
 	public int setFusionAttackLevel; //Set Multi Attack level.
 	public GameObject fusionAttackLv1, fusionAttackLv2, fusionAttackLv3, fusionAttackLv4; //Place Art for each level here (in Inspector).
 	public Transform fusionShotSpawn, fusionShotSpawnR, fusionShotSpawnL;
+	public float maxFusion = 100, fusion = 100;
+	public Image fusionBar;
+	public int fusionAttackDamage;
 }
 
 [System.Serializable]
@@ -36,6 +39,10 @@ public class BombAttack{  		//Collapsible menu to access Bomb Attack settings.
 	public int setBombLevel;
 	public GameObject bombPurple, bombRed, bombOrange, bombYellow; 	//Place Art here
 	public Transform shotSpawn;
+	public float maxBomb = 100, bomb = 100;
+	public Image bombBar;
+
+
 }
 
 public class PlayerAttack : MonoBehaviour {
@@ -46,13 +53,11 @@ public class PlayerAttack : MonoBehaviour {
 	public BombAttack bombAttack;
 	public float fireRate, fusionFireRate = 0.05f;
 	private float primaryAttackNextFire, multiAttackNextFire, fusionAttackNextFire;
-	public int fusionAttackDamage;
 
-	public float maxFusion, fusion;
-	private float nextFusionRecharge, fusionFillAmount, fusionRechargeDelay;
+	private float nextBombRecharge, bombFillAmount, bombRechargeDelay = 0.1f;
+	private float nextFusionRecharge, fusionFillAmount, fusionRechargeDelay = 0.1f;
 	private bool fusioning;
-	public int bombsAvailable;
-	public Image fusionBar;
+
 	private bool mouseDown;
 	public bool disableLasers, disableFusion;
 	private int primaryTemp;
@@ -82,6 +87,7 @@ public class PlayerAttack : MonoBehaviour {
 		primaryAttack.setPrimaryAttackLevel = gameState.getPrimaryAttackLevel ();
 		multiAttack.setMultiAttackLevel = gameState.getMultiAttackLevel ();
 		fusionAttack.setFusionAttackLevel = gameState.getFusionAttackLevel ();
+		bombAttack.setBombLevel = gameState.getBombAttackLevel ();
 		fireRate = gameState.getFireRate();
 
 		//Store laser attack upgrade levels for temporary disabling/enabling during fusion
@@ -130,8 +136,7 @@ public class PlayerAttack : MonoBehaviour {
 			//audioClips[1].Play();
 		}
 		if (other.tag == "powerUp_bomb"){
-			bombsAvailable += 1;
-
+			bombAttack.bomb += 10;
 			Destroy(other.gameObject);
 			//audioClips[1].Play();
 		}
@@ -241,13 +246,13 @@ public class PlayerAttack : MonoBehaviour {
 	{
 
 		//Determine Fusion attack level
-		fusionAttackDamage = primaryAttack.setPrimaryAttackLevel + multiAttack.setMultiAttackLevel;
+		fusionAttack.fusionAttackDamage = primaryAttack.setPrimaryAttackLevel + multiAttack.setMultiAttackLevel;
 
 
 		//Level 1
 		if (fusionAttack.setFusionAttackLevel == 1 && disableFusion == false) {
 			
-			if (Input.GetMouseButton (0) && fusion > 0) {
+			if (Input.GetMouseButton (0) && fusionAttack.fusion > 0) {
 
 				//Disable auto laser cannons during Fusion Attack
 				fusioning = true;
@@ -258,36 +263,38 @@ public class PlayerAttack : MonoBehaviour {
 
 				if (Time.time > fusionAttackNextFire) {
 					fusionAttackNextFire = Time.time + fusionFireRate * 2;
-					if (fusionAttackDamage == 1) {
+					if (fusionAttack.fusionAttackDamage == 1) {
 						Instantiate (fusionAttack.fusionAttackLv1, fusionAttack.fusionShotSpawn.position, fusionAttack.fusionShotSpawn.rotation);
 						Instantiate(fusionSound, transform.position, transform.rotation);
+						fusionAttack.fusion -= 5;
 					}
-					if (fusionAttackDamage == 2) {
+					if (fusionAttack.fusionAttackDamage == 2) {
 						Instantiate (fusionAttack.fusionAttackLv1, fusionAttack.fusionShotSpawn.position, fusionAttack.fusionShotSpawn.rotation);
 						Instantiate(fusionSound, transform.position, transform.rotation);
+						fusionAttack.fusion -= 5;
 					}
-					if (fusionAttackDamage == 3) {
+					if (fusionAttack.fusionAttackDamage == 3) {
 						Instantiate (fusionAttack.fusionAttackLv2, fusionAttack.fusionShotSpawn.position, fusionAttack.fusionShotSpawn.rotation);
 						Instantiate(fusionSound, transform.position, transform.rotation);
 					}
-					if (fusionAttackDamage == 4) {
+					if (fusionAttack.fusionAttackDamage == 4) {
 						Instantiate (fusionAttack.fusionAttackLv2, fusionAttack.fusionShotSpawn.position, fusionAttack.fusionShotSpawn.rotation);
 						Instantiate(fusionSound, transform.position, transform.rotation);
 					}
-					if (fusionAttackDamage == 5) {
+					if (fusionAttack.fusionAttackDamage == 5) {
 						Instantiate (fusionAttack.fusionAttackLv3, fusionAttack.fusionShotSpawn.position, fusionAttack.fusionShotSpawn.rotation);
 						Instantiate(fusionSound, transform.position, transform.rotation);
 					}
-					if (fusionAttackDamage == 6) {
+					if (fusionAttack.fusionAttackDamage == 6) {
 						Instantiate (fusionAttack.fusionAttackLv3, fusionAttack.fusionShotSpawn.position, fusionAttack.fusionShotSpawn.rotation);
 						Instantiate(fusionSound, transform.position, transform.rotation);
 					}
-					if (fusionAttackDamage == 7) {
+					if (fusionAttack.fusionAttackDamage == 7) {
 						Instantiate (fusionAttack.fusionAttackLv4, fusionAttack.fusionShotSpawn.position, fusionAttack.fusionShotSpawn.rotation);
 						Instantiate(fusionSound, transform.position, transform.rotation);
 					}
 				}
-				fusion -= Time.deltaTime * 20;
+				//fusionAttack.fusion -= Time.deltaTime * 20;
 
 				 
 			} else {
@@ -300,38 +307,91 @@ public class PlayerAttack : MonoBehaviour {
 		}
 
 		//Level 2
-		if (fusionAttack.setFusionAttackLevel == 2){
-			maxFusion = 40;
+		if (fusionAttack.setFusionAttackLevel == 2 && disableFusion == false) {
 
-			while (Input.GetMouseButton (0) && fusion > 0) {
+			if (Input.GetMouseButton (0) && fusionAttack.fusion > 0) {
+
+				//Disable auto laser cannons during Fusion Attack
+				fusioning = true;
+
+				//Set mouseDown to true to prevent recharging while using Fusion
 				mouseDown = true;
+
 
 				if (Time.time > fusionAttackNextFire) {
 					fusionAttackNextFire = Time.time + fusionFireRate * 2;
-					Instantiate (fusionAttack.fusionAttackLv2, fusionAttack.fusionShotSpawnL.position, fusionAttack.fusionShotSpawnL.rotation);
-					//audioSource.Play();
+					if (fusionAttack.fusionAttackDamage == 1) {
+						Instantiate (fusionAttack.fusionAttackLv1, fusionAttack.fusionShotSpawnL.position, fusionAttack.fusionShotSpawn.rotation);
+						Instantiate(fusionSound, transform.position, transform.rotation);
 
-					fusionAttackNextFire = Time.time + fusionFireRate * 2;
-					Instantiate (fusionAttack.fusionAttackLv2, fusionAttack.fusionShotSpawnR.position, fusionAttack.fusionShotSpawnR.rotation);
-					//audioSource.Play();
+						Instantiate (fusionAttack.fusionAttackLv1, fusionAttack.fusionShotSpawnR.position, fusionAttack.fusionShotSpawn.rotation);
+						Instantiate(fusionSound, transform.position, transform.rotation);
+					}
+					if (fusionAttack.fusionAttackDamage == 2) {
+						Instantiate (fusionAttack.fusionAttackLv1, fusionAttack.fusionShotSpawnL.position, fusionAttack.fusionShotSpawn.rotation);
+						Instantiate(fusionSound, transform.position, transform.rotation);
+
+						Instantiate (fusionAttack.fusionAttackLv1, fusionAttack.fusionShotSpawnR.position, fusionAttack.fusionShotSpawn.rotation);
+						Instantiate(fusionSound, transform.position, transform.rotation);
+					}
+					if (fusionAttack.fusionAttackDamage == 3) {
+						Instantiate (fusionAttack.fusionAttackLv2, fusionAttack.fusionShotSpawnL.position, fusionAttack.fusionShotSpawn.rotation);
+						Instantiate(fusionSound, transform.position, transform.rotation);
+
+						Instantiate (fusionAttack.fusionAttackLv2, fusionAttack.fusionShotSpawnR.position, fusionAttack.fusionShotSpawn.rotation);
+						Instantiate(fusionSound, transform.position, transform.rotation);
+					}
+					if (fusionAttack.fusionAttackDamage == 4) {
+						Instantiate (fusionAttack.fusionAttackLv2, fusionAttack.fusionShotSpawnL.position, fusionAttack.fusionShotSpawn.rotation);
+						Instantiate(fusionSound, transform.position, transform.rotation);
+
+						Instantiate (fusionAttack.fusionAttackLv2, fusionAttack.fusionShotSpawnR.position, fusionAttack.fusionShotSpawn.rotation);
+						Instantiate(fusionSound, transform.position, transform.rotation);
+					}
+					if (fusionAttack.fusionAttackDamage == 5) {
+						Instantiate (fusionAttack.fusionAttackLv3, fusionAttack.fusionShotSpawnL.position, fusionAttack.fusionShotSpawn.rotation);
+						Instantiate(fusionSound, transform.position, transform.rotation);
+
+						Instantiate (fusionAttack.fusionAttackLv3, fusionAttack.fusionShotSpawnR.position, fusionAttack.fusionShotSpawn.rotation);
+						Instantiate(fusionSound, transform.position, transform.rotation);
+					}
+					if (fusionAttack.fusionAttackDamage == 6) {
+						Instantiate (fusionAttack.fusionAttackLv3, fusionAttack.fusionShotSpawnL.position, fusionAttack.fusionShotSpawn.rotation);
+						Instantiate(fusionSound, transform.position, transform.rotation);
+
+						Instantiate (fusionAttack.fusionAttackLv3, fusionAttack.fusionShotSpawnR.position, fusionAttack.fusionShotSpawn.rotation);
+						Instantiate(fusionSound, transform.position, transform.rotation);
+					}
+					if (fusionAttack.fusionAttackDamage == 7) {
+						Instantiate (fusionAttack.fusionAttackLv4, fusionAttack.fusionShotSpawnL.position, fusionAttack.fusionShotSpawn.rotation);
+						Instantiate(fusionSound, transform.position, transform.rotation);
+
+						Instantiate (fusionAttack.fusionAttackLv4, fusionAttack.fusionShotSpawnR.position, fusionAttack.fusionShotSpawn.rotation);
+						Instantiate(fusionSound, transform.position, transform.rotation);
+					}
 				}
-				//While mouse is pressed down, decrease fusion meter at this rate
-				fusion -= Time.deltaTime * 20;
-			} 
+				//fusionAttack.fusion -= Time.deltaTime * 20;
 
-			mouseDown = false;
-		//Set mouseDown to false to allow recharge (below)
+
+			} else {
+				//Re-enable auto laser cannons
+				fusioning = false;
+
+				//Set mouseDown to false to allow recharge (below)
+				mouseDown = false;
+			}
 		}
 
+
 		//Fusion to stop recharging at maxFusion
-		if (fusion >= maxFusion){
-			fusion = maxFusion;
+		if (fusionAttack.fusion >= fusionAttack.maxFusion){
+			fusionAttack.fusion = fusionAttack.maxFusion;
 		}
 
 		//Show fusion meter fill amount
-		fusionFillAmount = (fusion / maxFusion);
-		if (fusionFillAmount != fusionBar.fillAmount) {
-			fusionBar.fillAmount = fusionFillAmount;
+		fusionFillAmount = (fusionAttack.fusion / fusionAttack.maxFusion);
+		if (fusionFillAmount != fusionAttack.fusionBar.fillAmount) {
+			fusionAttack.fusionBar.fillAmount = fusionFillAmount;
 		}
 
 		//Allow fusion meter to recharge when mouse isn't pressed down
@@ -339,40 +399,63 @@ public class PlayerAttack : MonoBehaviour {
 			if (Time.time > nextFusionRecharge){
 				nextFusionRecharge = Time.time + fusionRechargeDelay;
 				if (fusionAttack.setFusionAttackLevel == 1){
-					fusion += 0.1f;
+					fusionAttack.fusion += 0.3f;
 				}
 				if (fusionAttack.setFusionAttackLevel == 2){
-					fusion += 0.2f;
+					fusionAttack.fusion += 0.3f;
 				}
 			}
 		}
 	}
 
+
+
+
+
+
+
+
+
+
+
 	// ---------------------------------------------------------------------------------------------------
 	//BOMB ATTACK. Fire on RMB press
 	// ---------------------------------------------------------------------------------------------------
 	void BombAttack(){
-		if (Input.GetMouseButtonDown (1) && bombsAvailable >= 1) {
+		if (Input.GetMouseButtonDown (1) && bombAttack.bomb >= bombAttack.maxBomb) {
 			if(bombAttack.setBombLevel == 1){
 			Instantiate(bombAttack.bombYellow, bombAttack.shotSpawn.position, bombAttack.shotSpawn.rotation);
-			//audioClips[2].Play();
-			bombsAvailable -= 1;
+			bombAttack.bomb = 0;
 			}
 			if(bombAttack.setBombLevel == 2){
 			Instantiate(bombAttack.bombOrange, bombAttack.shotSpawn.position, bombAttack.shotSpawn.rotation);
-			//audioClips[2].Play();
-			bombsAvailable -= 1;
+			bombAttack.bomb = 0;
 			}
 			if(bombAttack.setBombLevel == 3){
 			Instantiate(bombAttack.bombRed, bombAttack.shotSpawn.position, bombAttack.shotSpawn.rotation);
-			//audioClips[2].Play();
-			bombsAvailable -= 1;
+			bombAttack.bomb = 0;
 			}
 			if(bombAttack.setBombLevel == 4){
 			Instantiate(bombAttack.bombPurple, bombAttack.shotSpawn.position, bombAttack.shotSpawn.rotation);
-			//audioClips[2].Play();
-			bombsAvailable -= 1;
+			bombAttack.bomb = 0;
 			}
+		}
+
+		//Bomb to stop recharging at maxFusion
+		if (bombAttack.bomb >= bombAttack.maxBomb){
+			bombAttack.bomb = bombAttack.maxBomb;
+		}
+
+		//Bomb fusion meter fill amount
+		bombFillAmount = (bombAttack.bomb / bombAttack.maxBomb);
+		if (bombFillAmount != bombAttack.bombBar.fillAmount) {
+			bombAttack.bombBar.fillAmount = bombFillAmount;
+		}
+
+		//Allow Bomb to recharge after use
+		if (Time.time > nextBombRecharge){
+			nextBombRecharge = Time.time + bombRechargeDelay;
+			bombAttack.bomb += 0.2f;
 		}
 	}
 
@@ -418,7 +501,11 @@ public class PlayerAttack : MonoBehaviour {
 		return fireRate;
 	}
 
-	public float getBombsAvailable(){
-		return bombsAvailable;
+	public int getBombAttack(){
+		return bombAttack.setBombLevel;
+	}
+
+	public int getFusionAttack(){
+		return fusionAttack.setFusionAttackLevel;
 	}
 }

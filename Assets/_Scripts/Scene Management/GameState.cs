@@ -12,14 +12,15 @@ public class GameState : MonoBehaviour {
         // Declare properties
         private static GameState instance;
         private string activeLevel;                     		// Active level
-        private int setMaxHealth = 1;                             // Max HP
-		private int setMaxShield = 1;                                  // Max shield
-        private int setPrimaryAttackLevel = 1;                      // Primary Attack Level
-        private int setMultiAttackLevel = 0;                        // Multi Attack level
-		private int setFusionAttackLevel = 0;
+        private int setMaxHealth;                             // Max HP
+		private int setMaxShield;                                  // Max shield
+        private int setPrimaryAttackLevel;                      // Primary Attack Level
+        private int setMultiAttackLevel ;                        // Multi Attack level
+		private int setFusionAttackLevel ;
+		private int setBombAttackLevel ;
 		private float fireRate = 0.5f;                                 // Fire Rate
-        private int currency;
-		private int bombsAvailable = 5;                                   // Currency
+        private int credits;
+		private int bombsAvailable = 5;                                   // credits
 
 		PlayerController playerController;
         PlayerAttack playerAttack;
@@ -61,8 +62,9 @@ public class GameState : MonoBehaviour {
                 setPrimaryAttackLevel = 1;
                 setMultiAttackLevel = 0;
 				setFusionAttackLevel = 0;
+				setBombAttackLevel = 0;
                 fireRate = 0.5f;
-                currency = 0;
+                credits = 100;
                               
                 // Load level 1
                 SceneManager.LoadScene ("UpgradeShop");
@@ -137,6 +139,15 @@ public class GameState : MonoBehaviour {
 			return setFusionAttackLevel;
 		}
 
+		// ---------------------------------------------------------------------------------------------------
+		// getBombAttackLevel()
+		// ---------------------------------------------------------------------------------------------------
+		// Returns the characters BombAttackLevel
+		// ---------------------------------------------------------------------------------------------------
+		public int getBombAttackLevel(){
+			return setBombAttackLevel;
+		}
+
 
 		// ---------------------------------------------------------------------------------------------------
         // getFireRate()
@@ -148,12 +159,12 @@ public class GameState : MonoBehaviour {
         }
 
 		// ---------------------------------------------------------------------------------------------------
-        // getCurrency()
+        // getcredits()
         // ---------------------------------------------------------------------------------------------------
-        // Returns the characters Currency
+        // Returns the characters credits
         // ---------------------------------------------------------------------------------------------------
-        public int getCurrency(){
-                return currency;
+        public int getcredits(){
+                return credits;
         }
 
 
@@ -171,10 +182,12 @@ public class GameState : MonoBehaviour {
 
 			setMaxHealth = playerController.getHealth();
 			setMaxShield = playerController.getShield();
-			setPrimaryAttackLevel = playerAttack.primaryAttack.setPrimaryAttackLevel;
-			setMultiAttackLevel = playerAttack.multiAttack.setMultiAttackLevel;
-			fireRate = playerAttack.fireRate;
-		}
+			setPrimaryAttackLevel = playerAttack.getPrimaryAttack();
+			setMultiAttackLevel = playerAttack.getMultiAttack();
+			fireRate = playerAttack.getFireRate();
+			setFusionAttackLevel = playerAttack.getFusionAttack();
+
+			}
 
 
 		//Load Scene by Hotkeys
