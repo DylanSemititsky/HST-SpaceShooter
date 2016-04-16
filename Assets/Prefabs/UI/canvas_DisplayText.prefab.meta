@@ -1,12 +1,7 @@
 fileFormatVersion: 2
 guid: 339e3074a686e1843b6130947687998e
-<<<<<<< HEAD
-timeCreated: 1460834105
+timeCreated: 1460826873
 licenseType: Free
-=======
-timeCreated: 1460674192
-licenseType: Pro
->>>>>>> parent of 728b61b... Working on UI. Mostly scales with resolution now.
 NativeFormatImporter:
   userData: 
   assetBundleName: 
