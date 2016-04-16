@@ -5,16 +5,17 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour 
 {
 	SceneFade sceneFade;
 	public GameObject fadeToBlack;
 
-	public GUIText scoreText;
-	public GUIText restartText;
-	public GUIText gameOverText;
-	//public GUIText levelCompleteText;
+	public Text scoreText;
+	public Text restartText;
+	public Text gameOverText;
+	//public Text levelCompleteText;
 
 	//private bool levelComplete;
 	private bool gameOver;
