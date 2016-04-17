@@ -9,6 +9,11 @@ public class Boss2Script : MonoBehaviour {
 	public float verticalSpeed; // bosses vertical speed
 	public float vAplitude; // the max vertical range the boss will travel
 	public float hAplitude; // the max width range the boss with travel
+
+	float originalHspeed = 1;
+	float originalVspeed = 2;
+	float originalHaplitude = 3;
+	float originalVaplitude = 1;
 	//ROLL VARIABLES
 	public float rollAttackSpeed;
 	public int rollRightLength;
@@ -17,6 +22,7 @@ public class Boss2Script : MonoBehaviour {
 	public int rollUpLength;
 	bool isPrepareRollAttack;
 	bool isRolling;
+	int rollCounter;
 
 	//EXPAND ATTACK VARIABLES
 	float expandSpeed = 6;
@@ -80,6 +86,8 @@ public class Boss2Script : MonoBehaviour {
 
 	bool expandingMode;
 	float expandModeCounter;
+	bool fadeIntoPlaySpace;
+	bool faded;
 
 	void Start () {
 		rotatePiece = GameObject.Find ("RotatePiece"); //grab rotate bone object
@@ -90,9 +98,9 @@ public class Boss2Script : MonoBehaviour {
 		shield = GameObject.Find ("BossShield");
 
 
-		tempPosition = transform.position;
-		originPos = transform.position;
-		topArmPos = topArm.transform.position;
+		//tempPosition = transform.position;
+		//originPos = transform.position;
+		//topArmPos = topArm.transform.position;
 
 		Renderer rend = GetComponent<Renderer> ();
 		originalColor = rend.material.color;
@@ -102,60 +110,70 @@ public class Boss2Script : MonoBehaviour {
 		//start stage
 		stage0 = true;
 		shield.GetComponent<Renderer> ().enabled = false;
+		topArm.transform.localPosition = new Vector3 (0, 0, 0);
+		bottomArm.transform.localPosition = new Vector3 (0, 0, 0);
+		leftArm.transform.localPosition = new Vector3 (0, 0, 0);
+		rightArm.transform.localPosition = new Vector3 (0, 0, 0);
 	}
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-		
-		DefaultBossMovement (); //regular movement
-		CheckToShootHomingLaser ();//check to see of can laser attack
-		//AttackSequenceLaser();
-		if (expanding) { //expand attack
-			ExpandArms ();
-		}
-		StageControl ();
 
-		if (damaged) {
-			StartCoroutine (DamageFlash ());
+		if (!faded) {
+			FadeIntoPlaySpace ();
 		}
-		HealthUpdate ();
-		//EXPAND ATTACK MODE
-		ExpandAttack();
+		if (fadeIntoPlaySpace) {
+
+
+			DefaultBossMovement (); //regular movement
+			CheckToShootHomingLaser ();//check to see of can laser attack
+			//AttackSequenceLaser();
+			if (expanding) { //expand attack
+				ExpandArms ();
+			}
+			StageControl ();
+
+			if (damaged) {
+				StartCoroutine (DamageFlash ());
+			}
+			HealthUpdate ();
+			//EXPAND ATTACK MODE
+			ExpandAttack ();
 	
 			
-		/*if (Input.GetKeyDown (KeyCode.Space)) {
+			/*if (Input.GetKeyDown (KeyCode.Space)) {
 			//horizontalSpeed *= 2;
 			//verticalSpeed *= 2;
 			isPrepareRollAttack = !isPrepareRollAttack;
 
 		}*/
-		if (Input.GetKeyDown (KeyCode.LeftShift)) {
-			expanding = true;
-		}
-		if (Input.GetKeyDown (KeyCode.Keypad0)) {
-			stage0 = true;
-		}
-		if (Input.GetKeyDown (KeyCode.Keypad1)) {
-			stage0 = false;
-			stage1 = true;
-		}
-		if (Input.GetKeyDown (KeyCode.Keypad2)) {
-			stage2 = true;
-			stage1 = false;
-		}
-		if (Input.GetKeyDown (KeyCode.Keypad3)) {
-			stage3 = true;
-			stage2 = false;
-		}
-		if (Input.GetKeyDown (KeyCode.Keypad4)) {
-			stage4 = true;
-			stage3 = false;
-		}
-		if(Input.GetKeyDown(KeyCode.A)){
+			if (Input.GetKeyDown (KeyCode.LeftShift)) {
+				expanding = true;
+			}
+			if (Input.GetKeyDown (KeyCode.Keypad0)) {
+				stage0 = true;
+			}
+			if (Input.GetKeyDown (KeyCode.Keypad1)) {
+				stage0 = false;
+				stage1 = true;
+			}
+			if (Input.GetKeyDown (KeyCode.Keypad2)) {
+				stage2 = true;
+				stage1 = false;
+			}
+			if (Input.GetKeyDown (KeyCode.Keypad3)) {
+				stage3 = true;
+				stage2 = false;
+			}
+			if (Input.GetKeyDown (KeyCode.Keypad4)) {
+				stage4 = true;
+				stage3 = false;
+			}
+			if (Input.GetKeyDown (KeyCode.A)) {
 			
+			}
+
 		}
-
-
 	}
 
 	void DefaultBossMovement(){
@@ -205,7 +223,7 @@ public class Boss2Script : MonoBehaviour {
 		isRolling = true;
 
 		//if(rollRight = true){
-		for(int i = 0; transform.position.x < 3.25f; i++){ //rolls right
+		for(int i = 0; transform.position.x < 3.45f; i++){ //rolls right
 			transform.Translate (Vector3.right * rollAttackSpeed * Time.deltaTime);
 			yield return new WaitForSeconds (0.0001f);
 		}
@@ -265,6 +283,7 @@ public class Boss2Script : MonoBehaviour {
 			yield return new WaitForSeconds (0.001f);
 		}
 		hAplitude = 3;
+		rollCounter += 1;
 		StartCoroutine (DeactivateShield ());
 
 
@@ -423,7 +442,7 @@ public class Boss2Script : MonoBehaviour {
 			//expandingMode = false; //cannot expand arms
 		}
 		if (stage1) {
-			if (!growTopArm && !expanding)//if arm hasnt grown yet do this.
+			if (!growTopArm && !expanding && rollCounter == 1)//if arm hasnt grown yet do this.
 			GrowTopArm ();
 			waveLaserFireRate = 2.75f;
 			//expandingMode = true;//expand arms
@@ -597,6 +616,51 @@ public class Boss2Script : MonoBehaviour {
 					expandModeCounter = 0;
 					expanding = true;
 					ExpandArms ();
+				}
+			}
+		}
+	}
+	void FadeIntoPlaySpace(){
+		
+
+		if (!fadeIntoPlaySpace) {
+			
+			StartCoroutine(ActivateShield ());
+			transform.Translate (Vector3.forward * -2f * Time.deltaTime);
+			ActivateShield ();
+			horizontalSpeed = 0;
+			verticalSpeed = 0;
+			hAplitude = 0;
+			vAplitude = 0;
+		}
+
+		if (transform.position.z < 9.6f) {
+			fadeIntoPlaySpace = true;
+			Vector3 temp = transform.position; // sets the z position to an absolute one
+			temp.z = 9.5f;
+			transform.position = temp;
+			tempPosition = transform.position;
+			originPos = transform.position;
+			topArmPos = topArm.transform.position;
+
+
+		}
+		if (fadeIntoPlaySpace) {
+			if (!faded) {
+				StartCoroutine (DeactivateShield ());
+
+				horizontalSpeed = Mathf.Lerp (horizontalSpeed, originalHspeed, 0.75f * Time.time*Time.deltaTime );
+				verticalSpeed = Mathf.Lerp (verticalSpeed, originalVspeed,1 * Time.time *Time.deltaTime);
+				hAplitude = Mathf.Lerp (hAplitude, originalHaplitude, 1 * Time.time*Time.deltaTime );
+				vAplitude = Mathf.Lerp (vAplitude, originalVaplitude, 1 * Time.time *Time.deltaTime );
+
+				if (vAplitude >= 0.999f) {
+					faded = true;
+					horizontalSpeed = originalHspeed;
+					verticalSpeed = originalVspeed;
+					hAplitude = originalHaplitude;
+					vAplitude = originalVaplitude;
+
 				}
 			}
 		}

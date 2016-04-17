@@ -7,8 +7,8 @@ public class DestroyByBoundary : MonoBehaviour
 {
 	void OnTriggerExit(Collider other)
 	{
-
-		Destroy(other.gameObject);
-
+		if (other.tag != "boss2Arms") {
+			Destroy (other.gameObject);
+		}
 	}
 }
