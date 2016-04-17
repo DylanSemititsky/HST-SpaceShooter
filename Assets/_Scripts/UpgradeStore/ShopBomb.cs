@@ -6,6 +6,7 @@ public class ShopBomb : MonoBehaviour {
 
 	PlayerAttack playerAttack;
 	PlayerController playerController;
+	FlashWhenFullBomb flashWhenFullBomb;
 
 	public Text currentText;
 	public Text upgradeText;
@@ -19,6 +20,11 @@ public class ShopBomb : MonoBehaviour {
 			playerAttack = playerObject.GetComponent<PlayerAttack> ();
 			playerController = playerObject.GetComponent<PlayerController> ();
 		}
+
+		GameObject flashObject = GameObject.Find ("Canvas_yellow2");	
+		if (flashObject != null) {
+			flashWhenFullBomb = flashObject.GetComponent<FlashWhenFullBomb> ();
+		}
 	}
 
 	void Update () {
@@ -30,6 +36,8 @@ public class ShopBomb : MonoBehaviour {
 	}
 
 	public void EnableUpgrade(){
+
+		flashWhenFullBomb.StartFlash();
 
 		audioSource.Play();
 

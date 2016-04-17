@@ -401,10 +401,10 @@ public class PlayerAttack : MonoBehaviour {
 			if (Time.time > nextFusionRecharge){
 				nextFusionRecharge = Time.time + fusionRechargeDelay;
 				if (fusionAttack.setFusionAttackLevel == 1){
-					fusionAttack.fusion += 0.3f;
+					fusionAttack.fusion += 1f;
 				}
 				else if (fusionAttack.setFusionAttackLevel == 2){
-					fusionAttack.fusion += 0.3f;
+					fusionAttack.fusion += 1f;
 				}
 			}
 		}
@@ -449,7 +449,7 @@ public class PlayerAttack : MonoBehaviour {
 		//Allow Bomb to recharge after use
 		if (Time.time > nextBombRecharge){
 			nextBombRecharge = Time.time + bombRechargeDelay;
-			bombAttack.bomb += 0.2f;
+			bombAttack.bomb += 1f;
 		}
 	}
 

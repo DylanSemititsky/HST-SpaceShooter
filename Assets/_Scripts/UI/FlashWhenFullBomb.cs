@@ -5,21 +5,31 @@ public class FlashWhenFullBomb : MonoBehaviour {
 
 	PlayerAttack playerAttack;
 
-	// Use this for initialization
 	void Start () {
+		CanvasGroup canvasGroup = GetComponent<CanvasGroup>();
+
 		GameObject playerObject = GameObject.Find ("Player");	
 		if (playerObject != null) {
 			playerAttack = playerObject.GetComponent<PlayerAttack> ();
 		}
 	}
-	
-	// Update is called once per frame
+
 	void Update () {
-		if (playerAttack.bombAttack.bomb >= 99 && playerAttack.bombAttack.bomb < 100){
-			StartCoroutine(Flash());
+
+		if(playerAttack.bombAttack.setBombLevel > 0){
+
+			if (playerAttack.bombAttack.bomb > 99.6 && playerAttack.bombAttack.bomb < 100){
+				StartCoroutine(Flash());
+			}
+			if (playerAttack.bombAttack.bomb < 99){
+				HideAlpha();
+			}
 		}
-		if (playerAttack.bombAttack.bomb < 99){
-			ResetAlpha();
+		else if (playerAttack.bombAttack.setBombLevel == 0){
+			HideAlpha();
+		}
+		else if (playerAttack.bombAttack.setBombLevel > 0 && playerAttack.bombAttack.bomb >= 100){
+			ShowAlpha();
 		}
 	}
 
@@ -34,8 +44,17 @@ public class FlashWhenFullBomb : MonoBehaviour {
 		}
 	}
 
-	void ResetAlpha(){
+	void HideAlpha(){
 		CanvasGroup canvasGroup = GetComponent<CanvasGroup>();
 		canvasGroup.alpha = 0;
+	}
+
+	void ShowAlpha(){
+		CanvasGroup canvasGroup = GetComponent<CanvasGroup>();
+		canvasGroup.alpha = 1;
+	}
+
+	public void StartFlash(){
+		StartCoroutine(Flash());
 	}
 }

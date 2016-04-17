@@ -6,17 +6,24 @@ public class ShopFusionBlast : MonoBehaviour {
 
 	PlayerAttack playerAttack;
 	PlayerController playerController;
+	FlashWhenFullFusion flashWhenFullFusion;
+
 	public Text currentText;
 	public Text upgradeText;
 
 	public AudioSource audioSource;
 
 	void Start () {
-	
+
 		GameObject playerObject = GameObject.Find ("Player");	
 		if (playerObject != null) {
 			playerAttack = playerObject.GetComponent<PlayerAttack> ();
 			playerController = playerObject.GetComponent<PlayerController> ();
+		}
+
+		GameObject flashObject = GameObject.Find ("Canvas_yellow1");	
+		if (flashObject != null) {
+			flashWhenFullFusion = flashObject.GetComponent<FlashWhenFullFusion> ();
 		}
 	}
 
@@ -30,8 +37,10 @@ public class ShopFusionBlast : MonoBehaviour {
 
 	public void EnableUpgrade(){
 
-		audioSource.Play();
+		flashWhenFullFusion.StartFlash();
 
+		audioSource.Play();
+		 
 		if (playerAttack.fusionAttack.setFusionAttackLevel == 0 && playerController.credits >= 100) {
 			playerAttack.fusionAttack.setFusionAttackLevel += 1;
 			playerController.credits -= 100;

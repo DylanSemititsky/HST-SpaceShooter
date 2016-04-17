@@ -5,22 +5,30 @@ public class FlashWhenFullFusion : MonoBehaviour {
 
 	PlayerAttack playerAttack;
 
-	// Use this for initialization
 	void Start () {
+		CanvasGroup canvasGroup = GetComponent<CanvasGroup>();
+
 		GameObject playerObject = GameObject.Find ("Player");	
 		if (playerObject != null) {
 			playerAttack = playerObject.GetComponent<PlayerAttack> ();
 		}
 	}
-	
-	// Update is called once per frame
+
 	void Update () {
-		if (playerAttack.fusionAttack.fusion >= 99 && playerAttack.fusionAttack.fusion < 100){
-			StartCoroutine(Flash());
+
+		if(playerAttack.fusionAttack.setFusionAttackLevel > 0){
+			
+			if (playerAttack.fusionAttack.fusion > 99.6 && playerAttack.fusionAttack.fusion < 100){
+				StartCoroutine(Flash());
+			}
+			if (playerAttack.fusionAttack.fusion < 99){
+				HideAlpha();
+			}
+		} 
+		else if (playerAttack.fusionAttack.setFusionAttackLevel == 0){
+			HideAlpha();
 		}
-		if (playerAttack.fusionAttack.fusion < 99){
-			ResetAlpha();
-		}
+		else HideAlpha();
 	}
 
 	IEnumerator Flash(){
@@ -34,8 +42,12 @@ public class FlashWhenFullFusion : MonoBehaviour {
 		}
 	}
 
-	void ResetAlpha(){
-		CanvasGroup canvasGroup = GetComponent<CanvasGroup>();
-		canvasGroup.alpha = 0;
+	void HideAlpha(){
+			CanvasGroup canvasGroup = GetComponent<CanvasGroup>();
+			canvasGroup.alpha = 0;
+	}
+
+	public void StartFlash(){
+		StartCoroutine(Flash());
 	}
 }
