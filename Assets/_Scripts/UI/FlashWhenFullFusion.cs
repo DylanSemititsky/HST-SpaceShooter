@@ -18,7 +18,7 @@ public class FlashWhenFullFusion : MonoBehaviour {
 
 		if(playerAttack.fusionAttack.setFusionAttackLevel > 0){
 			
-			if (playerAttack.fusionAttack.fusion > 99.6 && playerAttack.fusionAttack.fusion < 100){
+			if (playerAttack.fusionAttack.fusion > 98.9 && playerAttack.fusionAttack.fusion < 100){
 				StartCoroutine(Flash());
 			}
 			if (playerAttack.fusionAttack.fusion < 99){

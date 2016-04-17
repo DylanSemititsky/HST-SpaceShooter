@@ -18,7 +18,7 @@ public class FlashWhenFullBomb : MonoBehaviour {
 
 		if(playerAttack.bombAttack.setBombLevel > 0){
 
-			if (playerAttack.bombAttack.bomb > 99.6 && playerAttack.bombAttack.bomb < 100){
+			if (playerAttack.bombAttack.bomb > 98.9 && playerAttack.bombAttack.bomb < 100){
 				StartCoroutine(Flash());
 			}
 			if (playerAttack.bombAttack.bomb < 99){
