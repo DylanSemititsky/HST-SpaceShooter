@@ -89,6 +89,9 @@ public class Boss2Script : MonoBehaviour {
 	bool fadeIntoPlaySpace;
 	bool faded;
 
+	//EXPLOSION WHEN DEAD
+	public GameObject explosion;
+
 	void Start () {
 		rotatePiece = GameObject.Find ("RotatePiece"); //grab rotate bone object
 		topArm = GameObject.Find ("TopArm"); //grab boss arms -->>
@@ -578,6 +581,11 @@ public class Boss2Script : MonoBehaviour {
 			stage4 = true;
 			isPrepareRollAttack = true;
 		}else if (bossHealth < 0 && stage4){
+			Instantiate(explosion, topArm.transform.position,  Quaternion.identity);
+			Instantiate(explosion, bottomArm.transform.position,  Quaternion.identity);
+			Instantiate(explosion, rightArm.transform.position,  Quaternion.identity);
+			Instantiate(explosion, leftArm.transform.position,  Quaternion.identity);
+			Instantiate(explosion,transform.position,  Quaternion.identity);
 			Destroy (gameObject);
 		}
 	}
