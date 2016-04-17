@@ -7,7 +7,6 @@ public class OnToTheNext : MonoBehaviour
 	static int addScene = 2;
 
 	PlayerController playerController;
-	PlayerAttack playerAttack;
 	GameState gameState;
 
 	private float playerSpeedTemp;
@@ -20,7 +19,6 @@ public class OnToTheNext : MonoBehaviour
 		GameObject playerObject = GameObject.Find ("Player");	
 		if (playerObject != null) {
 			playerController = playerObject.GetComponent<PlayerController> ();
-			playerAttack = playerObject.GetComponent<PlayerAttack> ();
 		}
 
 		GameObject gameStateObject = GameObject.Find ("GameState");

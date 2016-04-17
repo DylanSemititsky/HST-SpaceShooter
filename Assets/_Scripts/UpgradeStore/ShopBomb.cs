@@ -1,12 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class ShopBomb : MonoBehaviour {
 
 	PlayerAttack playerAttack;
 	PlayerController playerController;
-	public GUIText currentText;
-	public GUIText upgradeText;
+
+	public Text currentText;
+	public Text upgradeText;
+
+	public AudioSource audioSource;
 
 	void Start () {
 
@@ -26,6 +30,9 @@ public class ShopBomb : MonoBehaviour {
 	}
 
 	public void EnableUpgrade(){
+
+		audioSource.Play();
+
 		if (playerAttack.bombAttack.setBombLevel == 0 && playerController.credits >= 50) {
 			playerAttack.bombAttack.setBombLevel += 1;
 			playerController.credits -= 50;

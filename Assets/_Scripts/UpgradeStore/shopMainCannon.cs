@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class ShopMainCannon : MonoBehaviour {
 
@@ -8,8 +9,11 @@ public class ShopMainCannon : MonoBehaviour {
 	private int playerMainCannonTemp;
 	private int playerMultiCannonTemp;
 
-	public GUIText currentText;
-	public GUIText upgradeText;
+	public Text currentText;
+	public Text upgradeText;
+	public Text notEnoughCredits;
+
+	public AudioSource audioSource;
 
 	void Start () {
 	
@@ -35,6 +39,9 @@ public class ShopMainCannon : MonoBehaviour {
 	}
 
 	public void EnableUpgrade(){
+
+		audioSource.Play();
+
 		if (playerMainCannonTemp == 1 && playerController.credits >= 50) {
 			playerAttack.primaryAttack.setPrimaryAttackLevel += 1;
 			playerMainCannonTemp += 1;
@@ -53,6 +60,9 @@ public class ShopMainCannon : MonoBehaviour {
 		else if (playerMainCannonTemp >= 4) {
 			playerMainCannonTemp = 4;
 		}
+
+
+		/*else StartCoroutine (NotEnoughCredits());*/
 	}
 
 	public void Revert(){
@@ -79,4 +89,8 @@ public class ShopMainCannon : MonoBehaviour {
 			upgradeText.text = "<b>Upgrade:</b>  <color=magenta>(maxed)</color>";
 		}
 	}
+
+	/*IEnumerator NotEnoughCredits(){
+		
+	}*/
 }

@@ -9,18 +9,17 @@ using UnityEngine.SceneManagement;
 
 public class GameState : MonoBehaviour {
        
-        // Declare properties
+        // Player Variables 
         private static GameState instance;
-        private string activeLevel;                     		// Active level
-        private int setMaxHealth;                             // Max HP
-		private int setMaxShield;                                  // Max shield
-        private int setPrimaryAttackLevel;                      // Primary Attack Level
-        private int setMultiAttackLevel ;                        // Multi Attack level
-		private int setFusionAttackLevel ;
-		private int setBombAttackLevel ;
-		private float fireRate = 0.5f;                                 // Fire Rate
-        private int credits;
-		private int bombsAvailable = 5;                                   // credits
+        private string activeLevel;                     			// Active level
+        private int setMaxHealth;                             		// Max HP
+		private int setMaxShield;                                  	// Max shield
+        private int setPrimaryAttackLevel;                      	// Primary Attack Level
+        private int setMultiAttackLevel ;                        	// Multi Attack level
+		private int setFusionAttackLevel;							// Fusion Attack level
+		private int setBombAttackLevel;								// Bomb Attack level
+		private float fireRate;                            			// Fire Rate
+        private int credits;                                 		// credits
 
 		PlayerController playerController;
         PlayerAttack playerAttack;
@@ -66,7 +65,7 @@ public class GameState : MonoBehaviour {
                 fireRate = 0.5f;
                 credits = 100;
                               
-                // Load level 1
+                // Start Game
                 SceneManager.LoadScene ("UpgradeShop");
         }
        
@@ -186,6 +185,7 @@ public class GameState : MonoBehaviour {
 			setMultiAttackLevel = playerAttack.getMultiAttack();
 			fireRate = playerAttack.getFireRate();
 			setFusionAttackLevel = playerAttack.getFusionAttack();
+			setBombAttackLevel = playerAttack.getBombAttack();
 
 			}
 
@@ -199,6 +199,10 @@ public class GameState : MonoBehaviour {
 			if(Input.GetKey("k")){
 				StoreVariables();
 				SceneManager.LoadScene("GreenPlanet");
+			}
+			if (Input.GetKeyDown(KeyCode.U)){
+				StoreVariables();
+				SceneManager.LoadScene("UpgradeShop");
 			}
 		}
 }

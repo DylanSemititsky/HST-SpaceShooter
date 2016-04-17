@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class ShopShield : MonoBehaviour {
 
@@ -7,8 +8,10 @@ public class ShopShield : MonoBehaviour {
 	PlayerController playerController;
 	private int playerShieldTemp;
 
-	public GUIText currentText;
-	public GUIText upgradeText;
+	public Text currentText;
+	public Text upgradeText;
+
+	public AudioSource audioSource;
 
 	void Start () {
 	
@@ -29,6 +32,9 @@ public class ShopShield : MonoBehaviour {
 
 
 	public void EnableUpgrade(){
+
+		audioSource.Play();
+
 		if (playerController.setMaxShield == 1 && playerController.credits >= 50) {
 			playerController.setMaxShield += 1;
 			playerController.credits -= 50;

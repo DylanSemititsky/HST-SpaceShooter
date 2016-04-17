@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class ShopWingCannon : MonoBehaviour {
 
@@ -8,8 +9,10 @@ public class ShopWingCannon : MonoBehaviour {
 	private int playerMainCannonTemp;
 	private int playerMultiCannonTemp;
 
-	public GUIText currentText;
-	public GUIText upgradeText;
+	public Text currentText;
+	public Text upgradeText;
+
+	public AudioSource audioSource;
 
 	void Start () {
 	
@@ -35,6 +38,9 @@ public class ShopWingCannon : MonoBehaviour {
 	}
 
 	public void EnableUpgrade(){
+
+		audioSource.Play();
+
 		if (playerMultiCannonTemp == 0 && playerController.credits >= 100) {
 			playerAttack.multiAttack.setMultiAttackLevel += 1;
 			playerMultiCannonTemp += 1;

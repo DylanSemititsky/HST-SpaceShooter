@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class ShopHealth : MonoBehaviour {
 
@@ -7,8 +8,10 @@ public class ShopHealth : MonoBehaviour {
 	PlayerController playerController;
 	private int playerHealthTemp;
 
-	public GUIText currentText;
-	public GUIText upgradeText;
+	public Text currentText;
+	public Text upgradeText;
+
+	public AudioSource audioSource;
 
 	void Start () {
 	
@@ -28,6 +31,9 @@ public class ShopHealth : MonoBehaviour {
 	}
 
 	public void EnableUpgrade(){
+
+		audioSource.Play();
+
 		if (playerController.setMaxHealth == 1 && playerController.credits >= 50) {
 			playerController.setMaxHealth += 1;
 			playerController.credits -= 50;

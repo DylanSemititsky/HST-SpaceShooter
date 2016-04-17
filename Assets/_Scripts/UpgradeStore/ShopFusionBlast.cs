@@ -1,12 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class ShopFusionBlast : MonoBehaviour {
 
 	PlayerAttack playerAttack;
 	PlayerController playerController;
-	public GUIText currentText;
-	public GUIText upgradeText;
+	public Text currentText;
+	public Text upgradeText;
+
+	public AudioSource audioSource;
 
 	void Start () {
 	
@@ -26,6 +29,9 @@ public class ShopFusionBlast : MonoBehaviour {
 	}
 
 	public void EnableUpgrade(){
+
+		audioSource.Play();
+
 		if (playerAttack.fusionAttack.setFusionAttackLevel == 0 && playerController.credits >= 100) {
 			playerAttack.fusionAttack.setFusionAttackLevel += 1;
 			playerController.credits -= 100;

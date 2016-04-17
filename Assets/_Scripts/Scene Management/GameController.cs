@@ -45,12 +45,8 @@ public class GameController : MonoBehaviour
 				SceneManager.LoadScene("Main Menu");
 			}
 		}
-
-		if (Input.GetKeyDown(KeyCode.U)){
-			SceneManager.LoadScene("UpgradeShop");
-		}
-	
 	}
+
 
 	// ---------------------------------------------------------------------------------------------------
 	// Restart text "if" gameOver condition
