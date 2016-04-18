@@ -61,6 +61,7 @@ public class PlayerAttack : MonoBehaviour {
 	public GameObject laserSound;
 	public GameObject fusionSound;
 
+	public GameObject popupAttackSpeed;
 
 	//private AudioSource audioSource;
 	public AudioSource[] audioClips = null;
@@ -112,10 +113,11 @@ public class PlayerAttack : MonoBehaviour {
 	// ---------------------------------------------------------------------------------------------------
 		void OnTriggerEnter(Collider other){
 		if (other.tag == "powerUp_fireRate"){
-			fireRate -= 0.04f;
+			fireRate -= 0.01f;
 			if(fireRate <= 0.1f){
 				fireRate = 0.1f;
 			}
+			Instantiate (popupAttackSpeed, transform.position, transform.rotation);
 			Destroy(other.gameObject);
 			audioClips[1].Play();
 		}

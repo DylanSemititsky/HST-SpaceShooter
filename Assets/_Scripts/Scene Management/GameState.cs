@@ -63,7 +63,7 @@ public class GameState : MonoBehaviour {
                 setMultiAttackLevel = 0;
 				setFusionAttackLevel = 0;
 				setBombAttackLevel = 0;
-                fireRate = 0.28f;
+                fireRate = 0.25f;
                 credits = 1500;
                               
                 // Start Game
