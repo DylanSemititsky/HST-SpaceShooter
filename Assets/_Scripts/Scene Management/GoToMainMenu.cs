@@ -5,18 +5,17 @@ using UnityEngine.SceneManagement;
 public class GoToMainMenu : MonoBehaviour {
 
 	public AudioSource audioSource;
-	public GameObject explosion;
 
 	ChangeShipColor changeShipColor;
 
 	void GoToSettings() {
 		audioSource = GetComponent<AudioSource>();
-
 	}
 
 	IEnumerator OnTriggerEnter(Collider other){
 		audioSource.Play();
-		Instantiate(explosion, transform.position, transform.rotation);
+
+
 
 		Renderer rend = GetComponent<Renderer> ();
 
@@ -28,6 +27,7 @@ public class GoToMainMenu : MonoBehaviour {
 		}
 
 		//yield return new WaitForSeconds (fadeTime);
+
 		SceneManager.LoadScene ("Main Menu");
 	}
 

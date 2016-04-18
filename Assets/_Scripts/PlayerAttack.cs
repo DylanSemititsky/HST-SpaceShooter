@@ -41,8 +41,6 @@ public class BombAttack{  		//Collapsible menu to access Bomb Attack settings.
 	public Transform shotSpawn;
 	public float maxBomb = 100, bomb = 100;
 	public Image bombBar;
-
-
 }
 
 public class PlayerAttack : MonoBehaviour {
@@ -65,7 +63,7 @@ public class PlayerAttack : MonoBehaviour {
 
 
 	//private AudioSource audioSource;
-	//public AudioSource[] audioClips = null;
+	public AudioSource[] audioClips = null;
 
 	GameState gameState;
 
@@ -119,7 +117,7 @@ public class PlayerAttack : MonoBehaviour {
 				fireRate = 0.1f;
 			}
 			Destroy(other.gameObject);
-			//audioClips[1].Play();
+			audioClips[1].Play();
 		}
 		if (other.tag == "powerUp_watermelon"){
 			multiAttack.setMultiAttackLevel += 1;
@@ -132,7 +130,7 @@ public class PlayerAttack : MonoBehaviour {
 		if (other.tag == "powerUp_bomb"){
 			bombAttack.bomb += 10;
 			Destroy(other.gameObject);
-			//audioClips[1].Play();
+			audioClips[1].Play();
 		}
 	}
 

@@ -49,7 +49,7 @@ namespace UnityStandardAssets.Effects
             if(m_Sphere == null)
                 m_Sphere = (GetComponent<Collider>() as SphereCollider);
 
-            m_Sphere.radius = effectDistance*.5f;
+//            m_Sphere.radius = effectDistance*.5f;
             m_Sphere.center = new Vector3(0, 0, effectDistance*.5f);
             var directions = new Vector3[] {Vector3.up, -Vector3.up, Vector3.right, -Vector3.right};
             var perpDirections = new Vector3[] {-Vector3.right, Vector3.right, Vector3.up, -Vector3.up};

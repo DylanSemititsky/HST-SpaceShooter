@@ -21,6 +21,7 @@ public class GameState : MonoBehaviour {
 		private float fireRate;                            			// Fire Rate
         private int credits;                                 		// credits
 
+		
 		PlayerController playerController;
         PlayerAttack playerAttack;
        
@@ -62,8 +63,8 @@ public class GameState : MonoBehaviour {
                 setMultiAttackLevel = 0;
 				setFusionAttackLevel = 0;
 				setBombAttackLevel = 0;
-                fireRate = 0.5f;
-                credits = 100;
+                fireRate = 0.28f;
+                credits = 1500;
                               
                 // Start Game
                 SceneManager.LoadScene ("UpgradeShop");
@@ -186,7 +187,7 @@ public class GameState : MonoBehaviour {
 			fireRate = playerAttack.getFireRate();
 			setFusionAttackLevel = playerAttack.getFusionAttack();
 			setBombAttackLevel = playerAttack.getBombAttack();
-
+			credits = playerController.getCredits ();
 			}
 
 

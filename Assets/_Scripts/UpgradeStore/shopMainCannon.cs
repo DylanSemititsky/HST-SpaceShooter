@@ -11,7 +11,6 @@ public class ShopMainCannon : MonoBehaviour {
 
 	public Text currentText;
 	public Text upgradeText;
-	public Text notEnoughCredits;
 
 	public AudioSource audioSource;
 
@@ -60,9 +59,6 @@ public class ShopMainCannon : MonoBehaviour {
 		else if (playerMainCannonTemp >= 4) {
 			playerMainCannonTemp = 4;
 		}
-
-
-		/*else StartCoroutine (NotEnoughCredits());*/
 	}
 
 	public void Revert(){
@@ -89,8 +85,4 @@ public class ShopMainCannon : MonoBehaviour {
 			upgradeText.text = "<b>Upgrade:</b>  <color=magenta>(maxed)</color>";
 		}
 	}
-
-	/*IEnumerator NotEnoughCredits(){
-		
-	}*/
 }

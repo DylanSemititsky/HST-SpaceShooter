@@ -15,16 +15,18 @@ public class EnemySpawnerRandom : MonoBehaviour
 	public float startWait;		//Initial time before enemies start spawning.
 	public float waveWait;		//Time between each wave of enemies.
 	public float endSpawns;
+	private float endTimer;
 
 	void Start ()
 	{
+		endTimer = Time.time + endSpawns;
 		StartCoroutine (SpawnWaves ());
 	}
 
 	IEnumerator SpawnWaves ()
 	{
 		yield return new WaitForSeconds (startWait);
-		while (Time.time < endSpawns)
+		while (Time.time < endTimer)
 		{
 			for (int i = 0; i < hazardCount; i++)
 			{

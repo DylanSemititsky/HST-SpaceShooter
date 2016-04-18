@@ -38,13 +38,13 @@ public class ShieldEnemy : MonoBehaviour {
 
 		if (!movement) {
 
-			if (verticalSpeed < 1f) {
+			/*if (verticalSpeed < 1f) {
 				verticalSpeed += Time.deltaTime * 0.2f;
 			}
 			tempPosition.x = Mathf.Sin (Time.realtimeSinceStartup * horizontalSpeed) * hAplitude;
 			tempPosition.z = Mathf.Sin (Time.realtimeSinceStartup* verticalSpeed) * vAplitude;
 			tempPosition.z += originPos.z;
-			transform.position = tempPosition;
+			transform.position = tempPosition;*/
 		}
 
 		CheckHomingLaser ();//check to see if homing laser is shot so it can be re shot again

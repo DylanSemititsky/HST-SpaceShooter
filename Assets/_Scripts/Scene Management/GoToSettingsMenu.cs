@@ -5,16 +5,13 @@ using UnityEngine.SceneManagement;
 public class GoToSettingsMenu : MonoBehaviour 
 {
 	private AudioSource audioSource;
-	public GameObject explosion;
 
 	void Start() {
 		audioSource = GetComponent<AudioSource>();
-
 	}
 
 	IEnumerator OnTriggerEnter(Collider other){
 		audioSource.Play();
-		Instantiate(explosion, transform.position, transform.rotation);
 
 		Renderer rend = GetComponent<Renderer> ();
 

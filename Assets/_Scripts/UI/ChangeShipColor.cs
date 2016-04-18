@@ -3,18 +3,18 @@ using System.Collections;
 
 public class ChangeShipColor : MonoBehaviour {
 
-	public AudioSource audioSource;
+	//public AudioSource audioSource;
 	public static ChangeShipColor Instance;
 
 
 	void Start() {
-		audioSource = GetComponent<AudioSource>();
+		//audioSource = GetComponent<AudioSource>();
 		//Renderer rend = GetComponent<Renderer> ();
 		//rend = GlobalControl.Instance.rend;
 	}
 
 	public void OnTriggerEnter(Collider other){
-		audioSource.Play();
+		//audioSource.Play();
 		Renderer rend = GetComponent<Renderer> ();
 
 		if(other.tag == "red"){

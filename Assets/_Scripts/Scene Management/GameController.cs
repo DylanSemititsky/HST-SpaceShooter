@@ -15,9 +15,9 @@ public class GameController : MonoBehaviour
 	public Text scoreText;
 	public Text restartText;
 	public Text gameOverText;
-	//public Text levelCompleteText;
+	public Text levelCompleteText;
 
-	//private bool levelComplete;
+	private bool levelComplete;
 	private bool gameOver;
 	private bool restart;
 	private int score;
@@ -31,7 +31,7 @@ public class GameController : MonoBehaviour
 		restart = false;
 		restartText.text = "";
 		gameOverText.text = "";
-		//levelCompleteText.text = "";
+		levelCompleteText.text = "";
 		score = 0;
 		UpdateScore ();
 	}
@@ -42,7 +42,7 @@ public class GameController : MonoBehaviour
 	void Update (){
 		if (restart){
 			if (Input.GetKeyDown(KeyCode.R)){
-				SceneManager.LoadScene("Main Menu");
+				SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 			}
 		}
 	}
@@ -54,14 +54,14 @@ public class GameController : MonoBehaviour
 	void Restart (){
 		
 		if (gameOver){
-			restartText.text = "Press 'R' to return to Main Menu";
+			restartText.text = "Press 'R' to restart level";
 			restart = true;
 		}
 
 	}
 
 	public void GameOver (){
-		gameOverText.text = "GAME OVER";
+		gameOverText.text = "You Died!";
 		gameOver = true;
 		Restart ();
 	}
@@ -83,12 +83,12 @@ public class GameController : MonoBehaviour
 	// When LevelComplete is called, begin FadeActivate and return to Main Menu
 	// ---------------------------------------------------------------------------------------------------
 	private IEnumerator CoLevelComplete(){
-		//levelCompleteText.text = "Level Complete!";
+		levelCompleteText.text = "Level Complete!";
 		yield return new WaitForSeconds (2);
 		FadeActivate ();
 		yield return new WaitForSeconds (3);
 		Debug.Log ("About to load scene");
-		SceneManager.LoadScene ("UpgradeShop");
+		SceneManager.LoadScene ("Main Menu");
 	}
 
 	public void LevelComplete(){
