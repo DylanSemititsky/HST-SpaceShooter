@@ -8,6 +8,14 @@ public class ShopBomb : MonoBehaviour {
 	PlayerController playerController;
 	FlashWhenFullBomb flashWhenFullBomb;
 
+	public GameObject bombIcon;
+	public Image myImageComponent;
+	public Sprite yellowIcon;
+	public Sprite orangeIcon;
+	public Sprite redIcon;
+	public Sprite purpleIcon;
+
+
 	public Text currentText;
 	public Text upgradeText;
 
@@ -25,6 +33,9 @@ public class ShopBomb : MonoBehaviour {
 		if (flashObject != null) {
 			flashWhenFullBomb = flashObject.GetComponent<FlashWhenFullBomb> ();
 		}
+
+		myImageComponent = bombIcon.GetComponent<Image> ();
+
 	}
 
 	void Update () {
@@ -48,14 +59,20 @@ public class ShopBomb : MonoBehaviour {
 		else if (playerAttack.bombAttack.setBombLevel == 1 && playerController.credits >= 100) {
 			playerAttack.bombAttack.setBombLevel += 1;
 			playerController.credits -= 100;
+
+			SetOrangeIcon ();
 		}
 		else if (playerAttack.bombAttack.setBombLevel == 2 && playerController.credits >= 150) {
 			playerAttack.bombAttack.setBombLevel += 1;
 			playerController.credits -= 150;
+
+			SetRedIcon ();
 		}
 		else if (playerAttack.bombAttack.setBombLevel == 3 && playerController.credits >= 200) {
 			playerAttack.bombAttack.setBombLevel += 1;
 			playerController.credits -= 200;
+
+			SetPurpleIcon ();
 		}
 		if (playerAttack.bombAttack.setBombLevel >= 4) {
 			playerAttack.bombAttack.setBombLevel = 4;
@@ -87,5 +104,18 @@ public class ShopBomb : MonoBehaviour {
 			currentText.text = "<b>Current:</b>  <color=magenta>340 dmg/3 secs</color>";
 			upgradeText.text = "<b>Upgrade:</b>  <color=magenta>(maxed)</color>";
 		}
+	}
+
+	public void SetYellowIcon(){
+		myImageComponent.sprite = yellowIcon;
+	}
+	public void SetOrangeIcon(){
+		myImageComponent.sprite = orangeIcon;
+	}
+	public void SetRedIcon(){
+		myImageComponent.sprite = redIcon;
+	}
+	public void SetPurpleIcon(){
+		myImageComponent.sprite = purpleIcon;
 	}
 }

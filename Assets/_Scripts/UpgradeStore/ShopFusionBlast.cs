@@ -8,6 +8,13 @@ public class ShopFusionBlast : MonoBehaviour {
 	PlayerController playerController;
 	FlashWhenFullFusion flashWhenFullFusion;
 
+	public GameObject fusionIcon;
+	public Image myImageComponent;
+	public Sprite yellowIcon;
+	public Sprite orangeIcon;
+	public Sprite redIcon;
+	public Sprite purpleIcon;
+
 	public Text currentText;
 	public Text upgradeText;
 
@@ -25,10 +32,14 @@ public class ShopFusionBlast : MonoBehaviour {
 		if (flashObject != null) {
 			flashWhenFullFusion = flashObject.GetComponent<FlashWhenFullFusion> ();
 		}
+
+		myImageComponent = fusionIcon.GetComponent<Image> ();
 	}
 
 	void Update () {
 		UpdateUpgradeText ();
+
+		CheckFusionLevel ();
 	}
 
 	public void ShowFusion(){
@@ -72,5 +83,35 @@ public class ShopFusionBlast : MonoBehaviour {
 			currentText.text = "<b>Current:</b>  Double Blast";
 			upgradeText.text = "<b>Upgrade:</b>  (maxed)";
 		}
+	}
+
+
+	void CheckFusionLevel(){
+		if (playerAttack.fusionAttack.fusionAttackDamage == 1 || playerAttack.fusionAttack.fusionAttackDamage == 2) {
+			SetYellowIcon ();
+		}
+		else if (playerAttack.fusionAttack.fusionAttackDamage == 3 || playerAttack.fusionAttack.fusionAttackDamage == 4) {
+			SetOrangeIcon ();
+		}
+		else if (playerAttack.fusionAttack.fusionAttackDamage == 5 || playerAttack.fusionAttack.fusionAttackDamage == 6) {
+			SetRedIcon ();
+		}
+		else if (playerAttack.fusionAttack.fusionAttackDamage == 7) {
+			SetPurpleIcon ();
+		}
+	}
+
+
+	public void SetYellowIcon(){
+		myImageComponent.sprite = yellowIcon;
+	}
+	public void SetOrangeIcon(){
+		myImageComponent.sprite = orangeIcon;
+	}
+	public void SetRedIcon(){
+		myImageComponent.sprite = redIcon;
+	}
+	public void SetPurpleIcon(){
+		myImageComponent.sprite = purpleIcon;
 	}
 }
