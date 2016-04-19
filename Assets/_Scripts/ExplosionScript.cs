@@ -9,6 +9,10 @@ public class ExplosionScript : MonoBehaviour {
 	float timer = 0.0f;
 	float trigger = 3.0f;
 
+	//Shaking Camera variables
+	public float amplitude = 0.1f;
+	public float duration = 0.5f;
+
 	void Start () {
 		timer = 0.0f;
 		nextDetonate = Time.time + detonateTime;
@@ -38,6 +42,7 @@ public class ExplosionScript : MonoBehaviour {
 	void ExplosionDamage1(){
 		Vector3 explosionPos = transform.position;
 		Collider[] colliders = Physics.OverlapSphere (explosionPos, 8);
+		CameraShake.Instance.Shake (amplitude, duration);//call camera shake
 
 		foreach (Collider hit in colliders){
 			GameObject hitObject = hit.gameObject;

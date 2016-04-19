@@ -42,6 +42,10 @@ public class Boss1Script : MonoBehaviour {
 
 	public GameController gameController;
 
+	//Shaking Camera variables
+	public float amplitude = 0.1f;
+	public float duration = 0.5f;
+
 	void Start () {
 		InvokeRepeating ("ShootWaveLaser", 2, waveLaserFireRate);
 
@@ -154,6 +158,7 @@ public class Boss1Script : MonoBehaviour {
 		if (bossHealth <= 0){
 			if (tag == "Enemy"){
 				Instantiate(explosion, transform.position, transform.rotation);
+				CameraShake.Instance.Shake (amplitude, duration);//call camera shake
 				//Instantiate (droppedItem, transform.position, transform.rotation);
 			}
 			gameController.LevelComplete (); //Execute Level complete function in GameController
@@ -169,6 +174,7 @@ public class Boss1Script : MonoBehaviour {
 			Destroy (GameObject.Find ("leftHand"));
 			Instantiate(explosion, leftHand.position,  Quaternion.identity);
 			Instantiate(explosion, leftArm.position, Quaternion.identity);
+			CameraShake.Instance.Shake (0.3f, 1f);//call camera shake
 			IncreaseBossAttack ();
 		}
 		if (rightArmHealth <= 0 && rightArmExists == true) {
@@ -180,6 +186,7 @@ public class Boss1Script : MonoBehaviour {
 			Destroy (GameObject.Find ("rightHand"));
 			Instantiate(explosion, rightHand.position, Quaternion.identity);
 			Instantiate(explosion, rightArm.position, Quaternion.identity);
+			CameraShake.Instance.Shake (amplitude, duration);//call camera shake
 			IncreaseBossAttack ();
 
 		}
