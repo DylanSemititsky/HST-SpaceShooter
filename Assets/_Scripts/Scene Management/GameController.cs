@@ -41,7 +41,7 @@ public class GameController : MonoBehaviour
 	// ---------------------------------------------------------------------------------------------------
 	void Update (){
 		if (restart){
-			if (Input.GetKeyDown(KeyCode.R)){
+			if (Input.GetMouseButton(0)){
 				SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 			}
 		}
@@ -54,7 +54,7 @@ public class GameController : MonoBehaviour
 	void Restart (){
 		
 		if (gameOver){
-			restartText.text = "Press 'R' to restart level";
+			restartText.text = "Click to restart level";
 			restart = true;
 		}
 
@@ -88,7 +88,7 @@ public class GameController : MonoBehaviour
 		FadeActivate ();
 		yield return new WaitForSeconds (3);
 		Debug.Log ("About to load scene");
-		SceneManager.LoadScene ("Main Menu");
+		SceneManager.LoadScene ("UpgradeShop");
 	}
 
 	public void LevelComplete(){

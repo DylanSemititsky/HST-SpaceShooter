@@ -119,7 +119,7 @@ public class PlayerAttack : MonoBehaviour {
 			}
 			Instantiate (popupAttackSpeed, transform.position, transform.rotation);
 			Destroy(other.gameObject);
-			audioClips[1].Play();
+			//audioClips[1].Play();
 		}
 		if (other.tag == "powerUp_watermelon"){
 			multiAttack.setMultiAttackLevel += 1;
@@ -132,7 +132,7 @@ public class PlayerAttack : MonoBehaviour {
 		if (other.tag == "powerUp_bomb"){
 			bombAttack.bomb += 10;
 			Destroy(other.gameObject);
-			audioClips[1].Play();
+			//audioClips[1].Play();
 		}
 	}
 
