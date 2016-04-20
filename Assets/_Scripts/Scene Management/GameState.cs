@@ -64,7 +64,7 @@ public class GameState : MonoBehaviour {
 				setFusionAttackLevel = 0;
 				setBombAttackLevel = 0;
                 fireRate = 0.25f;
-                credits = 1500;
+                credits = 200;
                               
                 // Start Game
                 SceneManager.LoadScene ("UpgradeShop");

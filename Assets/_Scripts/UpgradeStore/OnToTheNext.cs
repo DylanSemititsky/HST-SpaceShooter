@@ -35,7 +35,7 @@ public class OnToTheNext : MonoBehaviour
 		playerController.speed = playerSpeedTemp;
 		gameState.StoreVariables ();
 		Debug.Log ("variables stored");
-		SceneManager.LoadScene ("RedPlanet");
+		SceneManager.LoadScene (addScene);
 		Debug.Log ("Scene load");
 	}
 }

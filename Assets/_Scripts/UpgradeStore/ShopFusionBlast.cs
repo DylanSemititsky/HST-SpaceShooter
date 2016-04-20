@@ -87,16 +87,16 @@ public class ShopFusionBlast : MonoBehaviour {
 
 
 	void CheckFusionLevel(){
-		if (playerAttack.fusionAttack.fusionAttackDamage == 1 || playerAttack.fusionAttack.fusionAttackDamage == 2) {
+		if (playerAttack.fusionAttack.fusionAttackDamage == 1 /*|| playerAttack.fusionAttack.fusionAttackDamage == 2*/) {
 			SetYellowIcon ();
 		}
-		else if (playerAttack.fusionAttack.fusionAttackDamage == 3 || playerAttack.fusionAttack.fusionAttackDamage == 4) {
+		else if (playerAttack.fusionAttack.fusionAttackDamage == 2 /*|| playerAttack.fusionAttack.fusionAttackDamage == 4*/) {
 			SetOrangeIcon ();
 		}
-		else if (playerAttack.fusionAttack.fusionAttackDamage == 5 || playerAttack.fusionAttack.fusionAttackDamage == 6) {
+		else if (playerAttack.fusionAttack.fusionAttackDamage == 3 /*|| playerAttack.fusionAttack.fusionAttackDamage == 6*/) {
 			SetRedIcon ();
 		}
-		else if (playerAttack.fusionAttack.fusionAttackDamage == 7) {
+		else if (playerAttack.fusionAttack.fusionAttackDamage == 4) {
 			SetPurpleIcon ();
 		}
 	}

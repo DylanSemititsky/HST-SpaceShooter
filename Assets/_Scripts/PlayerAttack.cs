@@ -232,7 +232,13 @@ public class PlayerAttack : MonoBehaviour {
 	{
 
 		//Determine Fusion attack level
-		fusionAttack.fusionAttackDamage = primaryAttack.setPrimaryAttackLevel + multiAttack.setMultiAttackLevel;
+		if (primaryAttack.setPrimaryAttackLevel >= multiAttack.setMultiAttackLevel) {
+			fusionAttack.fusionAttackDamage = primaryAttack.setPrimaryAttackLevel;
+		} 
+		else if (multiAttack.setMultiAttackLevel >= primaryAttack.setPrimaryAttackLevel) {
+			fusionAttack.fusionAttackDamage = multiAttack.setMultiAttackLevel;
+		}
+		//fusionAttack.fusionAttackDamage = primaryAttack.setPrimaryAttackLevel + multiAttack.setMultiAttackLevel;
 
 		fusionFireRate = fireRate * 0.2f;
 		if(fusionFireRate <= 0.05f){
@@ -260,21 +266,21 @@ public class PlayerAttack : MonoBehaviour {
 						fusionAttack.fusion -= 5;
 					}
 					else if (fusionAttack.fusionAttackDamage == 2) {
-						Instantiate (fusionAttack.fusionAttackLv1, fusionAttack.fusionShotSpawn.position, fusionAttack.fusionShotSpawn.rotation);
+						Instantiate (fusionAttack.fusionAttackLv2, fusionAttack.fusionShotSpawn.position, fusionAttack.fusionShotSpawn.rotation);
 						Instantiate(fusionSound, transform.position, transform.rotation);
 						fusionAttack.fusion -= 5;
 					}
 					else if (fusionAttack.fusionAttackDamage == 3) {
-						Instantiate (fusionAttack.fusionAttackLv2, fusionAttack.fusionShotSpawn.position, fusionAttack.fusionShotSpawn.rotation);
+						Instantiate (fusionAttack.fusionAttackLv3, fusionAttack.fusionShotSpawn.position, fusionAttack.fusionShotSpawn.rotation);
 						Instantiate(fusionSound, transform.position, transform.rotation);
 						fusionAttack.fusion -= 5;
 					}
 					else if (fusionAttack.fusionAttackDamage == 4) {
-						Instantiate (fusionAttack.fusionAttackLv2, fusionAttack.fusionShotSpawn.position, fusionAttack.fusionShotSpawn.rotation);
+						Instantiate (fusionAttack.fusionAttackLv4, fusionAttack.fusionShotSpawn.position, fusionAttack.fusionShotSpawn.rotation);
 						Instantiate(fusionSound, transform.position, transform.rotation);
 						fusionAttack.fusion -= 5;
 					}
-					else if (fusionAttack.fusionAttackDamage == 5) {
+					/*else if (fusionAttack.fusionAttackDamage == 5) {
 						Instantiate (fusionAttack.fusionAttackLv3, fusionAttack.fusionShotSpawn.position, fusionAttack.fusionShotSpawn.rotation);
 						Instantiate(fusionSound, transform.position, transform.rotation);
 						fusionAttack.fusion -= 5;
@@ -288,7 +294,7 @@ public class PlayerAttack : MonoBehaviour {
 						Instantiate (fusionAttack.fusionAttackLv4, fusionAttack.fusionShotSpawn.position, fusionAttack.fusionShotSpawn.rotation);
 						Instantiate(fusionSound, transform.position, transform.rotation);
 						fusionAttack.fusion -= 5;
-					}
+					}*/
 				}
 
 				 
@@ -324,30 +330,30 @@ public class PlayerAttack : MonoBehaviour {
 						fusionAttack.fusion -= 5;
 					}
 					else if (fusionAttack.fusionAttackDamage == 2) {
-						Instantiate (fusionAttack.fusionAttackLv1, fusionAttack.fusionShotSpawnL.position, fusionAttack.fusionShotSpawn.rotation);
+						Instantiate (fusionAttack.fusionAttackLv2, fusionAttack.fusionShotSpawnL.position, fusionAttack.fusionShotSpawn.rotation);
 						Instantiate(fusionSound, transform.position, transform.rotation);
 
-						Instantiate (fusionAttack.fusionAttackLv1, fusionAttack.fusionShotSpawnR.position, fusionAttack.fusionShotSpawn.rotation);
+						Instantiate (fusionAttack.fusionAttackLv2, fusionAttack.fusionShotSpawnR.position, fusionAttack.fusionShotSpawn.rotation);
 						Instantiate(fusionSound, transform.position, transform.rotation);
 						fusionAttack.fusion -= 5;
 					}
 					else if (fusionAttack.fusionAttackDamage == 3) {
-						Instantiate (fusionAttack.fusionAttackLv2, fusionAttack.fusionShotSpawnL.position, fusionAttack.fusionShotSpawn.rotation);
+						Instantiate (fusionAttack.fusionAttackLv3, fusionAttack.fusionShotSpawnL.position, fusionAttack.fusionShotSpawn.rotation);
 						Instantiate(fusionSound, transform.position, transform.rotation);
 
-						Instantiate (fusionAttack.fusionAttackLv2, fusionAttack.fusionShotSpawnR.position, fusionAttack.fusionShotSpawn.rotation);
+						Instantiate (fusionAttack.fusionAttackLv3, fusionAttack.fusionShotSpawnR.position, fusionAttack.fusionShotSpawn.rotation);
 						Instantiate(fusionSound, transform.position, transform.rotation);
 						fusionAttack.fusion -= 5;
 					}
 					else if (fusionAttack.fusionAttackDamage == 4) {
-						Instantiate (fusionAttack.fusionAttackLv2, fusionAttack.fusionShotSpawnL.position, fusionAttack.fusionShotSpawn.rotation);
+						Instantiate (fusionAttack.fusionAttackLv4, fusionAttack.fusionShotSpawnL.position, fusionAttack.fusionShotSpawn.rotation);
 						Instantiate(fusionSound, transform.position, transform.rotation);
 
-						Instantiate (fusionAttack.fusionAttackLv2, fusionAttack.fusionShotSpawnR.position, fusionAttack.fusionShotSpawn.rotation);
+						Instantiate (fusionAttack.fusionAttackLv4, fusionAttack.fusionShotSpawnR.position, fusionAttack.fusionShotSpawn.rotation);
 						Instantiate(fusionSound, transform.position, transform.rotation);
 						fusionAttack.fusion -= 5;
 					}
-					else if (fusionAttack.fusionAttackDamage == 5) {
+					/*else if (fusionAttack.fusionAttackDamage == 5) {
 						Instantiate (fusionAttack.fusionAttackLv3, fusionAttack.fusionShotSpawnL.position, fusionAttack.fusionShotSpawn.rotation);
 						Instantiate(fusionSound, transform.position, transform.rotation);
 
@@ -370,7 +376,7 @@ public class PlayerAttack : MonoBehaviour {
 						Instantiate (fusionAttack.fusionAttackLv4, fusionAttack.fusionShotSpawnR.position, fusionAttack.fusionShotSpawn.rotation);
 						Instantiate(fusionSound, transform.position, transform.rotation);
 						fusionAttack.fusion -= 5;
-					}
+					}*/
 				}
 				//fusionAttack.fusion -= Time.deltaTime * 20;
 
@@ -401,10 +407,10 @@ public class PlayerAttack : MonoBehaviour {
 			if (Time.time > nextFusionRecharge){
 				nextFusionRecharge = Time.time + fusionRechargeDelay;
 				if (fusionAttack.setFusionAttackLevel == 1){
-					fusionAttack.fusion += 1f;
+					fusionAttack.fusion += 0.5f;
 				}
 				else if (fusionAttack.setFusionAttackLevel == 2){
-					fusionAttack.fusion += 1f;
+					fusionAttack.fusion += 0.5f;
 				}
 			}
 		}
@@ -449,7 +455,7 @@ public class PlayerAttack : MonoBehaviour {
 		//Allow Bomb to recharge after use
 		if (Time.time > nextBombRecharge){
 			nextBombRecharge = Time.time + bombRechargeDelay;
-			bombAttack.bomb += 1f;
+			bombAttack.bomb += 0.5f;
 		}
 	}
 

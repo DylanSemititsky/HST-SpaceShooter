@@ -9,6 +9,7 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour 
 {
+	GameState gameState;
 	SceneFade sceneFade;
 	public GameObject fadeToBlack;
 
@@ -34,6 +35,12 @@ public class GameController : MonoBehaviour
 		levelCompleteText.text = "";
 		score = 0;
 		UpdateScore ();
+
+		//Find GameState Object to access it's script
+		GameObject gameStateObject = GameObject.Find ("GameState");	
+		if (gameStateObject != null) {
+			gameState = gameStateObject.GetComponent<GameState> ();
+		}
 	}
 
 	// ---------------------------------------------------------------------------------------------------
@@ -88,6 +95,7 @@ public class GameController : MonoBehaviour
 		FadeActivate ();
 		yield return new WaitForSeconds (3);
 		Debug.Log ("About to load scene");
+		gameState.StoreVariables ();
 		SceneManager.LoadScene ("UpgradeShop");
 	}
 

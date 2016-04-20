@@ -92,6 +92,10 @@ public class Boss2Script : MonoBehaviour {
 	//EXPLOSION WHEN DEAD
 	public GameObject explosion;
 
+
+	//GameController Access
+	GameController gameController;
+
 	void Start () {
 		rotatePiece = GameObject.Find ("RotatePiece"); //grab rotate bone object
 		topArm = GameObject.Find ("TopArm"); //grab boss arms -->>
@@ -100,6 +104,10 @@ public class Boss2Script : MonoBehaviour {
 		leftArm = GameObject.Find ("LeftArm");
 		shield = GameObject.Find ("BossShield");
 
+		GameObject gameControllerObject = GameObject.Find ("GameController");	
+		if (gameControllerObject != null) {
+			gameController = gameControllerObject.GetComponent<GameController> ();
+		}
 
 		//tempPosition = transform.position;
 		//originPos = transform.position;
@@ -586,6 +594,10 @@ public class Boss2Script : MonoBehaviour {
 			Instantiate(explosion, rightArm.transform.position,  Quaternion.identity);
 			Instantiate(explosion, leftArm.transform.position,  Quaternion.identity);
 			Instantiate(explosion,transform.position,  Quaternion.identity);
+
+			gameController.LevelComplete (); //Execute Level complete function in GameController
+			Debug.Log ("Boss is dead");
+
 			Destroy (gameObject);
 		}
 	}

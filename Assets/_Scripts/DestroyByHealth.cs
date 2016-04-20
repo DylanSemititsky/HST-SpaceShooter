@@ -9,7 +9,6 @@ public class DestroyByHealth : MonoBehaviour
 {
 	//Set explosion for this object
 	public GameObject explosion;
-	public GameObject explosionAsteroids;
 
 	//PowerUp Objects and Drop Chance Ranges
 	public GameObject item1;
@@ -61,7 +60,7 @@ public class DestroyByHealth : MonoBehaviour
 			StartCoroutine (DamageFlash ());
 		}
 		if (health <= 0){
-			if (tag == "Enemy"){
+
 				Instantiate(explosion, transform.position, transform.rotation);
 
 				if (randomNumber >= item1DropMin && randomNumber <= item1DropMax) {
@@ -70,17 +69,12 @@ public class DestroyByHealth : MonoBehaviour
 				if (randomNumber >= item2DropMin && randomNumber <=item2DropMax) {
 					Instantiate (item2, transform.position, item2.transform.rotation);
 				}
-				if (randomNumber >= item3DropMin && randomNumber <= item3DropMax) {	//DISABLED FOR DEMO
+				if (randomNumber >= item3DropMin && randomNumber <= item3DropMax) {	
 					Instantiate (item3, transform.position, item3.transform.rotation);
 				}
-			}
-			if (tag == "Asteroid") {
-				Instantiate (explosionAsteroids, transform.position, transform.rotation);
-			}
 
 			gameController.AddScore (scoreValue);
 			Destroy(gameObject);
-
 		}
 	}
 
