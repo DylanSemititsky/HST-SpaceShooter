@@ -29,6 +29,16 @@ public class Boss3Script : MonoBehaviour {
 	float bottomLaserCounter;
 	float topLaserCounter;
 
+	public int MainTurretHealth;
+	public int turret1Health;
+	public int turret2Health;
+	public int turret3Health;
+	public int turret4Health;
+
+	bool turret1Exists = true;
+	bool turret2Exists = true;
+	bool turret3Exists = true;
+	bool turret4Exists = true;
 
 	void Start () {
 		
@@ -52,6 +62,8 @@ public class Boss3Script : MonoBehaviour {
 
 		AttackTopLaser ();
 		CheckTopLaser ();
+
+		CheckDamage ();
 	}
 
 	//enter play space
@@ -67,11 +79,11 @@ public class Boss3Script : MonoBehaviour {
 			
 			transform.Translate (Vector3.forward * -enterSpeed * Time.deltaTime);
 
-			if (transform.position.z <= 9.5f) {
+			if (transform.position.z <= 10f) {
 				hasEntered = true;
 
 				Vector3 temp = transform.position; // sets the z position to an absolute one
-				temp.z = 9.5f;
+				temp.z = 10f;
 				transform.position = temp;
 				//tempPosition = transform.position;
 				//originPos = transform.position;
@@ -105,15 +117,21 @@ public class Boss3Script : MonoBehaviour {
 		}
 	}
 	IEnumerator BottomTurretShot(float laserRate){
-		for (int i = 0; i < 2; i++) {
-			Instantiate (turretLaser, turret [i].transform.position, Quaternion.identity);
+		if (turret1Exists) {
+			Instantiate (turretLaser, turret [0].transform.position, Quaternion.identity);
+		}
+		if (turret2Exists) {
+			Instantiate (turretLaser, turret [1].transform.position, Quaternion.identity);
 		}
 		yield return new WaitForSeconds (laserRate);
 
 	}
 	IEnumerator TopTurretShot(float laserRate){
-		for (int i = 0; i < 2; i++) {
-			Instantiate (turretLaser, turret [i + 2].transform.position, Quaternion.identity);
+		if (turret3Exists) {
+			Instantiate (turretLaser, turret [2].transform.position, Quaternion.identity);
+		}
+		if (turret4Exists) {
+			Instantiate (turretLaser, turret [3].transform.position, Quaternion.identity);
 		}
 		yield return new WaitForSeconds (laserRate);
 
@@ -169,4 +187,24 @@ public class Boss3Script : MonoBehaviour {
 		}
 	}
 
+	void CheckDamage(){ //if turret health goes below the low of threshy bo
+
+		if (turret1Health < 0) {
+			Destroy (turret [0].gameObject);
+			turret1Exists = false;
+		}
+		if (turret2Health < 0) {
+			Destroy (turret [1].gameObject);
+			turret2Exists = false;
+		}
+		if (turret3Health < 0) {
+			Destroy (turret [2].gameObject);
+			turret3Exists = false;
+		}
+		if (turret4Health < 0) {
+			Destroy (turret [3].gameObject);
+			turret4Exists = false;
+		}
+
+	}
 }
