@@ -5,9 +5,11 @@ public class PauseGame : MonoBehaviour {
 
 	bool isPausing = false;
 
+
 	// Use this for initialization
-	void Start () {
-	
+	void Start () 
+	{
+	 
 	}
 	
 	// Update is called once per frame
@@ -19,6 +21,7 @@ public class PauseGame : MonoBehaviour {
 			{
 				Time.timeScale = 0f;
 				isPausing = true;
+				gameObject.GetComponent<MeshRenderer> ().enabled = true;
 			} 
 
 			else 
@@ -26,6 +29,7 @@ public class PauseGame : MonoBehaviour {
 			{
 				Time.timeScale = 1f; 
 				isPausing = false;
+				gameObject.GetComponent<MeshRenderer> ().enabled = false;
 			}
 				
 		}
