@@ -65,7 +65,9 @@ public class PlayerAttack : MonoBehaviour {
 
 	//private AudioSource audioSource;
 	public AudioSource[] audioClips = null;
+	public GameObject attackSpeedSound;
 
+	//Game Manager
 	GameState gameState;
 
 
@@ -118,6 +120,7 @@ public class PlayerAttack : MonoBehaviour {
 				fireRate = 0.1f;
 			}
 			Instantiate (popupAttackSpeed, transform.position, transform.rotation);
+			Instantiate (attackSpeedSound, transform.position, transform.rotation);
 			Destroy(other.gameObject);
 			//audioClips[1].Play();
 		}

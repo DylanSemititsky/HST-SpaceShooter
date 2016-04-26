@@ -8,7 +8,7 @@ public class Boss3Turret : MonoBehaviour {
 	Color originalColor;
 
 	void Start () {
-		boss3script = GameObject.Find("Boss3").GetComponent<Boss3Script> ();
+		boss3script = GameObject.Find("Boss3(Clone)").GetComponent<Boss3Script> ();
 		originalColor = GetComponent<Renderer> ().material.color;
 	}
 	

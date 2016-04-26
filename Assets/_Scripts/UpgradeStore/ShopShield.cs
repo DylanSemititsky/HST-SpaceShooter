@@ -64,23 +64,23 @@ public class ShopShield : MonoBehaviour {
 
 	void UpdateUpgradeText(){
 		if (playerController.setMaxShield == 1) {
-			currentText.text = "<b>Current:</b>  <color=cyan>30hp</color>";
-			upgradeText.text = "<b>Upgrade:</b>  <color=cyan>40hp</color> (c: 50)";
+			currentText.text = "<b>Current:</b>  <color=cyan>10hp</color>";
+			upgradeText.text = "<b>Upgrade:</b>  <color=cyan>20hp</color> (c: 50)";
 		}
 		else if (playerController.setMaxShield == 2) {
-			currentText.text = "<b>Current:</b>  <color=cyan>40hp</color>";
-			upgradeText.text = "<b>Upgrade:</b>  <color=cyan>55hp</color> (c: 100)";
+			currentText.text = "<b>Current:</b>  <color=cyan>20hp</color>";
+			upgradeText.text = "<b>Upgrade:</b>  <color=cyan>35hp</color> (c: 100)";
 		}
 		else if (playerController.setMaxShield == 3) {
-			currentText.text = "<b>Current:</b>  <color=cyan>55hp</color>";
-			upgradeText.text = "<b>Upgrade:</b>  <color=cyan>75hp</color> (c: 150)";
+			currentText.text = "<b>Current:</b>  <color=cyan>35hp</color>";
+			upgradeText.text = "<b>Upgrade:</b>  <color=cyan>55hp</color> (c: 150)";
 		}
 		else if (playerController.setMaxShield == 4) {
-			currentText.text = "<b>Current:</b>  <color=cyan>75hp</color>";
-			upgradeText.text = "<b>Upgrade:</b>  <color=cyan>100hp</color> (c: 200)";
+			currentText.text = "<b>Current:</b>  <color=cyan>55hp</color>";
+			upgradeText.text = "<b>Upgrade:</b>  <color=cyan>80hp</color> (c: 200)";
 		}
 		else if (playerController.setMaxShield == 5) {
-			currentText.text = "<b>Current:</b>  <color=cyan>100hp</color>";
+			currentText.text = "<b>Current:</b>  <color=cyan>80hp</color>";
 			upgradeText.text = "<b>Upgrade:</b>  <color=cyan>(maxed)</color>";
 		}
 	}

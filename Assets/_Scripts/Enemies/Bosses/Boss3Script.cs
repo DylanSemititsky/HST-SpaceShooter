@@ -40,6 +40,9 @@ public class Boss3Script : MonoBehaviour {
 	bool turret3Exists = true;
 	bool turret4Exists = true;
 
+	//GameController Access
+	//GameController gameController;
+
 	void Start () {
 		
 		turret = new GameObject[4];//set all turret objects on
@@ -47,6 +50,11 @@ public class Boss3Script : MonoBehaviour {
 			turret [i] = gameObject.transform.GetChild (i).gameObject;
 		}
 		mainTurret = GameObject.Find ("Boss3");
+
+		/*GameObject gameControllerObject = GameObject.Find ("GameController");	
+		if (gameControllerObject != null) {
+			gameController = gameControllerObject.GetComponent<GameController> ();
+		}*/
 	}
 	
 	void Update () {

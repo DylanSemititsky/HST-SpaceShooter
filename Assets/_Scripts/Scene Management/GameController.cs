@@ -11,6 +11,8 @@ public class GameController : MonoBehaviour
 {
 	GameState gameState;
 	SceneFade sceneFade;
+	CanvasGroup canvasGroup;
+
 	public GameObject fadeToBlack;
 
 	public Text scoreText;
@@ -23,6 +25,9 @@ public class GameController : MonoBehaviour
 	private bool restart;
 	private int score;
 
+	public GameObject pauseSound;
+	public Image pauseImage;
+	private bool isPausing;
 
 	// ---------------------------------------------------------------------------------------------------
 	// START
@@ -41,6 +46,13 @@ public class GameController : MonoBehaviour
 		if (gameStateObject != null) {
 			gameState = gameStateObject.GetComponent<GameState> ();
 		}
+
+		//Find Pause Canvas and set alpha to 0.
+		GameObject pauseObject = GameObject.Find ("Canvas_Pause");	
+		if (pauseObject != null) {
+			canvasGroup = pauseObject.GetComponent<CanvasGroup> ();
+			canvasGroup.alpha = 0;
+		}
 	}
 
 	// ---------------------------------------------------------------------------------------------------
@@ -51,6 +63,26 @@ public class GameController : MonoBehaviour
 			if (Input.GetMouseButton(0)){
 				SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 			}
+		}
+
+		if (Input.GetKeyDown (KeyCode.Escape)) 
+		{
+			if (isPausing == false) 
+			{
+				Time.timeScale = 0f;
+				isPausing = true;
+				canvasGroup.alpha = 1;
+				Instantiate (pauseSound, transform.position, transform.rotation);
+			} 
+
+			else 
+
+			{
+				Time.timeScale = 1f; 
+				isPausing = false;
+				canvasGroup.alpha = 0;
+			}
+
 		}
 	}
 
