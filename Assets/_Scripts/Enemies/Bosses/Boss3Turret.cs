@@ -8,7 +8,7 @@ public class Boss3Turret : MonoBehaviour {
 	Color originalColor;
 
 	void Start () {
-		boss3script = GameObject.Find("Boss3(Clone)").GetComponent<Boss3Script> ();
+	//	boss3script = GameObject.Find("Boss3").GetComponent<Boss3Script> ();
 		originalColor = GetComponent<Renderer> ().material.color;
 	}
 	
@@ -19,40 +19,41 @@ public class Boss3Turret : MonoBehaviour {
 		}
 	}
 	void OnTriggerEnter(Collider other){
+		boss3script = GameObject.Find("Boss3(Clone)").GetComponent<Boss3Script> ();
 		if (other.tag == "Boundary") {
 			return;
 		}
 		if (other.tag == "pLaser 1") {
 			damaged = true;
-			if(this.gameObject.name == "Turret1")
+			if(gameObject.name == "Turret1")
 				boss3script.turret1Health -= 10;
-			else if(this.gameObject.name == "Turret2")
+			else if(gameObject.name == "Turret2")
 				boss3script.turret2Health -= 10;
-			else if(this.gameObject.name == "Turret3")
+			else if(gameObject.name == "Turret3")
 				boss3script.turret3Health -= 10;
-			else if(this.gameObject.name == "Turret4")
+			else if(gameObject.name == "Turret4")
 				boss3script.turret4Health -= 10;
 		}
 		if (other.tag == "pLaser 2") {
 			damaged = true;
-			if(this.gameObject.name == "Turret1")
+			if(gameObject.name == "Turret1")
 				boss3script.turret1Health -= 20;
-			else if(this.gameObject.name == "Turret2")
+			else if(gameObject.name == "Turret2")
 				boss3script.turret2Health -= 20;
-			else if(this.gameObject.name == "Turret3")
+			else if(gameObject.name == "Turret3")
 				boss3script.turret2Health -= 20;
-			else if(this.gameObject.name == "Turret4")
+			else if(gameObject.name == "Turret4")
 				boss3script.turret2Health -= 20;
 		}
 		if (other.tag == "pLaser 3") {
 			damaged = true;
-			if(this.gameObject.name == "Turret1")
+			if(gameObject.name == "Turret1")
 				boss3script.turret1Health -= 30;
-			else if(this.gameObject.name == "Turret2")
+			else if(gameObject.name == "Turret2")
 				boss3script.turret2Health -= 30;
-			else if(this.gameObject.name == "Turret3")
+			else if(gameObject.name == "Turret3")
 				boss3script.turret3Health -= 30;
-			else if(this.gameObject.name == "Turret4")
+			else if(gameObject.name == "Turret4")
 				boss3script.turret4Health -= 30;
 		}
 		if (other.tag == "pLaser 4") {

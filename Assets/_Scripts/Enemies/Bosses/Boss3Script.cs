@@ -29,7 +29,7 @@ public class Boss3Script : MonoBehaviour {
 	float bottomLaserCounter;
 	float topLaserCounter;
 
-	public int MainTurretHealth;
+	public int mainTurretHealth;
 	public int turret1Health;
 	public int turret2Health;
 	public int turret3Health;
@@ -40,24 +40,33 @@ public class Boss3Script : MonoBehaviour {
 	bool turret3Exists = true;
 	bool turret4Exists = true;
 
+	bool damaged;
+	Color originalColor;
+	public GameObject explosion;
+	//Audio
+	public AudioSource idleHover;
 	//GameController Access
 	//GameController gameController;
 
 	void Start () {
-		
+
+		idleHover = GetComponent<AudioSource> ();
+
 		turret = new GameObject[4];//set all turret objects on
 		for (int i = 0; i < turret.Length; i++) {
 			turret [i] = gameObject.transform.GetChild (i).gameObject;
 		}
-		mainTurret = GameObject.Find ("Boss3");
-
+		mainTurret = GameObject.Find ("Boss3(Clone)");
+		originalColor = GetComponent<Renderer> ().material.color;
 		/*GameObject gameControllerObject = GameObject.Find ("GameController");	
 		if (gameControllerObject != null) {
 			gameController = gameControllerObject.GetComponent<GameController> ();
 		}*/
+		idleHover.Play ();
 	}
 	
 	void Update () {
+		
 		EnterPlaySpace (); //enter play space
 		//BossMovement (); //move left to right
 		SideToSideMovement();
@@ -72,6 +81,10 @@ public class Boss3Script : MonoBehaviour {
 		CheckTopLaser ();
 
 		CheckDamage ();
+
+		if (damaged) {
+			StartCoroutine (DamageFlash ());
+		}
 	}
 
 	//enter play space
@@ -197,22 +210,68 @@ public class Boss3Script : MonoBehaviour {
 
 	void CheckDamage(){ //if turret health goes below the low of threshy bo
 
-		if (turret1Health < 0) {
+		if (turret1Health < 0 && turret1Exists) {
+			Instantiate (explosion, turret [0].transform.position, Quaternion.identity);
 			Destroy (turret [0].gameObject);
 			turret1Exists = false;
 		}
-		if (turret2Health < 0) {
+		if (turret2Health < 0 && turret2Exists) {
+			Instantiate (explosion, turret [1].transform.position, Quaternion.identity);
 			Destroy (turret [1].gameObject);
 			turret2Exists = false;
 		}
-		if (turret3Health < 0) {
+		if (turret3Health < 0 && turret3Exists) {
+			Instantiate (explosion, turret [2].transform.position, Quaternion.identity);
 			Destroy (turret [2].gameObject);
 			turret3Exists = false;
 		}
-		if (turret4Health < 0) {
+		if (turret4Health < 0 && turret4Exists) {
+			Instantiate (explosion, turret [3].transform.position, Quaternion.identity);
 			Destroy (turret [3].gameObject);
 			turret4Exists = false;
 		}
+		if (mainTurretHealth < 0) {
+			//BIGEXPLOSION
+			Destroy (mainTurret.gameObject);
+		}
 
+	}
+	void OnTriggerEnter(Collider other){
+		if (other.tag == "Boundary") {
+			return;
+		}
+		if (!turret1Exists && !turret2Exists && !turret3Exists && !turret4Exists) {
+			
+			if (other.tag == "pLaser 1") {
+				damaged = true;
+				mainTurretHealth -= 30;
+			}
+			if (other.tag == "pLaser 2") {
+				damaged = true;
+				mainTurretHealth -= 30;
+			}
+			if (other.tag == "pLaser 3") {
+				damaged = true;
+				mainTurretHealth -= 30;
+			
+			}
+			if (other.tag == "pLaser 4") {
+				damaged = true;
+				mainTurretHealth -= 30;
+			}
+		}
+
+	}
+	public IEnumerator DamageFlash(){
+
+		Renderer rend = GetComponent<Renderer> ();
+		for(int i = 1; i <= 4; i++){
+			rend.material.SetColor ("_Color", Color.red);
+			yield return new WaitForSeconds (0.1f);
+			rend.material.SetColor ("_Color", Color.white);
+			yield return new WaitForSeconds (0.1f);
+			damaged = false;
+		}
+		rend.material.color = originalColor;
 	}
 }

@@ -91,12 +91,17 @@ public class Boss2Script : MonoBehaviour {
 
 	//EXPLOSION WHEN DEAD
 	public GameObject explosion;
+	//AUDIO
+	public AudioSource rollCharge;
 
 
 	//GameController Access
 	GameController gameController;
 
 	void Start () {
+		AudioSource[] soundClips = GetComponents<AudioSource> ();
+		rollCharge = soundClips [0];
+
 		rotatePiece = GameObject.Find ("RotatePiece"); //grab rotate bone object
 		topArm = GameObject.Find ("TopArm"); //grab boss arms -->>
 		bottomArm = GameObject.Find ("BottomArm");
@@ -218,6 +223,7 @@ public class Boss2Script : MonoBehaviour {
 	IEnumerator RollAttack(){ //roll attack sequence
 		StartCoroutine(ActivateShield ()); //activate shield before roll hgfds
 		if (!stage0) {
+			rollCharge.Play ();
 			for (int i = 0; vAplitude >= 0; i++) { // speeds aplitude back up
 				vAplitude -= Time.deltaTime * 2;
 				yield return new WaitForSeconds (0.001f);
