@@ -62,6 +62,7 @@ public class PlayerAttack : MonoBehaviour {
 	public GameObject fusionSound;
 
 	public GameObject popupAttackSpeed;
+	public GameObject popupBombCharge;
 
 	//private AudioSource audioSource;
 	public AudioSource[] audioClips = null;
@@ -133,7 +134,8 @@ public class PlayerAttack : MonoBehaviour {
 			//audioClips[1].Play();
 		}
 		if (other.tag == "powerUp_bomb"){
-			bombAttack.bomb += 10;
+			bombAttack.bomb += 25;
+			Instantiate (popupBombCharge, transform.position, transform.rotation);
 			Destroy(other.gameObject);
 			//audioClips[1].Play();
 		}

@@ -1,10 +1,9 @@
 fileFormatVersion: 2
-guid: 4957b3f7996e9d448a1d074b759c6605
-timeCreated: 1461783629
+guid: 8677270d0c0120e4a862aa26010c3e9c
+timeCreated: 1461792704
 licenseType: Pro
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: Start_0
+  fileIDToRecycleName: {}
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -31,41 +30,26 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     filterMode: -1
-    aniso: 16
+    aniso: -1
     mipBias: -1
-    wrapMode: 1
-  nPOTScale: 0
+    wrapMode: -1
+  nPOTScale: 1
   lightmap: 0
   rGBM: 0
   compressionQuality: 50
   allowsAlphaSplitting: 0
-  spriteMode: 2
+  spriteMode: 0
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
-  alphaIsTransparency: 1
-  textureType: 8
+  alphaIsTransparency: 0
+  textureType: -1
   buildTargetSettings: []
   spriteSheet:
-    sprites:
-    - name: Start_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 106
-        width: 300
-        height: 88
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -150, y: 44}
-        - {x: -150, y: -44}
-        - {x: 150, y: -44}
-        - {x: 150, y: 44}
+    sprites: []
     outline: []
   spritePackingTag: 
   userData: 

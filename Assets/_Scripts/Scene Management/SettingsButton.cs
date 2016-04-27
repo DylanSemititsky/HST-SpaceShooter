@@ -1,4 +1,4 @@
-﻿// ---------------------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------------
 // When hitting the Start button on Main Menu this script calls the GameState.startState
 // ---------------------------------------------------------------------------------------------------
 
@@ -7,9 +7,9 @@ using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class GoToMainMenu : MonoBehaviour
+public class SettingsButton : MonoBehaviour
 {
-	ChangeShipColor changeShipColor;
+
 	SceneFade sceneFade;
 
 	public bool start = false;
@@ -32,7 +32,7 @@ public class GoToMainMenu : MonoBehaviour
 			GetComponent<Image> ().color = Color.green;
 			yield return new WaitForSeconds(0.1f);
 		}
-		SceneManager.LoadScene ("Main Menu");
+		SceneManager.LoadScene("Settings");
 	}
 
 	public void FadeActivate(){

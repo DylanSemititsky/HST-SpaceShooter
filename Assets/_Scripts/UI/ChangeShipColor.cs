@@ -3,42 +3,36 @@ using System.Collections;
 
 public class ChangeShipColor : MonoBehaviour {
 
-	//public AudioSource audioSource;
+	public GameObject player;
 	public static ChangeShipColor Instance;
 
-
-	void Start() {
-		//audioSource = GetComponent<AudioSource>();
-		//Renderer rend = GetComponent<Renderer> ();
-		//rend = GlobalControl.Instance.rend;
+	public void ChangeColorGray(){
+		Renderer rend = player.GetComponent<Renderer> ();
+		rend.sharedMaterial.SetColor ("_Color", Color.white);
 	}
 
-	public void OnTriggerEnter(Collider other){
-		//audioSource.Play();
-		Renderer rend = GetComponent<Renderer> ();
-
-		if(other.tag == "red"){
-			rend.sharedMaterial.SetColor ("_Color", Color.red);
-		}
-		if(other.tag == "cyan"){
-			rend.sharedMaterial.SetColor ("_Color", Color.cyan);
-		}
-		if(other.tag == "green"){
-			rend.sharedMaterial.SetColor ("_Color", Color.green);
-		}
-		if(other.tag == "magenta"){
-			rend.sharedMaterial.SetColor ("_Color", Color.magenta);
-		}
-		if(other.tag == "yellow"){
-			rend.sharedMaterial.SetColor ("_Color", Color.yellow);
-		}
-		if(other.tag == "gray"){
-			rend.sharedMaterial.SetColor ("_Color", Color.gray);
-		}
+	public void ChangeColorRed(){
+		Renderer rend = player.GetComponent<Renderer> ();
+		rend.sharedMaterial.SetColor ("_Color", Color.red);
 	}
 
-	/*public void SavePlayer(){
-		Renderer rend = GetComponent<Renderer> ();
-		GlobalControl.Instance.rend = rend;
-	}*/
+	public void ChangeColorGreen(){
+		Renderer rend = player.GetComponent<Renderer> ();
+		rend.sharedMaterial.SetColor ("_Color", Color.green);
+	}
+
+	public void ChangeColorMagenta(){
+		Renderer rend = player.GetComponent<Renderer> ();
+		rend.sharedMaterial.SetColor ("_Color", Color.magenta);
+	}
+
+	public void ChangeColorCyan(){
+		Renderer rend = player.GetComponent<Renderer> ();
+		rend.sharedMaterial.SetColor ("_Color", Color.cyan);
+	}
+
+	public void ChangeColorYellow(){
+		Renderer rend = player.GetComponent<Renderer> ();
+		rend.sharedMaterial.SetColor ("_Color", Color.yellow);
+	}
 }

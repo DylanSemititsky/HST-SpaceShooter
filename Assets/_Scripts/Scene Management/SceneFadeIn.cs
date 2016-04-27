@@ -8,6 +8,8 @@ public class SceneFadeIn : MonoBehaviour {
 		CanvasGroup canvasGroup = GetComponent<CanvasGroup>();
 		canvasGroup.alpha = 1;
 		StartCoroutine (FadeFromBlack());
+
+		gameObject.SetActive(false);
 	}
 
 

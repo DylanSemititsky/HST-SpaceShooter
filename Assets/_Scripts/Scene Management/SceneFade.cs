@@ -10,6 +10,8 @@ public class SceneFade : MonoBehaviour {
 		CanvasGroup canvasGroup = GetComponent<CanvasGroup>();
 		canvasGroup.alpha = 0;
 		fadeActivate = false;
+
+		gameObject.SetActive(false);
 	}
 
 	void Update(){

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 4957b3f7996e9d448a1d074b759c6605
-timeCreated: 1461783629
+guid: e84d347a8e9989a44bb9de63f27291c4
+timeCreated: 1461783695
 licenseType: Pro
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Start_0
+    21300000: Credits_0
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -51,7 +51,7 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: Start_0
+    - name: Credits_0
       rect:
         serializedVersion: 2
         x: 0
