@@ -9,9 +9,9 @@ public class TextFadeInOut : MonoBehaviour {
 
 		CanvasGroup canvasGroup = GetComponent<CanvasGroup>();
 		canvasGroup.alpha = 0;
-		yield return new WaitForSeconds(6);
+		yield return new WaitForSeconds(1);
 		StartCoroutine(FadeIn());
-		yield return new WaitForSeconds(8);
+		yield return new WaitForSeconds(3);
 		StartCoroutine(FadeOut());
 
 	}
