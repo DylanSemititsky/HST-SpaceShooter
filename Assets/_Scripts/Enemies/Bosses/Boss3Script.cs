@@ -43,6 +43,7 @@ public class Boss3Script : MonoBehaviour {
 	bool damaged;
 	Color originalColor;
 	public GameObject explosion;
+	public GameObject deathExplosion;
 	//Audio
 	public AudioSource idleHover;
 	//GameController Access
@@ -233,6 +234,7 @@ public class Boss3Script : MonoBehaviour {
 		if (mainTurretHealth < 0) {
 			//BIGEXPLOSION
 			Destroy (mainTurret.gameObject);
+			Instantiate (deathExplosion, mainTurret.transform.position, Quaternion.identity);
 		}
 
 	}
