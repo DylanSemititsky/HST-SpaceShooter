@@ -1,14 +1,9 @@
 fileFormatVersion: 2
-guid: a68cc10a9738e3c48953f8875c5eebde
-timeCreated: 1461784220
+guid: a4713f68a7ece6f4fbabb740caaa19f8
+timeCreated: 1461883331
 licenseType: Pro
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: Title_0
-    21300002: Title_1
-    21300004: Title_2
-    21300006: Title_3
-    21300008: Title_4
+  fileIDToRecycleName: {}
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -54,68 +49,7 @@ TextureImporter:
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
-    sprites:
-    - name: Title_0
-      rect:
-        serializedVersion: 2
-        x: 73
-        y: 124
-        width: 42
-        height: 54
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -21, y: 27}
-        - {x: -21, y: 12}
-        - {x: -9, y: -27}
-        - {x: 8, y: -27}
-        - {x: 21, y: 12}
-        - {x: 21, y: 27}
-    - name: Title_1
-      rect:
-        serializedVersion: 2
-        x: 119
-        y: 124
-        width: 9
-        height: 41
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-    - name: Title_2
-      rect:
-        serializedVersion: 2
-        x: 134
-        y: 124
-        width: 31
-        height: 41
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-    - name: Title_3
-      rect:
-        serializedVersion: 2
-        x: 169
-        y: 124
-        width: 25
-        height: 41
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-    - name: Title_4
-      rect:
-        serializedVersion: 2
-        x: 200
-        y: 124
-        width: 26
-        height: 41
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
+    sprites: []
     outline: []
   spritePackingTag: 
   userData: 
