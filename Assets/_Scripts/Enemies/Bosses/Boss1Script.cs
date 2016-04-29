@@ -24,7 +24,7 @@ public class Boss1Script : MonoBehaviour {
 	public int waveLaserAmount; //
 	public float waveLaserFireRate; //rate at which the spread laser fires
 
-	bool enterPlaySpace = false; //check whether ther enemy is in the play space
+	public bool enterPlaySpace = false; //check whether ther enemy is in the play space
 	bool goLeft = false; //check whether which driection the enemy is going in
 	bool hasFired = false;//check homing laser to play the coroutine once
 	public bool bossHeadActive;
