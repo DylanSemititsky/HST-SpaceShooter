@@ -47,7 +47,10 @@ public class ExplosionScript : MonoBehaviour {
 		foreach (Collider hit in colliders){
 			GameObject hitObject = hit.gameObject;
 			DestroyByHealth enemy = hitObject.GetComponent<DestroyByHealth>();
-
+			if (hit.gameObject.tag == "eLaser 1" || hit.gameObject.tag == "eLaser 2" || hit.gameObject.tag == "eLaser 3" || hit.gameObject.tag == "eLaser4") {
+				Destroy (hit.gameObject);
+			}
+				
 			if(enemy != null){
 				enemy.AddDamage(damage);
 			}

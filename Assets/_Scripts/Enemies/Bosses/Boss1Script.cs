@@ -13,6 +13,7 @@ public class Boss1Script : MonoBehaviour {
 	public GameObject waveLaser5;
 
 	public GameObject explosion;
+	public GameObject finalExplosion;
 	public GameObject droppedItem;
 
 	public float enterSpeed;
@@ -157,7 +158,7 @@ public class Boss1Script : MonoBehaviour {
 	void CheckDamage(){
 		if (bossHealth <= 0){
 			if (tag == "Enemy"){
-				Instantiate(explosion, transform.position, transform.rotation);
+				Instantiate(finalExplosion, transform.position, transform.rotation);
 				CameraShake.Instance.Shake (amplitude, duration);//call camera shake
 				//Instantiate (droppedItem, transform.position, transform.rotation);
 			}
