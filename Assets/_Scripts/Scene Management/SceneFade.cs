@@ -12,14 +12,13 @@ public class SceneFade : MonoBehaviour {
 		fadeActivate = false;
 
 		gameObject.SetActive(false);
-		Debug.Log ("Scene Fade Start");
 	}
 
 	void Update(){
-		Debug.Log ("before coroutine");
+
 		if (fadeActivate == true) {
 			StartCoroutine (FadeInCo());
-			Debug.Log ("coroutine started");
+		
 		}
 	}
 

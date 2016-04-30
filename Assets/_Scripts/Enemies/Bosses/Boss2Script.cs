@@ -91,6 +91,7 @@ public class Boss2Script : MonoBehaviour {
 
 	//EXPLOSION WHEN DEAD
 	public GameObject explosion;
+	public GameObject finalExplosion;
 	//AUDIO
 	public AudioSource rollCharge;
 
@@ -600,10 +601,9 @@ public class Boss2Script : MonoBehaviour {
 			Instantiate(explosion, bottomArm.transform.position,  Quaternion.identity);
 			Instantiate(explosion, rightArm.transform.position,  Quaternion.identity);
 			Instantiate(explosion, leftArm.transform.position,  Quaternion.identity);
-			Instantiate(explosion,transform.position,  Quaternion.identity);
+			Instantiate(finalExplosion,transform.position,  Quaternion.identity);
 
 			gameController.LevelComplete (); //Execute Level complete function in GameController
-			Debug.Log ("Boss is dead");
 
 			Destroy (gameObject);
 		}

@@ -132,7 +132,6 @@ public class GameController : MonoBehaviour
 		yield return new WaitForSeconds (2);
 		FadeActivate ();
 		yield return new WaitForSeconds (3);
-		Debug.Log ("About to load scene");
 		gameState.StoreVariables ();
 		SceneManager.LoadScene ("UpgradeShop");
 	}
@@ -142,11 +141,9 @@ public class GameController : MonoBehaviour
 	}
 
 	public void FadeActivate(){
-		Debug.Log ("FadeActivate");
 		fadeToBlack.SetActive (true);
 		sceneFade = fadeToBlack.GetComponent<SceneFade> ();
 		sceneFade.fadeActivate = true;
-		Debug.Log ("FadeActivateTrue");
 		print (sceneFade.fadeActivate);
 	}
 }
