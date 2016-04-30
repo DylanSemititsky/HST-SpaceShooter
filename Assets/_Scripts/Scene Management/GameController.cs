@@ -22,7 +22,8 @@ public class GameController : MonoBehaviour
 
 	private bool levelComplete;
 	private bool gameOver;
-	private bool restart;
+	[HideInInspector]
+	public  bool restart;
 	private int score;
 
 	public GameObject pauseSound;
@@ -52,6 +53,11 @@ public class GameController : MonoBehaviour
 		if (pauseObject != null) {
 			canvasGroup = pauseObject.GetComponent<CanvasGroup> ();
 			canvasGroup.alpha = 0;
+		}
+
+		GameObject fadeObject = GameObject.Find ("Canvas_FadeToBlack");	
+		if (fadeObject != null) {
+			sceneFade = fadeToBlack.GetComponent<SceneFade> ();
 		}
 	}
 
@@ -137,8 +143,11 @@ public class GameController : MonoBehaviour
 
 	public void FadeActivate(){
 		Debug.Log ("FadeActivate");
+		fadeToBlack.SetActive (true);
 		sceneFade = fadeToBlack.GetComponent<SceneFade> ();
 		sceneFade.fadeActivate = true;
+		Debug.Log ("FadeActivateTrue");
+		print (sceneFade.fadeActivate);
 	}
 }
 

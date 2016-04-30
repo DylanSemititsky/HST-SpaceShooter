@@ -95,6 +95,7 @@ public class Boss2Script : MonoBehaviour {
 	public AudioSource rollCharge;
 
 
+
 	//GameController Access
 	GameController gameController;
 

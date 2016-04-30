@@ -17,6 +17,11 @@ public class BossMusicScript : MonoBehaviour {
 	}
 	
 	void Update () {
+
+		if (GameObject.Find ("GameController").GetComponent<GameController> ().restart == true) {
+			bossMusic.Stop ();
+		}
+
 		boss1 = GameObject.Find ("Boss1(Clone)");
 		if (boss1 != null) {
 			PlayBossMusic ();

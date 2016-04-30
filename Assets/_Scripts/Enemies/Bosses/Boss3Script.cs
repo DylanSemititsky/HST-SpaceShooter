@@ -34,11 +34,11 @@ public class Boss3Script : MonoBehaviour {
 	public int turret2Health;
 	public int turret3Health;
 	public int turret4Health;
-
-	bool turret1Exists = true;
-	bool turret2Exists = true;
-	bool turret3Exists = true;
-	bool turret4Exists = true;
+	[HideInInspector]
+	public bool turret1Exists = true;
+	public bool turret2Exists = true;
+	public bool turret3Exists = true;
+	public bool turret4Exists = true;
 
 	bool damaged;
 	Color originalColor;
@@ -49,9 +49,16 @@ public class Boss3Script : MonoBehaviour {
 	//GameController Access
 	//GameController gameController;
 
+	public GameController gameController;
+
 	void Start () {
 
 		idleHover = GetComponent<AudioSource> ();
+
+		GameObject gameControllerObject = GameObject.Find ("GameController");	
+		if (gameControllerObject != null) {
+			gameController = gameControllerObject.GetComponent<GameController> ();
+		}
 
 		turret = new GameObject[4];//set all turret objects on
 		for (int i = 0; i < turret.Length; i++) {
@@ -210,31 +217,34 @@ public class Boss3Script : MonoBehaviour {
 	}
 
 	void CheckDamage(){ //if turret health goes below the low of threshy bo
-
-		if (turret1Health < 0 && turret1Exists) {
+		
+		if (turret1Health <= 0 && turret1Exists) {
 			Instantiate (explosion, turret [0].transform.position, Quaternion.identity);
 			Destroy (turret [0].gameObject);
 			turret1Exists = false;
 		}
-		if (turret2Health < 0 && turret2Exists) {
+		if (turret2Health <= 0 && turret2Exists) {
 			Instantiate (explosion, turret [1].transform.position, Quaternion.identity);
 			Destroy (turret [1].gameObject);
 			turret2Exists = false;
 		}
-		if (turret3Health < 0 && turret3Exists) {
+		if (turret3Health <= 0 && turret3Exists) {
 			Instantiate (explosion, turret [2].transform.position, Quaternion.identity);
 			Destroy (turret [2].gameObject);
 			turret3Exists = false;
+			print("damagecheck");
 		}
-		if (turret4Health < 0 && turret4Exists) {
+		if (turret4Health <= 0 && turret4Exists) {
 			Instantiate (explosion, turret [3].transform.position, Quaternion.identity);
 			Destroy (turret [3].gameObject);
 			turret4Exists = false;
+			print("damagecheck2");
 		}
-		if (mainTurretHealth < 0) {
+		if (mainTurretHealth <= 0) {
 			//BIGEXPLOSION
 			Destroy (mainTurret.gameObject);
 			Instantiate (deathExplosion, mainTurret.transform.position, Quaternion.identity);
+			gameController.LevelComplete (); //Execute Level complete function in GameController
 		}
 
 	}

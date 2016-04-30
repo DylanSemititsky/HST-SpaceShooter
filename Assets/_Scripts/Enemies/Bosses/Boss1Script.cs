@@ -41,7 +41,7 @@ public class Boss1Script : MonoBehaviour {
 	Transform rightArm;
 	Transform leftArm;
 
-	public GameController gameController;
+	GameController gameController;
 
 	//Shaking Camera variables
 	public float amplitude = 0.1f;
@@ -51,6 +51,7 @@ public class Boss1Script : MonoBehaviour {
 		InvokeRepeating ("ShootWaveLaser", 2, waveLaserFireRate);
 
 		GameObject gameControllerObject = GameObject.Find ("GameController");	
+
 		if (gameControllerObject != null) {
 			gameController = gameControllerObject.GetComponent<GameController> ();
 		}
@@ -163,7 +164,7 @@ public class Boss1Script : MonoBehaviour {
 				//Instantiate (droppedItem, transform.position, transform.rotation);
 			}
 			gameController.LevelComplete (); //Execute Level complete function in GameController
-			Debug.Log ("Boss is dead");
+			//Debug.Log ("Boss is dead");
 			Destroy(gameObject);
 
 		}
