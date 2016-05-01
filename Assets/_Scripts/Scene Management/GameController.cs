@@ -39,7 +39,7 @@ public class GameController : MonoBehaviour
 		restartText.text = "";
 		gameOverText.text = "";
 		levelCompleteText.text = "";
-		score = 0;
+
 		UpdateScore ();
 
 		//Find GameState Object to access it's script
@@ -59,6 +59,8 @@ public class GameController : MonoBehaviour
 		if (fadeObject != null) {
 			sceneFade = fadeToBlack.GetComponent<SceneFade> ();
 		}
+
+		score = gameState.getScore();
 	}
 
 	// ---------------------------------------------------------------------------------------------------
@@ -145,6 +147,10 @@ public class GameController : MonoBehaviour
 		sceneFade = fadeToBlack.GetComponent<SceneFade> ();
 		sceneFade.fadeActivate = true;
 		print (sceneFade.fadeActivate);
+	}
+
+	public int getScore(){
+		return score;
 	}
 }
 

@@ -11,12 +11,12 @@ public class DestroyByHealth : MonoBehaviour
 	public GameObject explosion;
 
 	//PowerUp Objects and Drop Chance Ranges
-	public GameObject item1;
-	public float item1DropMin;
-	public float item1DropMax;
-	public GameObject item2;
-	public float item2DropMin;
-	public float item2DropMax;
+	public GameObject heal;
+	public float healDropMin;
+	public float healDropMax;
+	public GameObject bomb;
+	public float bombDropMin;
+	public float bombDropMax;
 	public GameObject item3;
 	public float item3DropMin;
 	public float item3DropMax;
@@ -40,15 +40,23 @@ public class DestroyByHealth : MonoBehaviour
 	public Color flashColor = new Color (1f, 0f, 0f, 0.1f);
 	bool damaged;
 
+	//Player access for repair/bomb item drops
+	PlayerController playerController;
+	PlayerAttack playerAttack;
 
 
 	void Start(){
 		randomNumber = Random.Range (1, 100);
 
 		GameObject gameControllerObject = GameObject.Find ("GameController");
-		//Debug.Log("GameController Found");
 		if (gameControllerObject != null) {
 			gameController = gameControllerObject.GetComponent<GameController> ();
+		}
+
+		GameObject playerObject = GameObject.Find ("Player");
+		if (playerObject != null) {
+			playerController = playerObject.GetComponent<PlayerController> ();
+			playerAttack = playerObject.GetComponent<PlayerAttack> ();
 		}
 	}
 	
@@ -61,17 +69,17 @@ public class DestroyByHealth : MonoBehaviour
 		}
 		if (health <= 0){
 
-				Instantiate(explosion, transform.position, transform.rotation);
+			Instantiate(explosion, transform.position, transform.rotation);
 
-				if (randomNumber >= item1DropMin && randomNumber <= item1DropMax) {
-					Instantiate (item1, transform.position, item1.transform.rotation);
+			if (randomNumber >= healDropMin && randomNumber <= healDropMax && playerController.health < playerController.maxHealth) {
+				Instantiate (heal, transform.position, heal.transform.rotation);
 				}
-				if (randomNumber >= item2DropMin && randomNumber <=item2DropMax) {
-					Instantiate (item2, transform.position, item2.transform.rotation);
+			else if (randomNumber >= bombDropMin && randomNumber <=bombDropMax && playerAttack.bombAttack.bomb < playerAttack.bombAttack.maxBomb) {
+				Instantiate (bomb, transform.position, bomb.transform.rotation);
 				}
-				if (randomNumber >= item3DropMin && randomNumber <= item3DropMax) {	
-					Instantiate (item3, transform.position, item3.transform.rotation);
-				}
+			else if (randomNumber >= item3DropMin && randomNumber <= item3DropMax) {	
+				Instantiate (item3, transform.position, item3.transform.rotation);
+			}
 
 			gameController.AddScore (scoreValue);
 			Destroy(gameObject);

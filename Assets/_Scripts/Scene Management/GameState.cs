@@ -20,10 +20,12 @@ public class GameState : MonoBehaviour {
 		private int setBombAttackLevel;								// Bomb Attack level
 		private float fireRate;                            			// Fire Rate
         private int credits;                                 		// credits
+		private int score;											// score
 
 		
 		PlayerController playerController;
         PlayerAttack playerAttack;
+		GameController gameController;
        
        
        
@@ -65,6 +67,7 @@ public class GameState : MonoBehaviour {
 				setBombAttackLevel = 0;
                 fireRate = 0.25f;
                 credits = 200;
+				score = 0;
                               
                 // Start Game
                 SceneManager.LoadScene ("UpgradeShop");
@@ -159,13 +162,22 @@ public class GameState : MonoBehaviour {
         }
 
 		// ---------------------------------------------------------------------------------------------------
-        // getcredits()
+        // getCredits()
         // ---------------------------------------------------------------------------------------------------
         // Returns the characters credits
         // ---------------------------------------------------------------------------------------------------
-        public int getcredits(){
+        public int getCredits(){
                 return credits;
         }
+
+		// ---------------------------------------------------------------------------------------------------
+		// getScore()
+		// ---------------------------------------------------------------------------------------------------
+		// Returns the characters Score
+		// ---------------------------------------------------------------------------------------------------
+		public int getScore(){
+			return score;
+		}
 
 
 		// ---------------------------------------------------------------------------------------------------
@@ -180,6 +192,11 @@ public class GameState : MonoBehaviour {
 				playerAttack = playerObject.GetComponent<PlayerAttack>();
 			}
 
+			GameObject gameControllerObject = GameObject.Find ("GameController");	
+			if (gameControllerObject != null) {
+				gameController = gameControllerObject.GetComponent<GameController> ();
+			}
+
 			setMaxHealth = playerController.getHealth();
 			setMaxShield = playerController.getShield();
 			setPrimaryAttackLevel = playerAttack.getPrimaryAttack();
@@ -188,6 +205,7 @@ public class GameState : MonoBehaviour {
 			setFusionAttackLevel = playerAttack.getFusionAttack();
 			setBombAttackLevel = playerAttack.getBombAttack();
 			credits = playerController.getCredits ();
+			score = gameController.getScore();
 			}
 
 
