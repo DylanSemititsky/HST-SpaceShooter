@@ -7,12 +7,15 @@ public class MainMenuMusicPlayer : MonoBehaviour {
 	public AudioSource audioClip;
 	public bool isFadingMusic;
 
+	static MainMenuMusicPlayer instance = null;
+
 	void Awake()
 	{
-		if (!AudioBegin) {
-			audioClip.Play ();
-			DontDestroyOnLoad (gameObject);
-			AudioBegin = true;
+		if (instance != null) {
+			Destroy (gameObject);
+		} else {
+			instance = this;
+			GameObject.DontDestroyOnLoad (gameObject);
 		}
 
 	}
@@ -21,10 +24,11 @@ public class MainMenuMusicPlayer : MonoBehaviour {
 
 			audioClip.Stop ();
 			AudioBegin = false;
+			Destroy (gameObject);
 		}
 		if (isFadingMusic) {
 			
-			audioClip.volume -= Time.deltaTime * 0.25f;
+			audioClip.volume -= Time.deltaTime * 0.35f;
 
 		}
 
