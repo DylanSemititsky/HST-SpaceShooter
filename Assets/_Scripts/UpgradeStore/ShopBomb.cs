@@ -50,27 +50,31 @@ public class ShopBomb : MonoBehaviour {
 
 		flashWhenFullBomb.StartFlash();
 
-		audioSource.Play();
+
 
 		if (playerAttack.bombAttack.setBombLevel == 0 && playerController.credits >= 50) {
 			playerAttack.bombAttack.setBombLevel += 1;
 			playerController.credits -= 50;
+			audioSource.Play();
 		}
 		else if (playerAttack.bombAttack.setBombLevel == 1 && playerController.credits >= 100) {
 			playerAttack.bombAttack.setBombLevel += 1;
 			playerController.credits -= 100;
+			audioSource.Play();
 
 			SetOrangeIcon ();
 		}
 		else if (playerAttack.bombAttack.setBombLevel == 2 && playerController.credits >= 150) {
 			playerAttack.bombAttack.setBombLevel += 1;
 			playerController.credits -= 150;
+			audioSource.Play();
 
 			SetRedIcon ();
 		}
 		else if (playerAttack.bombAttack.setBombLevel == 3 && playerController.credits >= 200) {
 			playerAttack.bombAttack.setBombLevel += 1;
 			playerController.credits -= 200;
+			audioSource.Play();
 
 			SetPurpleIcon ();
 		}

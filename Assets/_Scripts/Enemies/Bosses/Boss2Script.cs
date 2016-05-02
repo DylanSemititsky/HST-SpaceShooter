@@ -1,5 +1,6 @@
 ﻿                                                                                                                                                                                                                                                                                                                                              using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class Boss2Script : MonoBehaviour {
 
@@ -603,8 +604,10 @@ public class Boss2Script : MonoBehaviour {
 			Instantiate(explosion, leftArm.transform.position,  Quaternion.identity);
 			Instantiate(finalExplosion,transform.position,  Quaternion.identity);
 
-			gameController.LevelComplete (); //Execute Level complete function in GameController
 
+			//gameController.LevelComplete (); //Execute Level complete function in GameController
+
+			gameController.EndGame(); //Execute Level complete function in GameController
 			Destroy (gameObject);
 		}
 	}

@@ -39,22 +39,24 @@ public class ShopMainCannon : MonoBehaviour {
 
 	public void EnableUpgrade(){
 
-		audioSource.Play();
 
 		if (playerMainCannonTemp == 1 && playerController.credits >= 50) {
 			playerAttack.primaryAttack.setPrimaryAttackLevel += 1;
 			playerMainCannonTemp += 1;
 			playerController.credits -= 50;
+			audioSource.Play();
 		}
 		else if (playerMainCannonTemp == 2 && playerController.credits >= 100) {
 			playerAttack.primaryAttack.setPrimaryAttackLevel += 1;
 			playerMainCannonTemp += 1;
 			playerController.credits -= 100;
+			audioSource.Play();
 		}
 		else if (playerMainCannonTemp == 3 && playerController.credits >= 200) {
 			playerAttack.primaryAttack.setPrimaryAttackLevel += 1;
 			playerMainCannonTemp += 1;
 			playerController.credits -= 200;
+			audioSource.Play();
 		}
 		else if (playerMainCannonTemp >= 4) {
 			playerMainCannonTemp = 4;

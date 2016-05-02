@@ -32,23 +32,26 @@ public class ShopHealth : MonoBehaviour {
 
 	public void EnableUpgrade(){
 
-		audioSource.Play();
 
 		if (playerController.setMaxHealth == 1 && playerController.credits >= 50) {
 			playerController.setMaxHealth += 1;
 			playerController.credits -= 50;
+			audioSource.Play();
 		} 
 		else if (playerController.setMaxHealth == 2 && playerController.credits >= 100) {
 			playerController.setMaxHealth += 1;
 			playerController.credits -= 100;
+			audioSource.Play();
 		}
 		else if (playerController.setMaxHealth == 3 && playerController.credits >= 150) {
 			playerController.setMaxHealth += 1;
 			playerController.credits -= 150;
+			audioSource.Play();
 		}
 		else if (playerController.setMaxHealth == 4 && playerController.credits >= 200) {
 			playerController.setMaxHealth += 1;
 			playerController.credits -= 200;
+			audioSource.Play();
 		}
 		if (playerController.setMaxHealth >= 5) {
 			playerController.setMaxHealth = 5;

@@ -53,7 +53,7 @@ public class ShieldEnemy : MonoBehaviour {
 		if (movement) {//movement is true until z is less than 6.
 			transform.Translate (Vector3.back * speed * Time.deltaTime);
 		}
-		if(transform.position.z <= 8.5f && movement == true) // stop position once enemy is half way into plane
+		if(transform.position.z <= 6.0f && movement == true) // stop position once enemy is half way into plane
 		{
 			tempPosition = transform.position;
 			originPos = transform.position;

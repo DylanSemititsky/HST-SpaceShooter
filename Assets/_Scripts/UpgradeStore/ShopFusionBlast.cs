@@ -50,15 +50,16 @@ public class ShopFusionBlast : MonoBehaviour {
 
 		flashWhenFullFusion.StartFlash();
 
-		audioSource.Play();
 		 
 		if (playerAttack.fusionAttack.setFusionAttackLevel == 0 && playerController.credits >= 100) {
 			playerAttack.fusionAttack.setFusionAttackLevel += 1;
 			playerController.credits -= 100;
+			audioSource.Play();
 		}
 		else if (playerAttack.fusionAttack.setFusionAttackLevel == 1 && playerController.credits >= 200) {
 			playerAttack.fusionAttack.setFusionAttackLevel += 1;
 			playerController.credits -= 200;
+			audioSource.Play();
 		} 
 		if (playerAttack.fusionAttack.setFusionAttackLevel >= 2) {
 			playerAttack.fusionAttack.setFusionAttackLevel = 2;

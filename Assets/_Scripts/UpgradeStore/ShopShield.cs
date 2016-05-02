@@ -33,23 +33,26 @@ public class ShopShield : MonoBehaviour {
 
 	public void EnableUpgrade(){
 
-		audioSource.Play();
 
 		if (playerController.setMaxShield == 1 && playerController.credits >= 50) {
 			playerController.setMaxShield += 1;
 			playerController.credits -= 50;
+			audioSource.Play();
 		} 
 		else if (playerController.setMaxShield == 2 && playerController.credits >= 100) {
 			playerController.setMaxShield += 1;
 			playerController.credits -= 100;
+			audioSource.Play();
 		}
 		else if (playerController.setMaxShield == 3 && playerController.credits >= 150) {
 			playerController.setMaxShield += 1;
 			playerController.credits -= 150;
+			audioSource.Play();
 		}
 		else if (playerController.setMaxShield == 4 && playerController.credits >= 200) {
 			playerController.setMaxShield += 1;
 			playerController.credits -= 200;
+			audioSource.Play();
 		} 
 		if (playerController.setMaxShield >= 5) {
 			playerController.setMaxShield = 5;

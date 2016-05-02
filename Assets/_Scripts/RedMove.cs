@@ -3,17 +3,17 @@ using System.Collections;
 
 public class RedMove : MonoBehaviour {
 
-	//this script is responsible for the dersert actions, including the infinite loop land
+	//this script is responsible for the desert actions, including the infinite loop land
 
 	private Vector3 pos;
 	public int speed;
 
 	[HideInInspector]
 
-	static bool oneTime = false;
+	public static bool oneTime = false;
 
 	void Start () {
-
+		print (oneTime);
 		pos = transform.position; //get current position of terrain
 
 	}

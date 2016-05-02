@@ -1,9 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class FlashWhenFullFusion : MonoBehaviour {
 
 	PlayerAttack playerAttack;
+
+	public Image myImageComponent;
+	public Sprite yellowIcon;
+	public Sprite orangeIcon;
+	public Sprite redIcon;
+	public Sprite purpleIcon;
+
+
 
 	void Start () {
 		CanvasGroup canvasGroup = GetComponent<CanvasGroup>();
@@ -15,6 +24,8 @@ public class FlashWhenFullFusion : MonoBehaviour {
 	}
 
 	void Update () {
+
+		CheckFusionLevel ();
 
 		if(playerAttack.fusionAttack.setFusionAttackLevel > 0){
 			
@@ -49,5 +60,33 @@ public class FlashWhenFullFusion : MonoBehaviour {
 
 	public void StartFlash(){
 		StartCoroutine(Flash());
+	}
+
+	void CheckFusionLevel(){
+		if (playerAttack.fusionAttack.fusionAttackDamage == 1 && playerAttack.fusionAttack.setFusionAttackLevel > 0) {
+			SetYellowIcon ();
+		}
+		else if (playerAttack.fusionAttack.fusionAttackDamage == 2 && playerAttack.fusionAttack.setFusionAttackLevel > 0) {
+			SetOrangeIcon ();
+		}
+		else if (playerAttack.fusionAttack.fusionAttackDamage == 3 && playerAttack.fusionAttack.setFusionAttackLevel > 0) {
+			SetRedIcon ();
+		}
+		else if (playerAttack.fusionAttack.fusionAttackDamage == 4 && playerAttack.fusionAttack.setFusionAttackLevel > 0) {
+			SetPurpleIcon ();
+		}
+	}
+
+	public void SetYellowIcon(){
+		myImageComponent.sprite = yellowIcon;
+	}
+	public void SetOrangeIcon(){
+		myImageComponent.sprite = orangeIcon;
+	}
+	public void SetRedIcon(){
+		myImageComponent.sprite = redIcon;
+	}
+	public void SetPurpleIcon(){
+		myImageComponent.sprite = purpleIcon;
 	}
 }

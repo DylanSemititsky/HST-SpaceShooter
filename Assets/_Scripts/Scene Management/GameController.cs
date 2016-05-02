@@ -12,6 +12,7 @@ public class GameController : MonoBehaviour
 	GameState gameState;
 	SceneFade sceneFade;
 	CanvasGroup canvasGroup;
+	RedMove redMove;
 
 	public GameObject fadeToBlack;
 
@@ -40,7 +41,6 @@ public class GameController : MonoBehaviour
 		gameOverText.text = "";
 		levelCompleteText.text = "";
 
-		UpdateScore ();
 
 		//Find GameState Object to access it's script
 		GameObject gameStateObject = GameObject.Find ("GameState");	
@@ -60,7 +60,14 @@ public class GameController : MonoBehaviour
 			sceneFade = fadeToBlack.GetComponent<SceneFade> ();
 		}
 
+		GameObject redMoveObject = GameObject.Find ("Terrain");	
+		if (redMoveObject != null) {
+			redMove = redMoveObject.GetComponent<RedMove> ();
+		}
+			
 		score = gameState.getScore();
+
+		UpdateScore ();
 	}
 
 	// ---------------------------------------------------------------------------------------------------
@@ -69,6 +76,7 @@ public class GameController : MonoBehaviour
 	void Update (){
 		if (restart){
 			if (Input.GetMouseButton(0)){
+				RedMove.oneTime = false;
 				SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 			}
 		}
@@ -151,6 +159,20 @@ public class GameController : MonoBehaviour
 
 	public int getScore(){
 		return score;
+	}
+
+
+	public IEnumerator CoEndGame(){
+		levelCompleteText.text = "Level Complete!";
+		yield return new WaitForSeconds (2);
+		FadeActivate ();
+		yield return new WaitForSeconds (3);
+//		gameState.StoreVariables ();
+		SceneManager.LoadScene ("Credits");	
+	}
+
+	public void EndGame(){
+		StartCoroutine (CoEndGame ());
 	}
 }
 

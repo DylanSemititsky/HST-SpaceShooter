@@ -39,22 +39,23 @@ public class ShopWingCannon : MonoBehaviour {
 
 	public void EnableUpgrade(){
 
-		audioSource.Play();
-
 		if (playerMultiCannonTemp == 0 && playerController.credits >= 100) {
 			playerAttack.multiAttack.setMultiAttackLevel += 1;
 			playerMultiCannonTemp += 1;
 			playerController.credits -= 100;
+			audioSource.Play();
 		}
 		else if (playerMultiCannonTemp == 1 && playerController.credits >= 200) {
 			playerAttack.multiAttack.setMultiAttackLevel += 1;
 			playerMultiCannonTemp += 1;
 			playerController.credits -= 200;
+			audioSource.Play();
 		}
 		else if (playerMultiCannonTemp == 2 && playerController.credits >= 400) {
 			playerAttack.multiAttack.setMultiAttackLevel += 1;
 			playerMultiCannonTemp += 1;
 			playerController.credits -= 400;
+			audioSource.Play();
 		}
 		else if (playerMultiCannonTemp >= 3) {
 			playerMultiCannonTemp = 3;

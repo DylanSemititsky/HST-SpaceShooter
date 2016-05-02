@@ -27,7 +27,7 @@ public class RotatingEnemyScript : MonoBehaviour {
 		if (movement) {//movement is true until z is less than 6.
 			transform.Translate (Vector3.back * speed * Time.deltaTime);
 		}
-		if(transform.position.z <= 8.5f) // stop position once enemy is half way into plane
+		if(transform.position.z <= 12.0f) // stop position once enemy is half way into plane
 		{
 			movement = false;
 		
