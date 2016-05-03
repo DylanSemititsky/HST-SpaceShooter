@@ -25,7 +25,7 @@ public class GameController : MonoBehaviour
 	private bool gameOver;
 	[HideInInspector]
 	public  bool restart;
-	private int score;
+	public int score;
 
 	public GameObject pauseSound;
 	public Image pauseImage;
@@ -143,7 +143,7 @@ public class GameController : MonoBehaviour
 		FadeActivate ();
 		yield return new WaitForSeconds (3);
 		gameState.StoreVariables ();
-		SceneManager.LoadScene ("UpgradeShop");
+		SceneManager.LoadScene ("HighScores");
 	}
 
 	public void LevelComplete(){
@@ -154,7 +154,6 @@ public class GameController : MonoBehaviour
 		fadeToBlack.SetActive (true);
 		sceneFade = fadeToBlack.GetComponent<SceneFade> ();
 		sceneFade.fadeActivate = true;
-		print (sceneFade.fadeActivate);
 	}
 
 	public int getScore(){
@@ -167,8 +166,8 @@ public class GameController : MonoBehaviour
 		yield return new WaitForSeconds (2);
 		FadeActivate ();
 		yield return new WaitForSeconds (3);
-//		gameState.StoreVariables ();
-		SceneManager.LoadScene ("Credits");	
+		gameState.StoreVariables ();
+		SceneManager.LoadScene ("HighScores");	
 	}
 
 	public void EndGame(){

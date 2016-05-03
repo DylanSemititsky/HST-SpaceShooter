@@ -232,13 +232,11 @@ public class Boss3Script : MonoBehaviour {
 			Instantiate (explosion, turret [2].transform.position, Quaternion.identity);
 			Destroy (turret [2].gameObject);
 			turret3Exists = false;
-			print("damagecheck");
 		}
 		if (turret4Health <= 0 && turret4Exists) {
 			Instantiate (explosion, turret [3].transform.position, Quaternion.identity);
 			Destroy (turret [3].gameObject);
 			turret4Exists = false;
-			print("damagecheck2");
 		}
 		if (mainTurretHealth <= 0) {
 			//BIGEXPLOSION
