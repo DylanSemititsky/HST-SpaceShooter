@@ -41,7 +41,7 @@ public class GameController : MonoBehaviour
 	// ---------------------------------------------------------------------------------------------------
 	void Start (){
 
-		Debug.Log ("score = " + score);
+		//Debug.Log ("score = " + score);
 		gameOver = false;
 		restart = false;
 		restartText.text = "";
@@ -73,7 +73,7 @@ public class GameController : MonoBehaviour
 		}
 
 		extraLives = gameState.getExtraLives ();
-		Debug.Log ("start: " + extraLives);
+		//Debug.Log ("start: " + extraLives);
 
 		score = gameState.getScore();
 

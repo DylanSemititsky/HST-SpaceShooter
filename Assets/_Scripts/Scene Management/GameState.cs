@@ -235,18 +235,18 @@ public class GameState : MonoBehaviour {
 
 
 		//Load Scene by Hotkeys
-		/*void Update(){
-			if(Input.GetKey("l")){
+		void Update(){
+			/*if(Input.GetKey("l")){
 				StoreVariables();
 				SceneManager.LoadScene("RedPlanet");
 			}
 			if(Input.GetKey("k")){
 				StoreVariables();
 				SceneManager.LoadScene("GreenPlanet");
-			}
+			}*/
 			if (Input.GetKeyDown(KeyCode.U)){
 				StoreVariables();
 				SceneManager.LoadScene("UpgradeShop");
 			}
-		}*/
+		}
 }

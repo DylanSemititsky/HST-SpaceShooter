@@ -22,16 +22,21 @@ public class ShopWingCannon : MonoBehaviour {
 			playerController = playerObject.GetComponent<PlayerController> ();
 		}
 
-		playerMainCannonTemp = playerAttack.primaryAttack.setPrimaryAttackLevel;
-		playerMultiCannonTemp = playerAttack.multiAttack.setMultiAttackLevel;
+		playerMultiCannonTemp = playerAttack.getMultiAttack();
+		playerMainCannonTemp = playerAttack.getPrimaryAttack();
+
+		//playerMainCannonTemp = playerAttack.primaryAttack.setPrimaryAttackLevel;
+		//playerMultiCannonTemp = playerAttack.multiAttack.setMultiAttackLevel;
+		//Debug.Log(playerMultiCannonTemp);
 	}	
 
 	void Update () {
 		UpdateUpgradeText ();
+		//Debug.Log("Update MultiCannonTemp = " + playerMultiCannonTemp);
 	}
 
 	public void ShowMultiAttack(){
-		playerMainCannonTemp = playerAttack.primaryAttack.setPrimaryAttackLevel;
+		playerMainCannonTemp = playerAttack.getPrimaryAttack();
 		playerAttack.multiAttack.setMultiAttackLevel += 1;
 		playerAttack.primaryAttack.setPrimaryAttackLevel = 0;
 		playerAttack.disableFusion = true;
@@ -63,13 +68,13 @@ public class ShopWingCannon : MonoBehaviour {
 	}
 
 	public void Revert(){
-		playerAttack.primaryAttack.setPrimaryAttackLevel = playerMainCannonTemp;
 		playerAttack.multiAttack.setMultiAttackLevel = playerMultiCannonTemp;
+		playerAttack.primaryAttack.setPrimaryAttackLevel = playerMainCannonTemp;
 		playerAttack.disableFusion = false;
 	}
 
 	void UpdateUpgradeText(){
-		if (playerMultiCannonTemp == 0) {
+		if (playerMultiCannonTemp <= 0) {
 			currentText.text = "<b>Current:</b>  --";
 			upgradeText.text = "<b>Upgrade:</b>  <color=yellow>10 dmg</color> (c: 100)";
 		}
