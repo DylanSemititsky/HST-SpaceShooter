@@ -50,6 +50,7 @@ public class Boss3Script : MonoBehaviour {
 	//GameController gameController;
 
 	public GameController gameController;
+	public bool hardMode;
 
 	void Start () {
 
@@ -58,6 +59,14 @@ public class Boss3Script : MonoBehaviour {
 		GameObject gameControllerObject = GameObject.Find ("GameController");	
 		if (gameControllerObject != null) {
 			gameController = gameControllerObject.GetComponent<GameController> ();
+		}
+
+		if (gameController.hardMode) {
+			turret1Health = 1000;
+			turret2Health = 1000;
+			turret3Health = 1000;
+			turret4Health = 1000;
+			mainTurretHealth = 1500;
 		}
 
 		turret = new GameObject[4];//set all turret objects on

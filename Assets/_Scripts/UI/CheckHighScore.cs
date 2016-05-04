@@ -20,4 +20,8 @@ public class CheckHighScore : MonoBehaviour {
 	public void InitialsEntered(){
 		GetComponent<HighScores> ().CheckForHighScore (score, playerName.text);
 	}
+
+	public void ResetPrefs(){
+		PlayerPrefs.DeleteAll ();
+	}
 }

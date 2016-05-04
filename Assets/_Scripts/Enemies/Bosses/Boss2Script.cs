@@ -100,8 +100,10 @@ public class Boss2Script : MonoBehaviour {
 
 	//GameController Access
 	GameController gameController;
+	public bool hardMode;
 
 	void Start () {
+
 		AudioSource[] soundClips = GetComponents<AudioSource> ();
 		rollCharge = soundClips [0];
 
@@ -115,6 +117,9 @@ public class Boss2Script : MonoBehaviour {
 		GameObject gameControllerObject = GameObject.Find ("GameController");	
 		if (gameControllerObject != null) {
 			gameController = gameControllerObject.GetComponent<GameController> ();
+		}
+		if (gameController.hardMode) {
+			bossHealth = 2000;
 		}
 
 		//tempPosition = transform.position;
@@ -604,10 +609,9 @@ public class Boss2Script : MonoBehaviour {
 			Instantiate(explosion, leftArm.transform.position,  Quaternion.identity);
 			Instantiate(finalExplosion,transform.position,  Quaternion.identity);
 
-
+			gameController.CheckLevel ();
 			//gameController.LevelComplete (); //Execute Level complete function in GameController
-
-			gameController.EndGame(); //Execute Level complete function in GameController
+			//gameController.EndGame (); //Execute Level complete function in GameController
 			Destroy (gameObject);
 		}
 	}

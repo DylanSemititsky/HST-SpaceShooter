@@ -21,6 +21,7 @@ public class GameState : MonoBehaviour {
 		private float fireRate;                            			// Fire Rate
         private int credits;                                 		// credits
 		private int score;											// score
+		private int extraLives;										//extra lives
 
 		
 		PlayerController playerController;
@@ -68,6 +69,8 @@ public class GameState : MonoBehaviour {
                 fireRate = 0.25f;
                 credits = 200;
 				score = 0;
+				extraLives = 3;
+				OnToTheNext.addScene = 3;
                               
                 // Start Game
                 SceneManager.LoadScene ("UpgradeShop");
@@ -179,6 +182,27 @@ public class GameState : MonoBehaviour {
 			return score;
 		}
 
+		// ---------------------------------------------------------------------------------------------------
+		// getExtraLives()
+		// ---------------------------------------------------------------------------------------------------
+		// Returns the characters Extra Lives
+		// ---------------------------------------------------------------------------------------------------
+		public int getExtraLives(){
+			return extraLives;
+		Debug.Log ("Game State - GetExtraLives: " + extraLives);
+		}
+
+		// ---------------------------------------------------------------------------------------------------
+		// updateExtraLives()
+		// ---------------------------------------------------------------------------------------------------
+		// Updates the characters Extra Lives
+		// ---------------------------------------------------------------------------------------------------
+		public void updateExtraLives(){
+		Debug.Log ("Game State - before UpdateExtraLives: " + extraLives);
+			extraLives -= 1;
+		Debug.Log ("Game State - after UpdateExtraLives: " + extraLives);
+		}
+
 
 		// ---------------------------------------------------------------------------------------------------
         //Collect values before scene change (Must be called during(before) scene change)
@@ -206,11 +230,12 @@ public class GameState : MonoBehaviour {
 			setBombAttackLevel = playerAttack.getBombAttack();
 			credits = playerController.getCredits ();
 			score = gameController.getScore();
+			extraLives = gameController.getExtraLives ();
 			}
 
 
 		//Load Scene by Hotkeys
-		void Update(){
+		/*void Update(){
 			if(Input.GetKey("l")){
 				StoreVariables();
 				SceneManager.LoadScene("RedPlanet");
@@ -223,5 +248,5 @@ public class GameState : MonoBehaviour {
 				StoreVariables();
 				SceneManager.LoadScene("UpgradeShop");
 			}
-		}
+		}*/
 }

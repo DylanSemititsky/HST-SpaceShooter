@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class OnToTheNext : MonoBehaviour 
 {
-	static int addScene = 3;
+	public static int addScene = 3;
 
 	PlayerController playerController;
 	GameState gameState;

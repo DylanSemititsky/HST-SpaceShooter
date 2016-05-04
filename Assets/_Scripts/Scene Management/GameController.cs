@@ -21,6 +21,8 @@ public class GameController : MonoBehaviour
 	public Text gameOverText;
 	public Text levelCompleteText;
 
+	public int extraLives;
+
 	private bool levelComplete;
 	private bool gameOver;
 	[HideInInspector]
@@ -31,10 +33,15 @@ public class GameController : MonoBehaviour
 	public Image pauseImage;
 	private bool isPausing;
 
+	public bool lastLevel;
+	public bool hardMode;
+
 	// ---------------------------------------------------------------------------------------------------
 	// START
 	// ---------------------------------------------------------------------------------------------------
 	void Start (){
+
+		Debug.Log ("score = " + score);
 		gameOver = false;
 		restart = false;
 		restartText.text = "";
@@ -64,8 +71,13 @@ public class GameController : MonoBehaviour
 		if (redMoveObject != null) {
 			redMove = redMoveObject.GetComponent<RedMove> ();
 		}
-			
+
+		extraLives = gameState.getExtraLives ();
+		Debug.Log ("start: " + extraLives);
+
 		score = gameState.getScore();
+
+		RedMove.oneTime = false;
 
 		UpdateScore ();
 	}
@@ -74,10 +86,17 @@ public class GameController : MonoBehaviour
 	// UPDATE
 	// ---------------------------------------------------------------------------------------------------
 	void Update (){
-		if (restart){
-			if (Input.GetMouseButton(0)){
-				RedMove.oneTime = false;
-				SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+		if (restart) {
+			
+			if (Input.GetMouseButton (0)) {
+				if (extraLives > 0) {
+					RedMove.oneTime = false;
+					gameState.updateExtraLives ();
+					SceneManager.LoadScene (SceneManager.GetActiveScene ().buildIndex);
+				} else {
+					gameState.StoreVariables ();
+					SceneManager.LoadScene ("HighScores");
+				}
 			}
 		}
 
@@ -143,7 +162,7 @@ public class GameController : MonoBehaviour
 		FadeActivate ();
 		yield return new WaitForSeconds (3);
 		gameState.StoreVariables ();
-		SceneManager.LoadScene ("HighScores");
+		SceneManager.LoadScene ("UpgradeShop");
 	}
 
 	public void LevelComplete(){
@@ -172,6 +191,18 @@ public class GameController : MonoBehaviour
 
 	public void EndGame(){
 		StartCoroutine (CoEndGame ());
+	}
+
+	public int getExtraLives(){
+		return extraLives;
+		Debug.Log ("Game Controller - GetExtraLives: " + extraLives);
+	}
+
+	public void CheckLevel(){
+		if (lastLevel) {
+			EndGame ();
+		} else
+			LevelComplete ();
 	}
 }
 

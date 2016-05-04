@@ -42,18 +42,26 @@ public class Boss1Script : MonoBehaviour {
 	Transform leftArm;
 
 	GameController gameController;
+	public bool hardMode;
 
 	//Shaking Camera variables
 	public float amplitude = 0.1f;
 	public float duration = 0.5f;
 
 	void Start () {
+
 		InvokeRepeating ("ShootWaveLaser", 2, waveLaserFireRate);
 
 		GameObject gameControllerObject = GameObject.Find ("GameController");	
 
 		if (gameControllerObject != null) {
 			gameController = gameControllerObject.GetComponent<GameController> ();
+		}
+		//Set health if Hard Mode
+		if (gameController.hardMode) {
+			bossHealth = 2000;
+			rightArmHealth = 2000;
+			leftArmHealth = 2000;
 		}
 	}
 	
