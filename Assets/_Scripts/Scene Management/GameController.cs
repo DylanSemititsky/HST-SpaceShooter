@@ -20,6 +20,7 @@ public class GameController : MonoBehaviour
 	public Text restartText;
 	public Text gameOverText;
 	public Text levelCompleteText;
+	public Text livesRemaining;
 
 	public int extraLives;
 
@@ -47,7 +48,7 @@ public class GameController : MonoBehaviour
 		restartText.text = "";
 		gameOverText.text = "";
 		levelCompleteText.text = "";
-
+		livesRemaining.text = ""; 
 
 		//Find GameState Object to access it's script
 		GameObject gameStateObject = GameObject.Find ("GameState");	
@@ -128,16 +129,28 @@ public class GameController : MonoBehaviour
 	void Restart (){
 		
 		if (gameOver){
-			restartText.text = "Click to restart level";
-			restart = true;
+			if (extraLives > 0) {
+				restartText.text = "Click to restart level";
+				restart = true;
+			} else {
+				restartText.text = "Click to Continue";
+				restart = true;
+			}
 		}
 
 	}
 
 	public void GameOver (){
-		gameOverText.text = "You Died!";
-		gameOver = true;
-		Restart ();
+		if (extraLives > 0) {
+			gameOverText.text = "You Died!";
+			livesRemaining.text = "x" + extraLives + " Lives Remaining!"; 
+			gameOver = true;
+			Restart ();
+		} else {
+			gameOverText.text = "Game Over!";
+			gameOver = true;
+			Restart ();
+		}
 	}
 
 	// ---------------------------------------------------------------------------------------------------
@@ -195,7 +208,6 @@ public class GameController : MonoBehaviour
 
 	public int getExtraLives(){
 		return extraLives;
-		Debug.Log ("Game Controller - GetExtraLives: " + extraLives);
 	}
 
 	public void CheckLevel(){
