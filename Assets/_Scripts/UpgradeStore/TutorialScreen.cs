@@ -26,9 +26,11 @@ public class TutorialScreen : MonoBehaviour {
 		playerShip.transform.position = new Vector3 (3, 0, -1.7f);
 		}
 
+		if(!tutorialFinished){
+
 		upgradeButtons.SetActive(false);
 		continueButton.interactable = false;
-
+		} 
 	}
 	
 

@@ -84,7 +84,7 @@ public class CheckStore : MonoBehaviour {
 		}
 		else if (mainCannon == 3){
 			mainCannonCost = 200;
-		} 
+		} else mainCannonCost = 1000;
 	}
 
 	public void CheckWingCannon(){
@@ -98,7 +98,7 @@ public class CheckStore : MonoBehaviour {
 		}
 		else if (wingCannon == 2){
 			wingCannonCost = 400;
-		} 
+		} else wingCannonCost = 1000;
 	}
 
 	public void CheckHealth(){
@@ -115,7 +115,7 @@ public class CheckStore : MonoBehaviour {
 		}
 		else if (health == 4){
 			healthCost = 200;
-		}  
+		} else healthCost = 1000;
 	}
 
 	public void CheckShield(){
@@ -132,7 +132,7 @@ public class CheckStore : MonoBehaviour {
 		}
 		else if (shield == 4){
 			shieldCost = 200;
-		}  
+		} else shieldCost = 1000;
 	}
 
 	public void CheckFusionBlast(){
@@ -143,7 +143,7 @@ public class CheckStore : MonoBehaviour {
 		}
 		else if (fusionBlast == 1){
 			fusionBlastCost = 200;
-		}
+		} else fusionBlastCost = 1000;
 	}
 
 	public void CheckBomb(){
@@ -160,6 +160,6 @@ public class CheckStore : MonoBehaviour {
 		}
 		else if (bomb == 3){
 			bombCost = 200;
-		}  
+		} else bombCost = 1000;
 	}
 }
