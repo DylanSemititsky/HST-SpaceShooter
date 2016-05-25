@@ -13,10 +13,11 @@ public class HomingEnemyLaser : MonoBehaviour {
 	}
 	void Start () {
 		GameObject go = GameObject.FindGameObjectWithTag ("Player");
+		if(go != null){
 		target = go.transform;
 		//rotate the projectile to aim at target
 		myTransform.LookAt(target);
-
+		}
 	}
 		
 

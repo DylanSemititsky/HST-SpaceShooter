@@ -32,6 +32,7 @@ public class OnToTheNext : MonoBehaviour
 	}
 
 	public void LoadNext (){
+		print("Load Next");
 		playerController.speed = playerSpeedTemp;
 		gameState.StoreVariables ();
 		Debug.Log ("variables stored");

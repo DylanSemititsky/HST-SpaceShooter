@@ -22,11 +22,13 @@ public class GameState : MonoBehaviour {
         private int credits;                                 		// credits
 		private int score;											// score
 		private int extraLives;										//extra lives
+		private bool setTutorialFinished;
 
 		
 		PlayerController playerController;
         PlayerAttack playerAttack;
 		GameController gameController;
+		TutorialScreen tutorialScreen;
        
        
        
@@ -71,6 +73,7 @@ public class GameState : MonoBehaviour {
 				score = 0;
 				extraLives = 3;
 				OnToTheNext.addScene = 3;
+				setTutorialFinished = false;
                               
                 // Start Game
                 SceneManager.LoadScene ("UpgradeShop");
@@ -189,7 +192,6 @@ public class GameState : MonoBehaviour {
 		// ---------------------------------------------------------------------------------------------------
 		public int getExtraLives(){
 			return extraLives;
-		Debug.Log ("Game State - GetExtraLives: " + extraLives);
 		}
 
 		// ---------------------------------------------------------------------------------------------------
@@ -198,9 +200,22 @@ public class GameState : MonoBehaviour {
 		// Updates the characters Extra Lives
 		// ---------------------------------------------------------------------------------------------------
 		public void updateExtraLives(){
-		Debug.Log ("Game State - before UpdateExtraLives: " + extraLives);
+			Debug.Log ("Game State - before UpdateExtraLives: " + extraLives);
 			extraLives -= 1;
-		Debug.Log ("Game State - after UpdateExtraLives: " + extraLives);
+			Debug.Log ("Game State - after UpdateExtraLives: " + extraLives);
+		}
+
+		// ---------------------------------------------------------------------------------------------------
+		// tutorialScreen
+		// ---------------------------------------------------------------------------------------------------
+		// Retrieves tutorialScreen bool
+		// ---------------------------------------------------------------------------------------------------
+		public bool getTutuorialFinished(){
+			return setTutorialFinished;
+		}
+
+		public void makeTutorialTrue(){
+			setTutorialFinished = true;
 		}
 
 
@@ -209,17 +224,26 @@ public class GameState : MonoBehaviour {
 		// ---------------------------------------------------------------------------------------------------
 
         public void StoreVariables(){
-        	
+
+			/*GameObject tutorialScreenObject = GameObject.Find ("Tutorial");
+			print (tutorialScreenObject);	
+			if (tutorialScreenObject != null) {
+				tutorialScreen = tutorialScreenObject.GetComponent<TutorialScreen> ();
+			}*/
+
 	        GameObject playerObject = GameObject.Find ("Player");	
 			if (playerObject != null) {
 				playerController = playerObject.GetComponent<PlayerController> ();
 				playerAttack = playerObject.GetComponent<PlayerAttack>();
 			}
 
-			GameObject gameControllerObject = GameObject.Find ("GameController");	
+			GameObject gameControllerObject = GameObject.Find ("GameController");
+			print (gameControllerObject);	
 			if (gameControllerObject != null) {
 				gameController = gameControllerObject.GetComponent<GameController> ();
 			}
+
+
 
 			setMaxHealth = playerController.getHealth();
 			setMaxShield = playerController.getShield();
@@ -231,6 +255,7 @@ public class GameState : MonoBehaviour {
 			credits = playerController.getCredits ();
 			score = gameController.getScore();
 			extraLives = gameController.getExtraLives ();
+			/*setTutorialFinished = tutorialScreen.getTutorialFinished();*/
 			}
 
 

@@ -7,6 +7,7 @@ public class ShopFusionBlast : MonoBehaviour {
 	PlayerAttack playerAttack;
 	PlayerController playerController;
 	FlashWhenFullFusion flashWhenFullFusion;
+	CreditsFlash creditsFlash;
 
 	public GameObject fusionIcon;
 	public Image myImageComponent;
@@ -26,6 +27,11 @@ public class ShopFusionBlast : MonoBehaviour {
 		if (playerObject != null) {
 			playerAttack = playerObject.GetComponent<PlayerAttack> ();
 			playerController = playerObject.GetComponent<PlayerController> ();
+		}
+
+		GameObject creditsFlashObject = GameObject.Find ("UI/Canvas_DisplayText/InGameCredits");	
+		if (creditsFlashObject != null) {
+			creditsFlash = creditsFlashObject.GetComponent<CreditsFlash> ();
 		}
 
 		GameObject flashObject = GameObject.Find ("Canvas_yellow1");	
@@ -64,6 +70,8 @@ public class ShopFusionBlast : MonoBehaviour {
 		if (playerAttack.fusionAttack.setFusionAttackLevel >= 2) {
 			playerAttack.fusionAttack.setFusionAttackLevel = 2;
 		}
+
+		creditsFlash.StartFlash();
 	}
 
 

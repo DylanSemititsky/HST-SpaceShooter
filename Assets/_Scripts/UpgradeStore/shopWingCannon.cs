@@ -6,6 +6,7 @@ public class ShopWingCannon : MonoBehaviour {
 
 	PlayerAttack playerAttack;
 	PlayerController playerController;
+	CreditsFlash creditsFlash;
 	private int playerMainCannonTemp;
 	private int playerMultiCannonTemp;
 
@@ -20,6 +21,11 @@ public class ShopWingCannon : MonoBehaviour {
 		if (playerObject != null) {
 			playerAttack = playerObject.GetComponent<PlayerAttack> ();
 			playerController = playerObject.GetComponent<PlayerController> ();
+		}
+
+		GameObject creditsFlashObject = GameObject.Find ("UI/Canvas_DisplayText/InGameCredits");	
+		if (creditsFlashObject != null) {
+			creditsFlash = creditsFlashObject.GetComponent<CreditsFlash> ();
 		}
 
 		playerMultiCannonTemp = playerAttack.getMultiAttack();
@@ -65,6 +71,8 @@ public class ShopWingCannon : MonoBehaviour {
 		else if (playerMultiCannonTemp >= 3) {
 			playerMultiCannonTemp = 3;
 		}
+
+		creditsFlash.StartFlash();
 	}
 
 	public void Revert(){

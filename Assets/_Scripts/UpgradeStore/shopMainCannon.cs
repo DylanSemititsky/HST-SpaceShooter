@@ -6,6 +6,7 @@ public class ShopMainCannon : MonoBehaviour {
 
 	PlayerAttack playerAttack;
 	PlayerController playerController;
+	CreditsFlash creditsFlash;
 	private int playerMainCannonTemp;
 	private int playerMultiCannonTemp;
 
@@ -20,6 +21,11 @@ public class ShopMainCannon : MonoBehaviour {
 		if (playerObject != null) {
 			playerAttack = playerObject.GetComponent<PlayerAttack> ();
 			playerController = playerObject.GetComponent<PlayerController> ();
+		}
+
+		GameObject creditsFlashObject = GameObject.Find ("UI/Canvas_DisplayText/InGameCredits");	
+		if (creditsFlashObject != null) {
+			creditsFlash = creditsFlashObject.GetComponent<CreditsFlash> ();
 		}
 
 		playerMainCannonTemp = playerAttack.primaryAttack.setPrimaryAttackLevel;
@@ -39,6 +45,7 @@ public class ShopMainCannon : MonoBehaviour {
 
 	public void EnableUpgrade(){
 
+		
 
 		if (playerMainCannonTemp == 1 && playerController.credits >= 50) {
 			playerAttack.primaryAttack.setPrimaryAttackLevel += 1;
@@ -61,6 +68,8 @@ public class ShopMainCannon : MonoBehaviour {
 		else if (playerMainCannonTemp >= 4) {
 			playerMainCannonTemp = 4;
 		}
+
+		creditsFlash.StartFlash();
 	}
 
 	public void Revert(){

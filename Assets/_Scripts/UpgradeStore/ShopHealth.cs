@@ -6,6 +6,7 @@ public class ShopHealth : MonoBehaviour {
 
 	PlayerAttack playerAttack;
 	PlayerController playerController;
+	CreditsFlash creditsFlash;
 	private int playerHealthTemp;
 
 	public Text currentText;
@@ -19,6 +20,11 @@ public class ShopHealth : MonoBehaviour {
 		if (playerObject != null) {
 			playerController = playerObject.GetComponent<PlayerController> ();
 			playerAttack = playerObject.GetComponent<PlayerAttack> ();
+		}
+
+		GameObject creditsFlashObject = GameObject.Find ("UI/Canvas_DisplayText/InGameCredits");	
+		if (creditsFlashObject != null) {
+			creditsFlash = creditsFlashObject.GetComponent<CreditsFlash> ();
 		}
 	}	
 
@@ -56,6 +62,8 @@ public class ShopHealth : MonoBehaviour {
 		if (playerController.setMaxHealth >= 5) {
 			playerController.setMaxHealth = 5;
 		}
+
+		creditsFlash.StartFlash();
 		playerController.setHealth();
 	}
 

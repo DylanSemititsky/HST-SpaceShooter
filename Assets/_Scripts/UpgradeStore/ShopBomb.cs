@@ -7,6 +7,7 @@ public class ShopBomb : MonoBehaviour {
 	PlayerAttack playerAttack;
 	PlayerController playerController;
 	FlashWhenFullBomb flashWhenFullBomb;
+	CreditsFlash creditsFlash;
 
 	public GameObject bombIcon;
 	public Image myImageComponent;
@@ -27,6 +28,11 @@ public class ShopBomb : MonoBehaviour {
 		if (playerObject != null) {
 			playerAttack = playerObject.GetComponent<PlayerAttack> ();
 			playerController = playerObject.GetComponent<PlayerController> ();
+		}
+
+		GameObject creditsFlashObject = GameObject.Find ("UI/Canvas_DisplayText/InGameCredits");	
+		if (creditsFlashObject != null) {
+			creditsFlash = creditsFlashObject.GetComponent<CreditsFlash> ();
 		}
 
 		GameObject flashObject = GameObject.Find ("Canvas_yellow2");	
@@ -78,6 +84,9 @@ public class ShopBomb : MonoBehaviour {
 
 			SetPurpleIcon ();
 		}
+
+		creditsFlash.StartFlash();
+
 		if (playerAttack.bombAttack.setBombLevel >= 4) {
 			playerAttack.bombAttack.setBombLevel = 4;
 		}

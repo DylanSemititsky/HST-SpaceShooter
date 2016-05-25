@@ -6,6 +6,7 @@ public class ShopShield : MonoBehaviour {
 
 	PlayerAttack playerAttack;
 	PlayerController playerController;
+	CreditsFlash creditsFlash;
 	private int playerShieldTemp;
 
 	public Text currentText;
@@ -19,6 +20,11 @@ public class ShopShield : MonoBehaviour {
 		if (playerObject != null) {
 			playerController = playerObject.GetComponent<PlayerController> ();
 			playerAttack = playerObject.GetComponent<PlayerAttack> ();
+		}
+
+		GameObject creditsFlashObject = GameObject.Find ("UI/Canvas_DisplayText/InGameCredits");	
+		if (creditsFlashObject != null) {
+			creditsFlash = creditsFlashObject.GetComponent<CreditsFlash> ();
 		}
 	}	
 
@@ -57,6 +63,8 @@ public class ShopShield : MonoBehaviour {
 		if (playerController.setMaxShield >= 5) {
 			playerController.setMaxShield = 5;
 		}
+
+		creditsFlash.StartFlash();
 		playerController.setShield();
 	}
 
