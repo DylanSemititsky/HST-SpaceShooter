@@ -42,6 +42,8 @@ public class GameController : MonoBehaviour
 	// ---------------------------------------------------------------------------------------------------
 	void Start (){
 
+		Cursor.lockState = CursorLockMode.Confined;
+
 		//Debug.Log ("score = " + score);
 		gameOver = false;
 		restart = false;
