@@ -14,6 +14,7 @@ public class GameController : MonoBehaviour
 	CanvasGroup canvasGroup;
 	RedMove redMove;
 
+	public GameObject canvasPause;
 	public GameObject fadeToBlack;
 
 	public Text scoreText;
@@ -32,7 +33,7 @@ public class GameController : MonoBehaviour
 
 	public GameObject pauseSound;
 	public Image pauseImage;
-	private bool isPausing;
+	public bool isPausing;
 
 	public bool lastLevel;
 	public bool hardMode;
@@ -59,11 +60,12 @@ public class GameController : MonoBehaviour
 		}
 
 		//Find Pause Canvas and set alpha to 0.
-		GameObject pauseObject = GameObject.Find ("Canvas_Pause");	
+		/*GameObject pauseObject = GameObject.Find ("Canvas_Pause");	
 		if (pauseObject != null) {
 			canvasGroup = pauseObject.GetComponent<CanvasGroup> ();
 			canvasGroup.alpha = 0;
-		}
+		}*/
+
 
 		GameObject fadeObject = GameObject.Find ("Canvas_FadeToBlack");	
 		if (fadeObject != null) {
@@ -74,6 +76,12 @@ public class GameController : MonoBehaviour
 		if (redMoveObject != null) {
 			redMove = redMoveObject.GetComponent<RedMove> ();
 		}
+
+		GameObject canvasPauseObject = GameObject.Find ("Canvas_Pause");	
+		if (canvasPauseObject != null) {
+			canvasPause = canvasPauseObject;
+		}
+		canvasPause.SetActive(false);
 
 		extraLives = gameState.getExtraLives ();
 		//Debug.Log ("start: " + extraLives);
@@ -109,7 +117,8 @@ public class GameController : MonoBehaviour
 			{
 				Time.timeScale = 0f;
 				isPausing = true;
-				canvasGroup.alpha = 1;
+				canvasPause.SetActive(true);
+				Cursor.visible = true;
 				Instantiate (pauseSound, transform.position, transform.rotation);
 			} 
 
@@ -118,7 +127,8 @@ public class GameController : MonoBehaviour
 			{
 				Time.timeScale = 1f; 
 				isPausing = false;
-				canvasGroup.alpha = 0;
+				canvasPause.SetActive(false);
+				Cursor.visible = false;
 			}
 
 		}

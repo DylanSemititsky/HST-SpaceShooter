@@ -30,8 +30,7 @@ public class GameState : MonoBehaviour {
 		GameController gameController;
 		TutorialScreen tutorialScreen;
        
-       
-       
+
         // ---------------------------------------------------------------------------------------------------
         // gamestate()
         // ---------------------------------------------------------------------------------------------------
@@ -243,8 +242,6 @@ public class GameState : MonoBehaviour {
 				gameController = gameControllerObject.GetComponent<GameController> ();
 			}
 
-
-
 			setMaxHealth = playerController.getHealth();
 			setMaxShield = playerController.getShield();
 			setPrimaryAttackLevel = playerAttack.getPrimaryAttack();
@@ -255,6 +252,7 @@ public class GameState : MonoBehaviour {
 			credits = playerController.getCredits ();
 			score = gameController.getScore();
 			extraLives = gameController.getExtraLives ();
+
 			/*setTutorialFinished = tutorialScreen.getTutorialFinished();*/
 			}
 

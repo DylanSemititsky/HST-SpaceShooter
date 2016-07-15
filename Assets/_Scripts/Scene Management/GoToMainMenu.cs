@@ -11,12 +11,21 @@ public class GoToMainMenu : MonoBehaviour
 {
 	ChangeShipColor changeShipColor;
 	SceneFade sceneFade;
+	GameObject gameState;
 
 	public bool start = false;
 	public GameObject fadeToBlack;
 
 
 	public void StartFlash(){
+		//Find GameState Object to access it's script
+		GameObject gameStateObject = GameObject.Find ("GameState");	
+		if (gameStateObject != null) {
+			gameState = gameStateObject;
+		}
+
+		Destroy (gameState);
+
 		StartCoroutine (Flash ());
 	}
 

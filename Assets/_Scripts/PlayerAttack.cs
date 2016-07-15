@@ -26,7 +26,7 @@ public class MultiAttack{  	//Collapsible menu to access Multi Attack settings.
 
 [System.Serializable]
 public class FusionAttack{  			//Collapsible menu to access Fusion Attack settings.
-	public int setFusionAttackLevel; //Set Multi Attack level.
+	public int setFusionAttackLevel; //Set Fusion Attack level.
 	public GameObject fusionAttackLv1, fusionAttackLv2, fusionAttackLv3, fusionAttackLv4; //Place Art for each level here (in Inspector).
 	public Transform fusionShotSpawn, fusionShotSpawnR, fusionShotSpawnL;
 	public float maxFusion = 100, fusion = 100;
@@ -266,22 +266,34 @@ public class PlayerAttack : MonoBehaviour {
 				if (Time.time > fusionAttackNextFire) {
 					fusionAttackNextFire = Time.time + fusionFireRate * 2;
 					if (fusionAttack.fusionAttackDamage == 1) {
-						Instantiate (fusionAttack.fusionAttackLv1, fusionAttack.fusionShotSpawn.position, fusionAttack.fusionShotSpawn.rotation);
+						Instantiate (fusionAttack.fusionAttackLv1, fusionAttack.fusionShotSpawnL.position, fusionAttack.fusionShotSpawn.rotation);
+						Instantiate(fusionSound, transform.position, transform.rotation);
+
+						Instantiate (fusionAttack.fusionAttackLv1, fusionAttack.fusionShotSpawnR.position, fusionAttack.fusionShotSpawn.rotation);
 						Instantiate(fusionSound, transform.position, transform.rotation);
 						fusionAttack.fusion -= 5;
 					}
 					else if (fusionAttack.fusionAttackDamage == 2) {
-						Instantiate (fusionAttack.fusionAttackLv2, fusionAttack.fusionShotSpawn.position, fusionAttack.fusionShotSpawn.rotation);
+						Instantiate (fusionAttack.fusionAttackLv2, fusionAttack.fusionShotSpawnL.position, fusionAttack.fusionShotSpawn.rotation);
+						Instantiate(fusionSound, transform.position, transform.rotation);
+
+						Instantiate (fusionAttack.fusionAttackLv2, fusionAttack.fusionShotSpawnR.position, fusionAttack.fusionShotSpawn.rotation);
 						Instantiate(fusionSound, transform.position, transform.rotation);
 						fusionAttack.fusion -= 5;
 					}
 					else if (fusionAttack.fusionAttackDamage == 3) {
-						Instantiate (fusionAttack.fusionAttackLv3, fusionAttack.fusionShotSpawn.position, fusionAttack.fusionShotSpawn.rotation);
+						Instantiate (fusionAttack.fusionAttackLv3, fusionAttack.fusionShotSpawnL.position, fusionAttack.fusionShotSpawn.rotation);
+						Instantiate(fusionSound, transform.position, transform.rotation);
+
+						Instantiate (fusionAttack.fusionAttackLv3, fusionAttack.fusionShotSpawnR.position, fusionAttack.fusionShotSpawn.rotation);
 						Instantiate(fusionSound, transform.position, transform.rotation);
 						fusionAttack.fusion -= 5;
 					}
 					else if (fusionAttack.fusionAttackDamage == 4) {
-						Instantiate (fusionAttack.fusionAttackLv4, fusionAttack.fusionShotSpawn.position, fusionAttack.fusionShotSpawn.rotation);
+						Instantiate (fusionAttack.fusionAttackLv4, fusionAttack.fusionShotSpawnL.position, fusionAttack.fusionShotSpawn.rotation);
+						Instantiate(fusionSound, transform.position, transform.rotation);
+
+						Instantiate (fusionAttack.fusionAttackLv4, fusionAttack.fusionShotSpawnR.position, fusionAttack.fusionShotSpawn.rotation);
 						Instantiate(fusionSound, transform.position, transform.rotation);
 						fusionAttack.fusion -= 5;
 					}
@@ -313,7 +325,7 @@ public class PlayerAttack : MonoBehaviour {
 		}
 
 		//Level 2
-		else if (fusionAttack.setFusionAttackLevel == 2 && disableFusion == false) {
+		/*else if (fusionAttack.setFusionAttackLevel == 2 && disableFusion == false) {
 
 			if (Input.GetMouseButton (0) && fusionAttack.fusion > 0) {
 
@@ -381,7 +393,7 @@ public class PlayerAttack : MonoBehaviour {
 						Instantiate (fusionAttack.fusionAttackLv4, fusionAttack.fusionShotSpawnR.position, fusionAttack.fusionShotSpawn.rotation);
 						Instantiate(fusionSound, transform.position, transform.rotation);
 						fusionAttack.fusion -= 5;
-					}*/
+					}
 				}
 				//fusionAttack.fusion -= Time.deltaTime * 20;
 
@@ -393,7 +405,7 @@ public class PlayerAttack : MonoBehaviour {
 				//Set mouseDown to false to allow recharge (below)
 				mouseDown = false;
 			}
-		}
+		}*/
 
 
 		//Fusion to stop recharging at maxFusion

@@ -59,16 +59,16 @@ public class ShopFusionBlast : MonoBehaviour {
 		 
 		if (playerAttack.fusionAttack.setFusionAttackLevel == 0 && playerController.credits >= 100) {
 			playerAttack.fusionAttack.setFusionAttackLevel += 1;
-			playerController.credits -= 100;
+			playerController.credits -= 200;
 			audioSource.Play();
 		}
-		else if (playerAttack.fusionAttack.setFusionAttackLevel == 1 && playerController.credits >= 200) {
+		/*else if (playerAttack.fusionAttack.setFusionAttackLevel == 1 && playerController.credits >= 200) {
 			playerAttack.fusionAttack.setFusionAttackLevel += 1;
 			playerController.credits -= 200;
 			audioSource.Play();
-		} 
-		if (playerAttack.fusionAttack.setFusionAttackLevel >= 2) {
-			playerAttack.fusionAttack.setFusionAttackLevel = 2;
+		} */
+		if (playerAttack.fusionAttack.setFusionAttackLevel >= 1) {
+			playerAttack.fusionAttack.setFusionAttackLevel = 1;
 		}
 
 		creditsFlash.StartFlash();
@@ -82,14 +82,14 @@ public class ShopFusionBlast : MonoBehaviour {
 	void UpdateUpgradeText(){
 		if (playerAttack.fusionAttack.setFusionAttackLevel == 0) {
 			currentText.text = "<b>Current:</b>  --";
-			upgradeText.text = "<b>Upgrade:</b>  Single Blast (c: 100)";
+			upgradeText.text = "<b>Upgrade:</b>  Fusion Blast (c: 200)";
 		}
-		else if (playerAttack.fusionAttack.setFusionAttackLevel == 1) {
+		/*else if (playerAttack.fusionAttack.setFusionAttackLevel == 1) {
 			currentText.text = "<b>Current:</b>  Single Blast";
 			upgradeText.text = "<b>Upgrade:</b>  Double Blast (c: 200)";
-		}
-		else if (playerAttack.fusionAttack.setFusionAttackLevel == 2) {
-			currentText.text = "<b>Current:</b>  Double Blast";
+		}*/
+		else if (playerAttack.fusionAttack.setFusionAttackLevel == 1) {
+			currentText.text = "<b>Current:</b>  Fusion Blast";
 			upgradeText.text = "<b>Upgrade:</b>  (maxed)";
 		}
 	}

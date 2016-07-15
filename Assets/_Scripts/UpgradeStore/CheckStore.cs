@@ -139,9 +139,6 @@ public class CheckStore : MonoBehaviour {
 		fusionBlast = playerAttack.getFusionAttack();
 
 		if (fusionBlast == 0){
-			fusionBlastCost = 100;
-		}
-		else if (fusionBlast == 1){
 			fusionBlastCost = 200;
 		} else fusionBlastCost = 1000;
 	}
